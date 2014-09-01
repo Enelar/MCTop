@@ -1,0 +1,1174 @@
+body
+{
+    font-family: "Tahoma";
+    font-size: 12px;
+    background-color: #ffffff;
+    color: #fff;
+}
+
+hr
+{
+    border-color: #d9e3da;
+}
+
+form
+{
+    margin: 20px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 13px;
+    background-color: #fff;
+    color: #000;
+}
+
+.navbar
+{
+    margin: 15px;
+}
+
+.content
+{
+    position: relative;
+    top: -20px;
+    margin: 20px;
+    padding: 5px;
+    font-size: 13px;
+    background-color: #fff;
+    color: #000;
+    #border: 1px solid #d3cdd7;
+}
+
+.content h1
+{
+    margin-left: 15px;
+}
+
+.content h2
+{
+    margin-left: 15px;
+}
+
+a:hover
+{
+    cursor: pointer;
+}
+
+.divider
+{
+    border-bottom: 1px solid #A4CEFC;
+}
+
+.without_pointers
+{
+    list-style: none;
+}
+
+.without_pointers li
+{
+    padding: 2px;
+    margin-bottom: 3px;
+}
+
+.footer
+{
+    background-color: #fff;
+    color: #000;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 20px;
+    position: relative;
+    top: -30px;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 421px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer hr
+{
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+/*
+  -========================= Фиксы бутстрапа ====================-
+*/
+
+.navbar-default {
+    background-color: rgba(146, 146, 146, 0.86);
+    border-color: #BEBEBE;
+    position: relative;
+    top: -18px;
+    min-height: 62px;
+}
+
+.navbar-nav > li
+{
+    margin: 5px;
+}
+
+.navbar-nav > li:hover
+{
+    background-color: rgba(14, 9, 9, 0.51);
+    border-radius: 3px;
+}
+
+.navbar-default .navbar-nav > li > a
+{
+    color: #fff;
+    border-left: 1px solid #8A8282;
+    border-right: 1px solid #ADADAD;
+    border-bottom: 1px solid #B4ACAC;
+    margin: 5px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #fff;
+}
+
+.navbar-nav > li.clock:hover
+{
+    background-color: rgba(255, 166, 166, 0);
+}
+
+.dropdown-menu li
+{
+    cursor: pointer;
+}
+
+li a:hover
+{
+    cursor: pointer;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a {
+    border-radius: 4px;
+    margin: 5px;
+}
+
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: #98D4F0;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: rgba(242, 244, 245, 0.8);
+    border-color: #CDFFFF;
+    border-top: 1px solid #C7C2C2;
+    max-width: 250px;
+}
+
+.dropdown-menu span
+{
+    border-right: 1px solid #89B1C7;
+    padding-right: 10px;
+    position: relative;
+    left: -5px;
+}
+
+.navbar-nav > li {
+    min-width: 120px;
+    text-align: center;
+}
+
+.navbar-nav > li span
+{
+    font-size: 16px;
+    position: relative;
+    left: -10px;
+    top: 4px;
+}
+
+.navbar-nav > li .caret
+{
+    position: relative;
+    left: 5px;
+}
+
+.badge
+{
+    border: 1px solid #cacaca;
+    border-radius: 2px;
+    font-size: 11px;
+}
+
+.badge:hover
+{
+    color:#000;
+    background-color: #cacaca;
+}
+
+.welcome_slogan
+{
+    background-color: rgba(255, 255, 255, 0.86);
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #eae8f0;
+}
+
+.welcome_slogan hr
+{
+    border-color: #b2e3dc;
+}
+
+.login_form
+{
+    margin: 20px;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 13px;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #000;
+    border: 1px solid #A0A0A0;
+    width: 300px;
+    margin-left: auto;
+    text-align: center;
+    margin-right: auto;
+}
+
+.login_form .btn
+{
+    width: 150px;
+    height: 50px;
+    background-color: #90bec9;
+    color: #fff;
+}
+
+.login_form .btn:hover
+{
+    background-color: #779ea8;
+}
+
+/*
+   -======================= Модули ===============================-
+*/
+
+#mctop_logo{
+    color: #FFFFFF;
+    background-color: rgba(78, 70, 70, 0.43);
+    border: 1px solid #A09B9B;
+    border-radius: 4px;
+    position: relative;
+    top: 10px;
+    left: 8px;
+    margin-right: 10px;
+}
+
+#mctop_logo:hover
+{
+    cursor: pointer;
+    color: #CAE5FF;
+    background-color: rgba(14, 9, 9, 0.51);
+}
+
+/*
+    Контакты
+*/
+
+.contacts
+{
+    margin: 10px;
+    width: 98%;
+}
+
+.contacts .contact:hover
+{
+    cursor: pointer;
+    background: #F5F5F5;
+}
+
+.contacts .contact
+{
+    min-height: 120px;
+    border: 1px solid #E7E7E7;
+    padding: 5px;
+}
+
+.contacts .contact .avatar
+{
+    margin-top: 3px;
+    float: left;
+    border: 1px solid #E7E7E7;
+}
+
+.contacts .contact .availability_status {
+    min-height: 16px;
+    max-height: 16px;
+    min-width: 16px;
+    max-width: 16px;
+    background-color: #cacaca;
+    border: 1px solid #a5a5a5;
+    border-radius: 4px;
+    position: relative;
+    left: 114px;
+    top: 18px;
+}
+
+.contacts .contact .status_in_vay
+{
+    background-color: #55DF57;
+    border: 1px solid #2A8B3E;
+}
+
+.contacts .contact .name
+{
+    margin-left: 115px;
+    font-size: 17px;
+    font-family: sans-serif;
+    border-bottom: 1px solid #E7E7E7;
+    position: relative;
+    left: 20px;
+}
+
+.contacts .contact .status
+{
+    margin-top: 5px;
+    margin-left: 115px;
+    font-size: 13px;
+    font-family: sans-serif;
+    color:#868585;
+}
+
+.contacts_contact_buttons
+{
+    margin-left: 0px;
+    margin-top: 10px;
+}
+
+/*
+    Профиль
+*/
+
+.profile
+{
+    width: 98%;
+}
+
+.profile hr
+{
+    top: -17px;
+    position: relative;
+}
+
+.profile p
+{
+    border-bottom: 1px solid #F1F1F1;
+}
+
+.profile table
+{
+    width:100%;
+}
+
+.profile .name{
+    top: 0px;
+    left: 20px;
+    position: relative;
+}
+
+.profile .status{
+    float: right;
+    margin-top: 15px;
+}
+
+.profile .availability_status {
+    min-height: 16px;
+    max-height: 16px;
+    min-width: 16px;
+    max-width: 16px;
+    background-color: #cacaca;
+    border: 1px solid #a5a5a5;
+    position: absolute;
+    top: 35px;
+    left: 11px;
+    border-radius: 4px;
+}
+
+.profile .status_in_vay
+{
+    background-color: #55DF57;
+    border: 1px solid #2A8B3E;
+}
+
+.profile .avatar {
+    border: 1px solid #E7E7E7;
+    width: 205px;
+}
+
+.profile .middle_info
+{
+    margin: 10px;
+    position: relative;
+    top: -10px;
+}
+
+.profile .middle_info .avatar_td
+{
+    width: 210px;
+}
+
+.profile .middle_info .right_column
+{
+    position: absolute;
+    margin-left: 10px;
+}
+
+.profile .buttons
+{
+    margin-left: 15px;
+}
+
+/*
+    Заметки
+*/
+
+.notes
+{
+    width: 98%;
+    #min-height: 700px;
+    overflow: auto;
+}
+
+.notes .note
+{
+    padding: 5px;
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
+    min-width: 200px;
+    float: left;
+    border: 1px solid #cacaca;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.notes .note:hover
+{
+    cursor: pointer;
+    background-color: #F1F1F1;
+}
+
+.notes .note .name
+{
+    border-bottom: 1px solid #E7E7E7;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.notes .note .time
+{
+    float: right;
+    position: relative;
+    top: -6px;
+    background-color: #F3F3F3;
+    padding: 4px;
+    color: #000;
+    font-size: 11px;
+    border: 1px solid #E6DEDE;
+    border-radius: 3px;
+}
+
+.notes .note .text
+{
+    font-size: 10px;
+}
+
+.delete_btn
+{
+    float: right;
+    position: absolute;
+}
+
+/*
+    Блоги
+*/
+
+.blogs
+{
+    width: 98%;
+    #min-height: 700px;
+    overflow: auto;
+}
+
+.blogs .record
+{
+    padding: 5px;
+    border-bottom: 1px solid #cacaca;
+    margin: 5px;
+    min-height: 40px;
+    margin-bottom: 10px;
+}
+
+.blogs .record:hover
+{
+    cursor: pointer;
+    background-color: #E0FAFD;
+}
+
+.blogs .record .name
+{
+    border-bottom: 1px solid #E7E7E7;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.blogs .record .time
+{
+    float: right;
+    position: relative;
+    top: -2px;
+    background-color: #F3F3F3;
+    padding: 4px;
+    color: #000;
+    font-size: 11px;
+    border: 1px solid #E6DEDE;
+    border-radius: 3px;
+}
+
+.blogs .record .btn_delete
+{
+    float: right;
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+}
+
+.blogs .record .btn_delete a:hover
+{
+    text-decoration: none;
+}
+
+.blogs .record .text
+{
+    padding: 10px;
+}
+
+/*
+    Городской портал
+*/
+
+.city_portal
+{
+    overflow: auto;
+    padding: 15px;
+}
+
+.city_portal .name
+{
+    text-align: center;
+    font-size: 56px;
+}
+
+.city_portal .menu
+{
+    font-size: 20px;
+}
+
+.city_portal .menu table
+{
+    width: 100%;
+    text-align: center;
+}
+
+.city_portal .menu table td {
+    height: 50px;
+    vertical-align: bottom;
+    border: 1px solid #E7E3E3;
+    padding: 15px;
+}
+
+/*
+    Клубы
+*/
+
+.clubs
+{
+    width: 98%;
+    #min-height: 700px;
+    overflow: auto;
+}
+
+
+.clubs .btn_join
+{
+    margin-top: 6px;
+    text-align: center;
+}
+
+.clubs .btn_join a:hover
+{
+    text-decoration: none;
+}
+
+.clubs .club
+{
+    padding: 5px;
+    width: 200px;
+    height: 100px;
+    min-height: 100px;
+    min-width: 200px;
+    float: left;
+    border: 1px solid #cacaca;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.clubs .club:hover
+{
+    cursor: pointer;
+    background-color: #F1F1F1;
+}
+
+.clubs .club .name
+{
+    border-bottom: 1px solid #E7E7E7;
+    margin-bottom: 12px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.clubs .club .description
+{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.clubs .leave_enter_button
+{
+    float: right;
+    margin-right: 10px;
+}
+
+
+
+/*
+    Клубы - пользователи
+*/
+
+.clubs .users
+{
+    margin: 10px;
+    width: 98%;
+}
+
+.clubs .users .delete_are_button
+{
+    position: relative;
+    top: -20px;
+}
+
+.clubs .users .user
+{
+    min-height: 120px;
+    border: 1px solid #E7E7E7;
+    padding: 5px;
+}
+
+.clubs .users .user:hover
+{
+    background-color: #E4FCFF;
+    cursor: pointer;
+}
+
+.clubs .users .user .avatar
+{
+    margin-top: 3px;
+    float: left;
+    border: 1px solid #E7E7E7;
+}
+
+.clubs .users .user .name
+{
+    margin-left: 115px;
+    font-size: 17px;
+    font-family: sans-serif;
+    border-bottom: 1px solid #E7E7E7;
+}
+
+.clubs .users .user .status
+{
+    margin-top: 5px;
+    margin-left: 115px;
+    font-size: 13px;
+    font-family: sans-serif;
+    color:#868585;
+}
+
+.clubs .users .user .member_rang
+{
+    margin-top: 5px;
+    margin-left: 115px;
+}
+
+.clubs .users .user .member_rang .label
+{
+    font-size: 12px;
+    font-style: normal;
+}
+
+/*
+    Фотографии
+*/
+#dragandrophandler
+{
+    border:2px dotted #0B85A1;
+    width:400px;
+    color:#92AAB0;
+    text-align:left;vertical-align:middle;
+    padding:10px 10px 10 10px;
+    margin-bottom:10px;
+    font-size:200%;
+}
+.progressBar {
+    width: 200px;
+    height: 22px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    display:inline-block;
+    margin:0px 10px 5px 5px;
+    vertical-align:top;
+}
+
+.progressBar div {
+    height: 100%;
+    color: #fff;
+    text-align: right;
+    line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+    width: 0;
+    background-color: #0ba1b5; border-radius: 3px;
+}
+.statusbar
+{
+    border-top:1px solid #A9CCD1;
+    min-height:25px;
+    width:700px;
+    padding:10px 10px 0px 10px;
+    vertical-align:top;
+}
+.statusbar:nth-child(odd){
+    background:#EBEFF0;
+}
+.filename
+{
+    display:inline-block;
+    vertical-align:top;
+    width:250px;
+}
+.filesize
+{
+    display:inline-block;
+    vertical-align:top;
+    color:#30693D;
+    width:100px;
+    margin-left:10px;
+    margin-right:5px;
+}
+.abort{
+    background-color:#A8352F;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;display:inline-block;
+    color:#fff;
+    font-family:arial;font-size:13px;font-weight:normal;
+    padding:4px 15px;
+    cursor:pointer;
+    vertical-align:top
+}
+
+/*
+    applications
+*/
+
+.applications
+{
+    background-color: #44769E;
+    padding: 15px;
+    border-radius: 5px;
+    width: 100%;
+    overflow: auto;
+}
+
+.applications .application
+{
+    padding: 5px;
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
+    min-width: 200px;
+    float: left;
+    border: 1px solid #6EA8A8;
+    margin: 5px;
+    overflow: hidden;
+    background-color: rgba(201, 197, 173, 0.36);
+}
+
+.applications .application .name
+{
+    color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #8ab7c3;
+}
+
+.applications .application .description
+{
+    color: #fff;
+    padding: 3px;
+    text-align: center;
+    position: relative;
+    top: 50px;
+}
+
+.applications .application .category
+{
+    color: #c7c7c7;
+    text-align: center;
+}
+
+.applications .application .new_status
+{
+    background-color: #3c763d;
+    color: #fff;
+    width: 50px;
+    text-align: center;
+    padding: 2px;
+    position: absolute;
+}
+
+.applications .application .site_url
+{
+    position: relative;
+    top: 90px;
+    color: #aeeaf7;
+    padding: 3px;
+    text-align: center;
+}
+
+.applications .application:hover
+{
+    background-color: #4c4a41;
+}
+
+
+/*
+    Интерфейс пользователя
+*/
+
+#clubs_invites_count
+{
+    display: inline;
+}
+
+.main_notifications
+{
+    background-color: #D1D6D6;
+    border: 1px solid #EBEBEB;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 5px;
+    position: relative;
+    top: -25px;
+    margin-bottom: -15px;
+}
+
+.main_notifications .notifications_section
+{
+    background-color: #494949;
+    max-width: 100px;
+    text-align: center;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.main_notifications .notifications_section:hover
+{
+    cursor: pointer;
+}
+
+.page_label
+{
+    margin-left: 5px;
+}
+
+/*
+    Часики
+*/
+
+.jqclock
+{
+    text-align: center; position: relative; top: 7px; left: 50px;
+}
+
+.clockdate
+{
+    color: DarkRed; margin-bottom: 10px; font-size: 12px; display: block;
+}
+
+.clocktime
+{
+    background: #fff; padding: 1px; font-size: 11px; color: #878787; margin: 2px; display: block; border: 1px solid #b8b9bc; width:75px;
+}
+
+.clocktime:hover
+{
+    cursor: pointer;
+    background-color: #cacaca;
+    color: #fff;
+    border: 1px solid #8e9797;
+}
+
+/*
+    Уведомления
+*/
+
+#qtip-growl-container{
+    position: fixed;
+    top: 80px; right: 23px;
+    z-index: 1000;
+}
+
+#qtip-growl-container .qtip{
+    position: static;
+    min-height: 0;
+    overflow: hidden;
+    margin: 0 0 5px 0;
+    z-index: 1000;
+}
+
+.qtip-blue {
+    background-color: rgba(207, 238, 250, 0.54);
+    color: #143E5A;
+    border: 1px solid #b6b6b6;
+    border-right: 1px solid #979797;
+    border-bottom: 1px solid #808080;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.qtip-blue .qtip-titlebar{
+    color: #000;
+    background-color:#D0E9F5;
+    width: 250px;
+    position: relative;
+    left: -10px;
+    top: -10px;
+    padding: 10px;
+    border-bottom: 1px solid #8fc6c4;
+}
+.qtip-blue .qtip-close .qtip-icon{
+    background-position:-2px 0
+}
+
+.home_contact_link
+{
+    padding: 10px;
+    background-color: #ade4f3;
+    position: relative;
+    top: 3px;
+    border-radius: 4px;
+}
+
+/*
+    MCTop
+*/
+
+
+/* Rating */
+
+.rating .server
+{
+    background-color: #eeeeee;
+    padding: 15px;
+    overflow: auto;
+    border-radius: 5px;
+    border: 1px solid #cacaca;
+}
+
+.rating .server .left_block {
+    float: left;
+}
+
+.rating .server .left_block .position {
+    display: inline;
+    font-size: 20px;
+    background-color: #cacaca;
+    padding: 4px;
+    text-align: center;
+    padding-left: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #bbbbbb;
+}
+
+.rating .server .left_block .name {
+    font-size: 24px;
+    display: inline;
+}
+
+.rating .server .left_block .name a
+{
+    color: #7f7f7f;
+}
+
+.rating .server .left_block .avatar
+{
+    margin-top: 10px;
+}
+
+.rating .server .right_block {
+    float: right;
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+    padding: 15px;
+    position: relative;
+    top: 0px;
+}
+
+.rating .server .right_block .score
+{
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 5px;
+    position: relative;
+    top: -5px;
+}
+
+.rating .server .right_block .vote
+{
+    background-color: #cacaca;
+    padding: 15px;
+}
+
+.rating .server .right_block .vote a
+{
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+/*
+    Forum
+*/
+
+.forum
+{
+    border: 1px solid #e1e1e1;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.forum .section
+{
+
+}
+
+.forum .section .name
+{
+    font-size: 18px;
+    border: 1px solid #cacaca;
+    border-top: 1px solid #979797;
+    border-bottom: none;
+    color: #fff;
+    padding: 3px;
+    background-color: #a3a3a3;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.forum .section .name span
+{
+    position: relative;
+    top: 4px;
+}
+
+.forum .section .topics
+{
+    border: 1px solid #cacaca;
+    border-left: 1px solid #eaeaea;
+    border-top: none;
+    padding: 3px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.forum .section .topics .topic
+{
+    overflow: auto;
+}
+
+.forum .section .topics .topic .name
+{
+    font-size: 13px;
+    text-align: left;
+    border: none;
+    border-radius: 0px;
+    background-color: #fff;
+    color: #000;
+    padding: 6px;
+}
+
+.forum .section .topics .topic .name a:hover{
+    color: #428bca;
+    text-decoration: none;
+}
+
+.forum .section .topics .topic .name:hover
+{
+    background-color: #e6e6e6;
+    cursor: pointer;
+}
+
+.forum .section .topics .topic .name span
+{
+    position: relative;
+    top: 4px;
+}
+/*
+.forum .section .topics .topic .name
+.forum .section .topics .topic .name
+.forum .section .topics .topic .name
+/*
+
+/*
+    Control Panel
+*/
+
+.control_panel .projects
+{
+    border: 1px solid #acacac;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.control_panel .projects h1
+{
+    margin: 0px;
+    margin-left: 10px;
+    margin-top: 5px;
+    position: relative;
+    bottom: -5px;
+}
+
+.control_panel .projects .project
+{
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.control_panel .projects .project .name
+{
+    font-size: 17px;
+    margin: 15px;
+    margin-top: 3px;
+    margin-left: 3px;
+    border-bottom: 1px solid #cacaca;
+}
