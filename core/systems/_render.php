@@ -1,11 +1,11 @@
 <?php
 
-    class render
+class render
+{
+
+    public function render_page($module, $action)
     {
-
-        public function render_page($module, $action)
-        {
-            echo $module;
-        }
-
+        echo $module;
     }
+
+}
