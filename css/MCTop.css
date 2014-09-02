@@ -2,7 +2,7 @@ body
 {
     font-family: "Tahoma";
     font-size: 12px;
-    background-color: #ffffff;
+    background-color: #A6EEE8;
     color: #fff;
 }
 
@@ -118,9 +118,9 @@ a:hover
 .navbar-default .navbar-nav > li > a
 {
     color: #fff;
-    border-left: 1px solid #8A8282;
-    border-right: 1px solid #ADADAD;
-    border-bottom: 1px solid #B4ACAC;
+    #border-left: 1px solid #8A8282;
+    #border-right: 1px solid #ADADAD;
+    #border-bottom: 1px solid #B4ACAC;
     margin: 5px;
 }
 
@@ -1140,6 +1140,10 @@ li a:hover
     Control Panel
 */
 
+/*
+    Projects
+*/
+
 .control_panel .projects
 {
     border: 1px solid #acacac;
@@ -1171,4 +1175,66 @@ li a:hover
     margin-top: 3px;
     margin-left: 3px;
     border-bottom: 1px solid #cacaca;
+}
+
+/*
+    Control Panel
+*/
+
+/*
+    Help
+*/
+
+.control_panel .help
+{
+    border: 1px solid #acacac;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.control_panel .help .categories
+{
+
+}
+
+.control_panel .help .categories .category
+{
+
+}
+
+.control_panel .help .categories .category .name
+{
+    border-bottom: 1px solid #cacaca;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.control_panel .help .categories .category .topics
+{
+
+}
+
+.control_panel .help .categories .category .topics .topic
+{
+    padding: 5px;
+}
+
+.control_panel .help .categories .category .topics .topic:hover
+{
+    cursor: pointer;
+}
+
+.control_panel .help .categories .category .topics .topic .name
+{
+    border: none;
+    font-size: 12px;
+    color: #7a7a7a;
+    position: relative;
+    top: 5px;
+}
+
+.control_panel .help .categories .category .topics .topic .name:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
 }

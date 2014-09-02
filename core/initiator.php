@@ -9,6 +9,7 @@
     require_once(корень.'/db/user.php');
     require_once(корень.'/db/Servers.php');
     require_once(корень.'/db/Projects.php');
+    require_once(корень.'/db/Help.php');
     require_once(корень.'/db/Notes.php');
     require_once(корень.'/db/Blog_posts.php');
     require_once(корень.'/db/Clubs.php');

@@ -13,8 +13,13 @@
             cache: false,
             success: function(msg){
                 var answer = jQuery.parseJSON(msg);
-                console.log(answer);
-
+                if(answer)
+                {
+                    $( ".message" ).html('<div class="alert alert-success" role="alert">Данные обновлены</div>');
+                    setTimeout(function() {
+                        $(".message").fadeOut().empty();
+                    }, 5000);
+                }
             }
         });
     }

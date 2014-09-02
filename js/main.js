@@ -27,8 +27,7 @@
             else
             {
 
-                display_page('social','home/index');
-                render_page_on_tab('social', 'home/home_tab', 'home');
+                display_page('control_panel','index');
 
                 api_get_request('users','update_user_session_period');
                 update_user_status();
