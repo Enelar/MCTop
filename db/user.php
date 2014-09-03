@@ -210,4 +210,67 @@ class User extends X
         return $users;
     }
 
+    static function get_user_bank_transactions()
+    {
+        $transactions_count = Core::$redis_db->zCard('user:'.Core::get_current_user_profile()->id.':bank:transactions');
+        if($transactions_count>0)
+        {
+            $transactions = [];
+            $transactions_keys = Core::$redis_db->keys('user:'.Core::get_current_user_profile()->id.':bank:transactions:*');
+
+            foreach ($transactions_keys as $key)
+                $transactions[] = User_Bank_Transactions::get_transaction($key);
+
+            return $transactions;
+        }
+        return false;
+    }
+
+    static function get_user_balance()
+    {
+        $count = Core::$redis_db->get('user:'.Core::get_current_user_profile()->id.':bank:money_count');
+        if(!$count)
+        {
+            Core::$redis_db->set('user:'.Core::get_current_user_profile()->id.':bank:money_count', 0);
+            $count = 0;
+        }
+        return $count;
+    }
+
+}
+
+class User_Bank_Transactions
+{
+    public $id, $name, $description, $time, $user;
+
+    static function register_transaction($name, $description)
+    {
+        $transaction_id = Core::$redis_db->zCard('user:'.Core::get_current_user_profile()->id.':bank:transactions')+1;
+        $transaction = new User_Bank_Transactions;
+        $transaction->id = $transaction_id;
+        $transaction->name = $name;
+        $transaction->description = $description;
+        $transaction->time = time();
+
+        Core::$redis_db->zAdd('user:'.Core::get_current_user_profile()->id.':bank:transactions', $transaction_id, $transaction_id);
+
+        foreach($transaction as $key => $value)
+            if($key != 'user' and $key != 'id')
+                Core::$redis_db->hSet('user:'.Core::get_current_user_profile()->id.':bank:transactions:'.$transaction_id,$key, $value);
+    }
+
+    static function get_transaction($id)
+    {
+        $_info = Core::$redis_db->hGetAll($id);
+        if(sizeof($_info)>0)
+        {
+            $transaction = new User_Bank_Transactions();
+
+            foreach($_info as $key => $value)
+                $transaction->$key = $value;
+
+            return $transaction;
+        }
+        return false;
+    }
 }

@@ -1,7 +1,5 @@
 
     <?php
-        //HelpCategories::add_new_category('Форум', 'Тип-какт-так');
-        //Help_Topic::add_new_topic(2, 'Реклама на форуме', 'Не еблань');
         $help_categories = HelpCategories::get_categories_with_topics();
     ?>
     <h1><span class="glyphicon glyphicon-leaf"></span> Помощь по сайту</h1> <hr>
