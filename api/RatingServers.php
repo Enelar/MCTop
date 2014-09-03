@@ -1,13 +1,13 @@
 <?php
 
-class RatingServers extends Api
+class RatingServers extends API
 {
 
     function vote()
     {
         global $core;
 
-        Api::check_for_post_request();
+        API::check_for_post_request();
 
         $server = Servers::get_server($_POST['server_id'], 'for_api');
 

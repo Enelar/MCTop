@@ -1,12 +1,12 @@
 <?php
 
-class Users extends Api
+class Users extends API
 {
     function authorize()
     {
         global $core;
 
-        Api::check_for_post_request();
+        API::check_for_post_request();
 
         $user = new User(Core::get_db());
         $user_hack = new User(Core::get_db());
@@ -47,7 +47,7 @@ class Users extends Api
     function edit_profile()
     {
         global $core;
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $user = new User(Core::get_db());
         $user->get_user(intval($_POST['user_id']));

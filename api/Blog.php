@@ -1,6 +1,6 @@
 <?php
 
-class Blog extends Api
+class Blog extends API
 {
 
     function post_new_record()
@@ -10,7 +10,7 @@ class Blog extends Api
         if (!$core::is_user_authorized())
             die();
 
-        Api::check_for_post_request();
+        API::check_for_post_request();
 
         $id = uniqid();
 
@@ -38,7 +38,7 @@ class Blog extends Api
         if (!$core::is_user_authorized())
             die();
 
-        Api::check_for_post_request();
+        API::check_for_post_request();
 
         $post = Core::$redis_db->hGetAll('user:' . $_POST['user_id'] . ':blog:records:' . $_POST['id']);
 
