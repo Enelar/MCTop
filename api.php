@@ -3,6 +3,7 @@ require_once('core/libs/TheX.php');
 define('DEBUG', 0);
 ini_set('display_errors', 'yes');
 include('core/core.php');
+include('core/API.php');
 include('core/systems/_db.php');
 include('db/user.php');
 include('db/Servers.php');
@@ -21,44 +22,9 @@ if (isset($_GET['module']) & isset($_GET['action'])) {
         $object = new $class_name;
 
         if (in_array($_GET['action'], get_class_methods($class_name)))
-            Api::answer($object->$_GET['action']());
+            API::answer($object->$_GET['action']());
         //else
         //if($_SERVER['REQUEST_METHOD'] != 'get')
         //    Api::answer(array('error' => 'Method is not exists'));
-    }
-}
-
-exit();
-
-class Api
-{
-
-    static public function answer($object)
-    {
-        echo json_encode($object);
-    }
-
-    static function check_for_post_request()
-    {
-        if (sizeof($_POST) == 0) {
-            self::answer(array(
-                'message' => 'Empty post request'
-            ));
-            die();
-        }
-    }
-
-    static function is_user_authorized_and_is_not_empty_post_request()
-    {
-        if (!Core::is_user_authorized())
-            die();
-
-        Api::check_for_post_request();
-    }
-
-    static function abort($object)
-    {
-        self::answer($object);
-        die();
     }
 }

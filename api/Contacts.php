@@ -1,12 +1,12 @@
 <?php
 
-class Contacts extends api
+class Contacts extends API
 {
 
     function remove()
     {
         global $core;
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->sRem('user:' . $_POST['from'] . ':contacts:ids', $_POST['who_wants_to_remove']);
 
@@ -18,7 +18,7 @@ class Contacts extends api
     function add()
     {
         global $core;
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->sAdd('user:' . $_POST['from'] . ':contacts:ids', $_POST['who_wants_to_add']);
 

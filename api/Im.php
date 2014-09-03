@@ -1,6 +1,6 @@
 <?php
 
-class Im extends Api
+class Im extends API
 {
 
     protected $comet_server;
@@ -38,7 +38,7 @@ class Im extends Api
 
     function send_message_to_user()
     {
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $sender = new User();
         $sender->get_user($_POST['from']);

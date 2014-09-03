@@ -1,12 +1,12 @@
 <?php
 
-class Projects_api extends Api
+class Projects_api extends API
 {
 
     function update()
     {
         global $core;
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $project = Projects::get_project(intval($_POST['id']));
 

@@ -1,12 +1,12 @@
 <?php
 
-class Notes extends Api
+class Notes extends API
 {
 
     function create_note()
     {
         global $core;
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $id = uniqid();
 
@@ -31,7 +31,7 @@ class Notes extends Api
     function edit_note()
     {
         global $core;
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->hMset($_POST['id'], array(
                 'name' => $_POST['name'],
@@ -48,7 +48,7 @@ class Notes extends Api
     function delete()
     {
         global $core;
-        Api::is_user_authorized_and_is_not_empty_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
 
         $note = Core::$redis_db->hGetAll('user:' . $_POST['user_id'] . ':notes:' . $_POST['id']);
 
