@@ -1,7 +1,7 @@
 <?php
 
 define('ROOT_DIR', __DIR__);
-require_once('core/initiator.php');
+require_once 'core/bootstrap.php';
 
 if (!$ajax): ?>
     <!doctype html>

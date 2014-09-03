@@ -1,16 +1,11 @@
 <?php
-require_once('core/libs/TheX.php');
-define('DEBUG', 0);
-ini_set('display_errors', 'yes');
-include('core/core.php');
-include('core/API.php');
-include('core/systems/_db.php');
-include('db/user.php');
-include('db/Servers.php');
-include('db/Projects.php');
-$core = new Core('api');
 
-if (isset($_GET['module']) & isset($_GET['action'])) {
+ini_set('display_errors', 'yes');
+
+define('ROOT_DIR', __DIR__);
+require_once 'core/bootstrap.php';
+
+if (isset($_GET['module'], $_GET['action'])) {
     $file_address = 'api/' . ucfirst($_GET['module']) . '.php';
     if (file_exists($file_address)) {
         if ($_GET['module'] == 'im' or $_GET['module'] == 'notifications') {
