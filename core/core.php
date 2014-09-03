@@ -74,14 +74,18 @@ class Core extends X
 
     static function get_current_user_profile()
     {
-        if (empty(self::$_current_user)) {
-            $user = new User(self::$db);
-            $user->get_user(self::$_session['uid']);
-            self::$_current_user = $user;
-        } else
-            $user = self::$_current_user;
-
-        return $user;
+        if(sizeof(self::$_session)>0)
+        {
+            if (empty(self::$_current_user)) {
+                $user = new User(self::$db);
+                $user->get_user(self::$_session['uid']);
+                self::$_current_user = $user;
+            } else
+                $user = self::$_current_user;
+            return $user;
+        }
+        else
+            return false;
     }
 
     static function is_user_authorized()

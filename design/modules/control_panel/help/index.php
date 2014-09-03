@@ -1,5 +1,7 @@
 
     <?php
+        //HelpCategories::add_new_category('Форум', 'Тип-какт-так');
+        //Help_Topic::add_new_topic(2, 'Реклама на форуме', 'Не еблань');
         $help_categories = HelpCategories::get_categories_with_topics();
     ?>
     <h1><span class="glyphicon glyphicon-leaf"></span> Помощь по сайту</h1> <hr>
@@ -15,28 +17,18 @@
 
             <div class="categories">
 
-                <div class="category">
-
-                    <div class="name">
-                        Рейтинг
-                    </div>
-
-                    <div class="topics">
-
-                        <div class="topic" onclick="display_page_with_id('control_panel', 'help/topic', '<?php echo $topic->id;?>')">
-
-                            <div class="name">
-                                <span class="glyphicon glyphicon-list-alt"></span> Регистрация сервера в рейтинге
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                <?php
+                    if(sizeof($help_categories)>0)
+                        foreach($help_categories as $key => $category)
+                            require('index/_category.php');
+                ?>
 
             </div>
 
         </div>
 
     </div>
+
+    <script>
+        $('[title!=""]').qtip();
+    </script>
