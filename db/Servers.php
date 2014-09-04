@@ -65,6 +65,7 @@ class Servers extends X
 
     function get_servers_for_rating_page($page, $limit = 10)
     {
+        return 'oups';
         $_offset = $page * 10;
 
         $sth = Core::get_db()->prepare("select * from servers limit $limit");

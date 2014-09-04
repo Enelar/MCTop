@@ -12,31 +12,20 @@ class Core extends X
     public $router;
     public $user;
     public $user_session;
-    private $is_api_query;
 
-    function __construct($string = null)
+    function __construct()
     {
         session_start();
         self::$_session = $_SESSION;
 
-        if ($string == 'api')
-            $this->is_api_query = true;
-
         require_once('settings.php');
         self::$settings = $settings;
-
-        try {
-            self::$db = new PDO('mysql:host=' . $settings->db['mysql']['server_address'] . ';dbname=' . $settings->db['mysql']['database_name'], $settings->db['mysql']['user_name'], $settings->db['mysql']['password'], array(
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')) or die('');
-        } catch (PDOException $e) {
-            Core::abort($e->getMessage());
-        }
 
         self::$redis_db = new Redis();
         self::$redis_db->connect($settings->db['redis']['server_address'], $settings->db['redis']['redis_server_port']);
         self::$redis_db->select($settings->db['redis']['db_number']);
 
-        if (!$this->is_api_query)
+        if (substr($_SERVER['REQUEST_URI'], 0, 8) != '/api.php')
             $this->handleQuery();
     }
 
@@ -68,7 +57,7 @@ class Core extends X
                 } else
                     ini_set('display_errors', 'no');
             } else
-                throw new Exception('test');
+                throw new Exception('Some error had occured');
         }
     }
 

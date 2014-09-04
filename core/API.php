@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class API
- */
 class API
 {
 

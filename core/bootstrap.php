@@ -3,7 +3,7 @@
 define('DEBUG', 0);
 
 require ROOT_DIR . '/core/Autoloader.php';
-Autoloader::addClasses([
+Autoloader::add_classes([
     'Core' => ROOT_DIR . '/core/core.php',
     'API' => ROOT_DIR . '/core/API.php',
     'CometServerApi' => ROOT_DIR . '/core/libs/CometServerApi.php',

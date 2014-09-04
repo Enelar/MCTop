@@ -1,29 +1,21 @@
 <?php
 
-/**
- * Class Autoloader
- */
 class Autoloader
 {
 
-    /**
-     * @var array
-     */
     private static $classes = [];
 
-    /**
-     * @param string $class
-     * @param string $path
-     */
-    public static function addClass($class, $path)
+
+    public static function add_class($class, $path)
     {
+        //todo Ведь мы же договаривались, что функции через_нижние_подчеркивания?
         static::$classes[$class] = $path;
     }
 
     /**
      * @param array $array ['SimpleClass' => 'path/to/SimpleClass.php']
      */
-    public static function addClasses($array)
+    public static function add_classes($array)
     {
         foreach ($array as $class => $path) {
             static::$classes[$class] = $path;
@@ -35,10 +27,6 @@ class Autoloader
         spl_autoload_register('Autoloader::load', true, true);
     }
 
-    /**
-     * @param string $class
-     * @return bool
-     */
     public static function load($class)
     {
         if (!isset(static::$classes[$class])) {
