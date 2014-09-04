@@ -36,7 +36,6 @@ class Clubs extends API
 
     function edit()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->hMset('clubs:' . $_POST['id'], array(
@@ -53,7 +52,6 @@ class Clubs extends API
 
     function delete_note()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->del($_POST['id']);
@@ -65,7 +63,6 @@ class Clubs extends API
 
     function join()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->sAdd('clubs:' . $_POST['id'] . ':members', $_POST['user_id']);
@@ -82,7 +79,6 @@ class Clubs extends API
 
     function leave()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->sRem('clubs:' . $_POST['id'] . ':members', $_POST['user_id']);
@@ -95,7 +91,6 @@ class Clubs extends API
 
     function delete()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $club = Core::$redis_db->hGetAll('clubs:' . $_POST['id']);
@@ -118,7 +113,6 @@ class Clubs extends API
 
     function invite()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->sAdd('clubs:' . $_POST['id'] . ':members:invited', $_POST['who_wants_to_invite']);
@@ -133,7 +127,6 @@ class Clubs extends API
 
     function dismember()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $club = Core::$redis_db->hGetAll('clubs:' . $_POST['club_id']);
