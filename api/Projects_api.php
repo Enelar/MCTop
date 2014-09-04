@@ -5,7 +5,6 @@ class Projects_api extends API
 
     function update()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $project = Projects::get_project(intval($_POST['id']));
@@ -15,10 +14,8 @@ class Projects_api extends API
 
 
         foreach ($fields as $key => $field) {
-            if ($field != 'owner')
-                if ($project->$field != $_POST[$field] and $field != 'owner') {
-                    $changed_fields[$field] = 1;
-                }
+            if ($field != 'owner' && $project->$field != $_POST[$field])
+                $changed_fields[$field] = 1;
         }
 
         $query = 'UPDATE projects set ';

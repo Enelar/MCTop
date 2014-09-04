@@ -31,9 +31,7 @@ class Core extends X
 
     function handleQuery()
     {
-        if (!isset($_GET['module'])) {
-            $module = 'main';
-        } else {
+        if (isset($_GET['module'])) {
             $module = $_GET['module'];
             $slash_position = strpos($module, '/');
             if (!$slash_position)
@@ -73,13 +71,13 @@ class Core extends X
                 $user = self::$_current_user;
             return $user;
         }
-        else
-            return false;
+
+        return false;
     }
 
     static function is_user_authorized()
     {
-        return (sizeof(self::get_session()) > 0 && self::get_session()['uid'] > 0) ? true : false;
+        return (sizeof(self::get_session()) > 0 && self::get_session()['uid'] > 0);
     }
 
     static function get_session()
@@ -104,10 +102,7 @@ class Core extends X
 
     function is_ajax_request()
     {
-        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
-            return 1;
-        else
-            return 0;
+        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
     }
 
     function render_page($module, $action)

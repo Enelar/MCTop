@@ -17,10 +17,7 @@ class modules_dictionary
 
     function in_dictionary($name)
     {
-        if (isset($this->modules[$name]))
-            return 1;
-        else
-            return 0;
+        return isset($this->modules[$name]);
     }
 
 }

@@ -4,8 +4,6 @@ class Users extends API
 {
     function authorize()
     {
-        global $core;
-
         API::check_for_post_request();
 
         $user = new User(Core::get_db());
@@ -13,10 +11,7 @@ class Users extends API
 
         $user = $user->find_user_by_login($_POST['login']);
 
-        if (md5($_POST['password']) == $user['password'])
-            $message = 'success';
-        else
-            $message = 'fail';
+        $message = (md5($_POST['password']) == $user['password']) ? 'success' : 'fail';
 
         if ($message == 'success') {
             if (session_status() != PHP_SESSION_ACTIVE)
@@ -34,7 +29,6 @@ class Users extends API
 
     function logout()
     {
-        global $core;
         if (session_status() != PHP_SESSION_ACTIVE)
             session_start();
         if (session_status() == PHP_SESSION_ACTIVE) {
@@ -46,7 +40,6 @@ class Users extends API
 
     function edit_profile()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $user = new User(Core::get_db());
@@ -56,10 +49,9 @@ class Users extends API
         $changed_fields = [];
 
         foreach ($fields as $key => $field) {
-            if ($field != 'password')
-                if ($user->$field != $_POST[$field] and $field != 'password') {
-                    $changed_fields[$field] = 1;
-                }
+            if ($field != 'password' && $user->$field != $_POST[$field]) {
+                $changed_fields[$field] = 1;
+            }
         }
 
         $query = 'UPDATE users set ';
@@ -79,8 +71,6 @@ class Users extends API
 
     function get_test_data_for_home()
     {
-        global $core;
-
         return $some_data = [
             'message' => time()
         ];
@@ -95,9 +85,7 @@ class Users extends API
 
     function update_user_session_period()
     {
-        global $core;
-
-        $time = 0; # =(
+        $time = 0;
         if (Core::is_user_authorized()) {
             $time = time();
             Core::$redis_db->hSet('user:' . Core::get_current_user_profile()->id . ':vay_data', 'last_seen', $time);
@@ -131,10 +119,7 @@ class Users extends API
             $info->get_user_by_login($login);
         }
 
-        unset($info->password);
-        unset($info->session_id);
-        unset($info->fields_to_edit);
-        unset($info->cl_name);
+        unset($info->password, $info->session_id, $info->fields_to_edit, $info->cl_name);
 
         return [
             $info
@@ -143,10 +128,12 @@ class Users extends API
 
     function get_user_contacts()
     {
-        if (isset($_GET['id'])) {
-            $id = intval($_GET['id']);
-            return Core::$redis_db->sMembers('user:' . $id . ':contacts:ids');
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ['options' => ['default' => 0, 'min_range' => 1, 'max_range' => PHP_INT_MAX]]);
+        if (!$id || is_null($id) || $id == 0) {
+            return null;
         }
+
+        return Core::$redis_db->sMembers('user:' . $id . ':contacts:ids');
     }
 
     function get_user_clubs()

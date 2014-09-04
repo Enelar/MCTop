@@ -30,7 +30,6 @@ class Notes extends API
 
     function edit_note()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $result = Core::$redis_db->hMset($_POST['id'], array(
@@ -47,20 +46,16 @@ class Notes extends API
 
     function delete()
     {
-        global $core;
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $note = Core::$redis_db->hGetAll('user:' . $_POST['user_id'] . ':notes:' . $_POST['id']);
 
-        if (sizeof($note) > 0) {
-            if ($_POST['user_id'] == Core::get_current_user_profile()->id) {
+        if (sizeof($note) > 0 && $_POST['user_id'] == Core::get_current_user_profile()->id) {
+            $result = Core::$redis_db->del('user:' . $_POST['user_id'] . ':notes:' . $_POST['id']);
 
-                $result = Core::$redis_db->del('user:' . $_POST['user_id'] . ':notes:' . $_POST['id']);
-
-                return [
-                    'message' => $result == 1 ? 'success' : 'fail'
-                ];
-            }
+            return [
+                'message' => $result == 1 ? 'success' : 'fail'
+            ];
         }
     }
 
