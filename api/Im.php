@@ -16,25 +16,25 @@ class Im extends API
 
     function authorize_user_on_comet_server()
     {
-        if (Core::is_user_authorized()) {
-            if (session_status() != PHP_SESSION_ACTIVE)
-                session_start();
+        # А если пользователь не авторизован?
+        # return ['error' => '?'];
+        if (!Core::is_user_authorized())
+            return;
 
-            if (isset($_SESSION['is_authorized_on_comet_server'])) { # Если изначально false, то значит есть, тогда еще ...n_comet_server'] && !$_SESSION['is_authorized_on_comet_server']) {...
-                $hash = substr(md5(uniqid() . md5(time())), 0, 6) . '+' . Core::get_current_user_profile()->id;
-                CometServerApi::getInstance()->add_user_hash(Core::get_current_user_profile()->id, $hash);
-                $_SESSION['is_authorized_on_comet_server'] = true;
-                return [
-                    'message' => 'user_successfuly_authorized_on_comet_server'
-                ];
-            }
+        if (session_status() != PHP_SESSION_ACTIVE)
+            session_start();
 
+        if (!isset($_SESSION['is_authorized_on_comet_server'])) 
             return [
                 'error' => 'user_already_authorized_on_comet_server'
             ];
-        }
-        # А если пользователь не авторизован?
-        # return ['error' => '?'];
+
+        $hash = substr(md5(uniqid() . md5(time())), 0, 6) . '+' . Core::get_current_user_profile()->id;
+        CometServerApi::getInstance()->add_user_hash(Core::get_current_user_profile()->id, $hash);
+        $_SESSION['is_authorized_on_comet_server'] = true;
+        return [
+            'message' => 'user_successfuly_authorized_on_comet_server'
+        ];
     }
 
     function send_message_to_user()
