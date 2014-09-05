@@ -6,12 +6,9 @@ class Users extends API
     {
         API::check_for_post_request();
 
-        $user = new User(Core::get_db());
-        $user_hack = new User(Core::get_db());
+        $user = User::find_user_by_login($_POST['login']);
 
-        $user = $user->find_user_by_login($_POST['login']);
-
-        $message = (md5($_POST['password']) == $user['password']) ? 'success' : 'fail';
+        $message = (md5($_POST['password']) == $user['salted_password']) ? 'success' : 'fail';
 
         if ($message == 'success') {
             if (session_status() != PHP_SESSION_ACTIVE)
@@ -19,13 +16,14 @@ class Users extends API
             $_SESSION['uid'] = $user['id'];
             $_SESSION['last_update'] = time();
             $_SESSION['session_id'] = md5($user['id'] . 'salt');
-            $user_hack->update_session_id($_SESSION['session_id'], $user['id']);
         }
 
         return [
             'message' => $message
         ];
     }
+
+    private
 
     function logout()
     {

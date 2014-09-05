@@ -12,7 +12,7 @@
 
         <table>
             <tr>
-                <td class="name"> <h1><span class="glyphicon glyphicon-user"></span> <?php echo $user->name?> <?php echo $user->display_nickname();?> <?php echo $user->lastname?></h1></td>
+                <td class="name"> <h1><span class="glyphicon glyphicon-user"></span> <?php $user->display_name();?> <?php $user->display_nickname();?> <?php $user->display_lastname();?></h1></td>
                 <td class="status"><?php echo $user->status;?></td>
                 <div class="availability_status <?php if(User::is_user_online($_GET['id'])) echo 'status_in_vay'?>"></div>
             </tr>

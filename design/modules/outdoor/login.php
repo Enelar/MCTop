@@ -3,7 +3,7 @@
 
 <form method="POST" id="formx" class="login_form" action="javascript:void(null);" onsubmit="authorize_user()">
     <div class="form-group">
-        <label>Логин</label>
+        <label>Логин или ID</label>
         <input id="login" name="login" class="form-control">
     </div>
     <div class="form-group">

@@ -8,6 +8,7 @@ class Core extends X
     private static $_session;
     private static $settings;
     private static $_current_user;
+    private static $_called_module_name;
     public $router;
     public $user;
     public $user_session;
@@ -75,7 +76,7 @@ class Core extends X
         var_dump($_GET);
         echo '<br>';
         var_dump($_POST);
-        echo '<b>XCoreQueryHanlder:</b> initializng of '.$module. ' module<br>';
+        echo '<br><b>XCoreQueryHanlder:</b> initializng of '.self::$_called_module_name. ' module<br>';
     }
 
     private function define_called_module()
@@ -83,10 +84,11 @@ class Core extends X
         $module = $_GET['module'];
 
         $slash_position = strpos($module, '/');
+
         if (!$slash_position)
             $slash_position = strlen($module);
 
-        return substr($module, 0, $slash_position);
+        return self::$_called_module_name = substr($module, 0, $slash_position);
     }
 
     private function is_module_exists($module)

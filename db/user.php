@@ -10,17 +10,8 @@ class User extends X
 
     function get_user($id)
     {
-        $id = intval($id);
 
-        if (DEBUG)
-            echo 'Getting user with id:' . $id . '<br>';
-
-        $sth = Core::get_db()->prepare('select * from users where id = ' . $id);
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $result = Core::get_db()->Query("select * from main.users where id = $1", [$id], true);
 
         if (!$result)
             Core::throw_error();
@@ -74,21 +65,27 @@ class User extends X
         return $user;
     }
 
-    function find_user_by_login($login)
+    static function find_user_by_login($login)
     {
-        $login = htmlentities($login);
+        $login = strip_tags(htmlentities($login));
 
-        if (DEBUG)
-            echo 'Getting user with login:' . $login . '<br>';
+        return Core::get_db()->Query("select * from main.users where login = $1", [$login], true);
+    }
 
-        $sth = Core::get_db()->prepare("select * from users where login = '$login'");
-        $sth->execute()
-        or
-        self::abort($sth);
+    function display_name()
+    {
+        if (!empty($this->name))
+            echo $this->name;
+        else
+            echo '..';
+    }
 
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
-
-        return $result;
+    function display_lastname()
+    {
+        if (!empty($this->lastname))
+            echo $this->lastname;
+        else
+            echo '..';
     }
 
     function display_hobby()
