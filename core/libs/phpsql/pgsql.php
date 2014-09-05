@@ -6,12 +6,6 @@ class pgsql extends \phpsql\connector_interface
 {
   private $db;
 
-  public function __construct($start_method = '', array $params)
-  {
-    if($start_method == 'OpenConnection')
-        $this->OpenConnection($params['user_name'], $params['password'], $params['server_address'], $params['server_port'], $params['working_base_name'], null);
-  }
-
   public function OpenConnection( $user, $pass, $ip, $port, $db, $options )
   {
     $str = "";

@@ -40,7 +40,7 @@ class proxy extends proxy_storage
 
   public function Begin()
   {
-    $id = $this->$next_transaction_id++;
+    $id = $this->next_transaction_id++;
     $this->transactions[] = $id;
     if (!$this->InTransaction())
       $this->connector->Begin();

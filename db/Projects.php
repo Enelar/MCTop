@@ -20,7 +20,7 @@ class Projects extends X
 
         if (!$result) {
             if (is_null($for_what_purposes))
-                Core::oups_sorry_404('Проект не найден');
+                Core::throw_error('Проект не найден');
             else
                 return array('data' => null);
         }

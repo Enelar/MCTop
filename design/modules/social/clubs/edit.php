@@ -4,7 +4,7 @@
         $club = new Clubs('get_one:club_by_id:'.$_GET['id']);
 
         if($club->owner != Core::get_current_user_profile()->id)
-            Core::oups_sorry_404();
+            Core::throw_error();
     ?>
     <h1>Редактирование клуба</h1><hr>
 

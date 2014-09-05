@@ -23,7 +23,7 @@ class Clubs
                 $this->id = $this->model_record_id;
 
                 if (is_null($this->name))
-                    Core::oups_sorry_404();
+                    Core::throw_error();
             }
 
             if ($this->model_reason_to_call == 'get_all_in_which_user_entered') {
@@ -82,11 +82,11 @@ class Clubs
     {
 
         if (is_null($this->name))
-            Core::oups_sorry_404();
+            Core::throw_error();
 
         if (!$this->is_club_member($user_id))
             if ($this->access_privacy == 'private_club')
-                Core::oups_sorry_404();
+                Core::throw_error();
 
     }
 

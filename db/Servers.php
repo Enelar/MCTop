@@ -10,16 +10,11 @@ class Servers extends X
 
     static function get_server($id, $for_what_purposes = null)
     {
-        $sth = Core::get_db()->prepare("select * from servers where id = '$id'");
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $result = Core::get_db()->Query("select * from main.servers where id = $1", [$id], true);
 
         if (!$result) {
             if (is_null($for_what_purposes))
-                Core::oups_sorry_404('Сервер не найден');
+                Core::throw_error('Сервер не найден');
             else
                 return array('data' => null);
         }
@@ -31,26 +26,12 @@ class Servers extends X
         $idle_server->position = 1;
         $idle_server->score = 1;
 
-        $sth = Core::get_db()->prepare("select * from servers_additional where id = '$id'");
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
-
-        if ($result) {
-
-            if (isset($result['vkontakte']))
-                $idle_server->vkontakte_public = $result['vkontakte'];
-
-            if (isset($result['facebook']))
-                $idle_server->facebook_public = $result['facebook'];
-
-            if (isset($result['twitter']))
-                $idle_server->twitter_account = $result['twitter'];
-        }
-
         return $idle_server;
+    }
+
+    static function transform_array_server_info_to_object()
+    {
+
     }
 
     function update_server()
@@ -63,17 +44,10 @@ class Servers extends X
 
     }
 
-    function get_servers_for_rating_page($page, $limit = 10)
+    static function get_servers_for_rating_page($page, $limit = 10)
     {
-        return 'oups';
         $_offset = $page * 10;
-
-        $sth = Core::get_db()->prepare("select * from servers limit $limit");
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = Core::get_db()->Query("select * from main.servers limit $1", [$limit]);
         $servers = [];
 
         foreach ($result as $server) {

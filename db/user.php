@@ -23,7 +23,7 @@ class User extends X
         $result = $sth->fetch(PDO::FETCH_ASSOC);
 
         if (!$result)
-            Core::oups_sorry_404();
+            Core::throw_error();
 
         foreach ($result as $key => $value)
             $this->$key = $value;
@@ -42,7 +42,7 @@ class User extends X
         $result = $sth->fetch(PDO::FETCH_ASSOC);
 
         if (!$result)
-            Core::oups_sorry_404();
+            Core::throw_error();
 
         foreach ($result as $key => $value)
             $this->$key = $value;
@@ -65,7 +65,7 @@ class User extends X
         $result = $sth->fetch(PDO::FETCH_ASSOC);
 
         if (!$result)
-            Core::oups_sorry_404();
+            Core::throw_error();
 
         $user = new User();
         foreach ($result as $key => $value)

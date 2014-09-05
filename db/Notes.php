@@ -34,7 +34,7 @@ class Notes
                     $this->storage = $this->get('user:' . $this->model_with_witch_user_works . ':notes:' . $this->model_record_id);
 
             if (is_null($this->storage['content']))
-                Core::oups_sorry_404();
+                Core::throw_error();
         }
 
     }
