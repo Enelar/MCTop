@@ -15,11 +15,14 @@ class Core extends X
 
     function __construct()
     {
+        Autoloader::load('pgsql');
+
         session_start();
         self::$_session = $_SESSION;
 
         require_once('settings.php');
         self::$settings = $settings;
+        self::$db = new \phpsql\connectors\pgsql('OpenConnection', $settings->db['postgres']);
 
         self::$redis_db = new Redis();
         self::$redis_db->connect($settings->db['redis']['server_address'], $settings->db['redis']['redis_server_port']);

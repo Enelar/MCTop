@@ -8,7 +8,6 @@ class Autoloader
 
     public static function add_class($class, $path)
     {
-        //todo Ведь мы же договаривались, что функции через_нижние_подчеркивания?
         static::$classes[$class] = $path;
     }
 

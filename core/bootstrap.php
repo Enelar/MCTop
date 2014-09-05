@@ -1,12 +1,13 @@
 <?php
 
-define('DEBUG', 0);
+define('DEBUG', 1);
 
 require ROOT_DIR . '/core/Autoloader.php';
 Autoloader::add_classes([
     'Core' => ROOT_DIR . '/core/core.php',
     'API' => ROOT_DIR . '/core/API.php',
     'CometServerApi' => ROOT_DIR . '/core/libs/CometServerApi.php',
+    'pgsql' => ROOT_DIR . '/core/libs/phpsql/pgsql.php',
     'X' => ROOT_DIR . '/core/libs/TheX.php',
     '_db' => ROOT_DIR . '/core/systems/_db.php',
 

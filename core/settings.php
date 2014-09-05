@@ -12,12 +12,12 @@ class Settings
         $settings = array(
             'databases' => array(
                 'db' => array(
-                    'mysql' => array(
-                        'type' => 'mysql',
-                        'password' => 'ybYE79PwYebBtGHn',
-                        'database_name' => 'vehela_mctop',
-                        'user_name' => 'Vay_user',
-                        'server_address' => '127.0.0.1',
+                    'postgres' => array(
+                        'server_address'    => '127.0.0.1',
+                        'server_port'       => '5432',
+                        'user_name'         => 'postgres',
+                        'password'          => '',
+                        'working_base_name' => 'mctop',
                     ),
                     'redis' => array(
                         'server_address' => '127.0.0.1',
