@@ -10,6 +10,7 @@ Autoloader::add_classes([
     'pgsql' => ROOT_DIR . '/core/libs/phpsql/pgsql.php',
     'X' => ROOT_DIR . '/core/libs/TheX.php',
     '_db' => ROOT_DIR . '/core/systems/_db.php',
+    'Modules_names' => ROOT_DIR . '/design/texts/modules.php',
 
     'User' => ROOT_DIR . '/db/user.php',
     'Servers' => ROOT_DIR . '/db/Servers.php',

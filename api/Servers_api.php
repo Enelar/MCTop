@@ -7,6 +7,10 @@ class Servers_api extends API
     {
         API::is_user_authorized_and_is_not_empty_post_request();
         $project = Projects::get_project($_POST['project']);
+        if(!$_POST['user'] == $project->owner)
+            Core::abort("Oups");
+
+        return $project->add_new_server();
     }
 
     function update()

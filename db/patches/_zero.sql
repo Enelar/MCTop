@@ -73,3 +73,36 @@ COMMENT ON COLUMN main.users.map_url IS 'Ссылка на dynmap - карту �
 COMMENT ON COLUMN main.users.features IS 'Преимущества сервера перед другими';
 COMMENT ON TABLE main.users
   IS 'Таблица для хранения данных, о пользователях MCTop';
+
+/*
+  ------------------------ Новости -----------------------------------------
+ */
+
+ -- Table: main.news
+
+-- DROP TABLE main.news;
+
+CREATE TABLE main.news
+(
+  id integer PRIMARY KEY DEFAULT nextval('main.news_id'::regclass),
+  subject character varying(128),
+  text character varying(2048) NOT NULL,
+  "time" time with time zone,
+  category integer
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE main.news
+  OWNER TO postgres;
+
+
+CREATE TABLE main.news_categories
+(
+  id integer PRIMARY KEY DEFAULT nextval('main.news_category_id'::regclass),
+   name character varying(128)
+)
+WITH (
+  OIDS = FALSE
+)
+;

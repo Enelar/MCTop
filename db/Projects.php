@@ -87,4 +87,9 @@ class Projects extends X
         return $servers;
     }
 
+    function add_new_server()
+    {
+        return Core::get_db()->Query("INSERT INTO main.servers(project) VALUES ($1)", [$this->id]);
+    }
+
 }

@@ -149,6 +149,22 @@ class Core extends X
 
     function render_page($module, $action)
     {
+        if($action != 'footer')
+        {
+            $modules = new Modules_names();
+
+            //echo $_GET['module'];
+            //echo $_GET['action'];
+            echo '
+            <ol class="breadcrumb">
+            <li>
+                <a onclick="display_page(\'control_panel\', \'index\')">'.$modules->try_get_module_info()->name.'</a>
+            </li>
+            <li class="active">
+                '.$modules->try_get_module_action_info()->name.'
+            </li>
+            </ol>';
+        }
         if (file_exists(ROOT_DIR . '/design/modules/' . $module . '/' . $action . '.php'))
             require_once(ROOT_DIR . '/design/modules/' . $module . '/' . $action . '.php');
         else
