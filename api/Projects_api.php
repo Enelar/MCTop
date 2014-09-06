@@ -3,6 +3,11 @@
 class Projects_api extends API
 {
 
+    function create()
+    {
+
+    }
+
     function update()
     {
 
@@ -38,6 +43,11 @@ class Projects_api extends API
         $query .= ' where id = ' . $project->id;
 
         return Core::get_db()->Query($query, $params);
+    }
+
+    function delete()
+    {
+
     }
 
 }

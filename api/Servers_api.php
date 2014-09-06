@@ -3,12 +3,21 @@
 class Servers_api extends API
 {
 
+    function create()
+    {
+        API::is_user_authorized_and_is_not_empty_post_request();
+        $project = Projects::get_project($_POST['project']);
+    }
+
     function update()
     {
 
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $server = Servers::get_server(intval($_POST['id']));
+
+        if($server->project_info->owner != Core::get_current_user_profile()->id)
+            Core::abort("Oups");
 
         $fields = explode(', ', $server->fields_to_edit);
         $changed_fields = [];
@@ -38,6 +47,11 @@ class Servers_api extends API
         $query .= ' where id = ' . $server->id;
 
         return Core::get_db()->Query($query, $params);
+    }
+
+    function delete()
+    {
+
     }
 
 }

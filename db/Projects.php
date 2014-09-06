@@ -29,16 +29,6 @@ class Projects extends X
         return $idle_project;
     }
 
-    function update_project()
-    {
-
-    }
-
-    function delete_project()
-    {
-
-    }
-
     static function get_projects_for_rating_page($page, $limit = 10)
     {
         $_offset = $page * 10;
