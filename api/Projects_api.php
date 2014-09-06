@@ -5,6 +5,7 @@ class Projects_api extends API
 
     function update()
     {
+
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $project = Projects::get_project(intval($_POST['id']));
@@ -18,7 +19,7 @@ class Projects_api extends API
                 $changed_fields[$field] = 1;
         }
 
-        $query = 'UPDATE projects set ';
+        $query = 'UPDATE main.projects set ';
 
         foreach ($changed_fields as $key => $field)
             $query .= "$key = '{$_POST[$key]}', ";
@@ -26,11 +27,7 @@ class Projects_api extends API
         $query = substr($query, 0, strlen($query) - 2);
         $query .= ' where id = ' . $project->id;
 
-        $sth = Core::get_db()->prepare($query);
-        $status = $sth->execute()
-        or
-        self::abort($sth);
-        return $status;
+        return Core::get_db()->Query($query);
     }
 
 }

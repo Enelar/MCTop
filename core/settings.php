@@ -35,15 +35,6 @@ class Settings
                             'show_in_navbar' => false
                         )
                     ),
-                'rating' => new Object(
-                        array(
-                            'show_in_navbar' => true,
-                            'show_to_authorized' => true,
-                            'name' => 'Рейтинг серверов',
-                            'icon' => 'glyphicon glyphicon-home',
-                            'link' => 'main\', \'index'
-                        )
-                    ),
                 'projects_rating' => new Object(
                         array(
                             'show_in_navbar' => true,
@@ -51,6 +42,15 @@ class Settings
                             'name' => 'Рейтинг проектов',
                             'icon' => 'glyphicon glyphicon-star',
                             'link' => 'projects_rating\', \'index'
+                        )
+                    ),
+                'rating' => new Object(
+                        array(
+                            'show_in_navbar' => true,
+                            'show_to_authorized' => true,
+                            'name' => 'Рейтинг серверов',
+                            'icon' => 'glyphicon glyphicon-home',
+                            'link' => 'main\', \'index'
                         )
                     ),
                 'search' => new Object(

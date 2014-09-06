@@ -5,18 +5,13 @@ class Projects extends X
 
     public $cl_name = 'Projects';
 
-    public $id, $name, $description, $owner, $position, $score, $minus_score, $plus_score, $avatar;
+    public $id, $name, $description, $owner, $position, $score, $minus_score, $plus_score, $avatar, $servers, $site_url;
     public $vkontakte_public, $facebook_public, $twitter_account;
-    public $fields_to_edit = 'name, description';
+    public $fields_to_edit = 'name, description, site_url';
 
     static function get_project($id, $for_what_purposes = null)
     {
-        $sth = Core::get_db()->prepare("select * from projects where id = '$id'");
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $result = Core::get_db()->Query("select * from main.projects where id = $1", [$id], true);
 
         if (!$result) {
             if (is_null($for_what_purposes))
@@ -29,6 +24,7 @@ class Projects extends X
         foreach ($result as $key => $value)
             $idle_project->$key = $value;
 
+        $idle_project->servers = Core::get_db()->Query("select * from main.servers where project = $1", [$idle_project->id]);
 
         return $idle_project;
     }
@@ -47,12 +43,7 @@ class Projects extends X
     {
         $_offset = $page * 10;
 
-        $sth = Core::get_db()->prepare("select * from projects limit $limit");
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = Core::get_db()->Query("select * from main.projects limit $1", [$limit]);
         $projects = [];
 
         foreach ($result as $project) {
@@ -60,6 +51,7 @@ class Projects extends X
 
             foreach ($project as $key => $value)
                 $idle_project->$key = $value;
+            $idle_project->servers = Core::get_db()->Query("select * from main.servers where project = $1", [$idle_project->id]);
 
             $projects[] = $idle_project;
         }
@@ -71,12 +63,8 @@ class Projects extends X
     {
         $_offset = $page * 10;
 
-        $sth = Core::get_db()->prepare("select * from projects where owner = '$user' limit $limit");
-        $sth->execute()
-        or
-        self::abort($sth);
+        $result = Core::get_db()->Query("select * from main.projects where owner = $1 limit $2", [$user, $limit]);
 
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
         $projects = [];
 
         foreach ($result as $project) {

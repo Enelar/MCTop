@@ -14,6 +14,13 @@
             <textarea name="description" type="text" class="form-control" placeholder="Описание"><?php echo $project->description;?></textarea>
         </div>
 
+        <hr>
+
+        <div class="form-group">
+            <label>Сайт проекта</label>
+            <input name="site_url" type="text" class="form-control" placeholder="Сайт" value="<?php echo $project->site_url;?>"/>
+        </div>
+
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 
