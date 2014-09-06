@@ -5,8 +5,9 @@ class Servers extends X
 
     public $cl_name = 'Servers';
 
-    public $id, $name, $description, $owner, $position, $score, $minus_score, $plus_score, $avatar;
-    public $vkontakte_public, $facebook_public, $twitter_account;
+    public $id, $name, $description, $features, $project;
+
+    public $fields_to_edit = 'name, description, site_url';
 
     static function get_server($id, $for_what_purposes = null)
     {
