@@ -1177,6 +1177,21 @@ li a:hover
     border-bottom: 1px solid #cacaca;
 }
 
+.control_panel .projects .project .servers
+{
+    margin-top: 20px;
+    border: 1px solid #cacaca;
+    margin: 10px;
+    border-bottom: none;
+}
+
+.control_panel .projects .project .servers .server
+{
+    border-bottom: 1px solid #cacaca;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
 /*
     Control Panel
 */

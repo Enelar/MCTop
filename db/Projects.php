@@ -24,7 +24,7 @@ class Projects extends X
         foreach ($result as $key => $value)
             $idle_project->$key = $value;
 
-        $idle_project->servers = Core::get_db()->Query("select * from main.servers where project = $1", [$idle_project->id]);
+        $idle_project->servers = self::get_project_servers($idle_project->id);
 
         return $idle_project;
     }
@@ -73,10 +73,28 @@ class Projects extends X
             foreach ($project as $key => $value)
                 $idle_project->$key = $value;
 
+            $idle_project->servers = self::get_project_servers($idle_project->id);
+
             $projects[] = $idle_project;
         }
 
         return $projects;
+    }
+
+    static function get_project_servers($project)
+
+    {
+        $servers = [];
+        $result = Core::get_db()->Query("select * from main.servers where project = $1", [$project]);
+        foreach ($result as $server) {
+            $idle_server = new Servers();
+
+            foreach ($server as $key => $value)
+                $idle_server->$key = $value;
+
+            $servers[] = $idle_server;
+        }
+        return $servers;
     }
 
 }

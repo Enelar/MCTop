@@ -5,9 +5,9 @@ class Servers extends X
 
     public $cl_name = 'Servers';
 
-    public $id, $name, $description, $features, $project;
+    public $id, $name, $description, $features, $project, $map_url, $address, $port, $project_info;
 
-    public $fields_to_edit = 'name, description, site_url';
+    public $fields_to_edit = 'name, description, features, map_url, address, port';
 
     static function get_server($id, $for_what_purposes = null)
     {
@@ -24,8 +24,7 @@ class Servers extends X
         foreach ($result as $key => $value)
             $idle_server->$key = $value;
 
-        $idle_server->position = 1;
-        $idle_server->score = 1;
+        $idle_server->project_info = Projects::get_project($idle_server->project);
 
         return $idle_server;
     }
@@ -57,13 +56,24 @@ class Servers extends X
             foreach ($server as $key => $value)
                 $idle_server->$key = $value;
 
-            $idle_server->position = 1;
-            $idle_server->score = 1;
+            $idle_server->project_info = Projects::get_project($idle_server->project);
 
             $servers[] = $idle_server;
+
         }
 
         return $servers;
+    }
+
+    function map_url()
+    {
+        if(strlen($this->map_url)>0)
+            echo 'Адрес карты: '.$this->map_url.'<br>';
+    }
+
+    function address()
+    {
+        echo $this->address.':'.$this->port.'<br><br>';
     }
 
 }

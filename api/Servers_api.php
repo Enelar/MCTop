@@ -19,6 +19,9 @@ class Servers_api extends API
                 $changed_fields[$field] = 1;
         }
 
+        if(sizeof($changed_fields) == 0)
+            return true;
+
         $query = 'UPDATE main.servers set ';
 
         $i = 1;
