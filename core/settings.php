@@ -35,11 +35,20 @@ class Settings
                             'show_in_navbar' => false
                         )
                     ),
+                'news' => new Object(
+                        array(
+                            'show_in_navbar' => true,
+                            'show_to_authorized' => true,
+                            'name' => 'Новости',
+                            'icon' => 'glyphicon glyphicon-volume-up',
+                            'link' => 'news\', \'index'
+                        )
+                    ),
                 'projects_rating' => new Object(
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
-                            'name' => 'Рейтинг проектов',
+                            'name' => 'Проекты',
                             'icon' => 'glyphicon glyphicon-star',
                             'link' => 'projects_rating\', \'index'
                         )
@@ -48,7 +57,7 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
-                            'name' => 'Рейтинг серверов',
+                            'name' => 'Серверы',
                             'icon' => 'glyphicon glyphicon-home',
                             'link' => 'main\', \'index'
                         )
@@ -76,7 +85,7 @@ class Settings
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
                             'name' => 'Видео',
-                            'icon' => 'glyphicon glyphicon-film',
+                            'icon' => 'glyphicon glyphicon-facetime-video',
                             'link' => 'videos\', \'index'
                         )
                     ),

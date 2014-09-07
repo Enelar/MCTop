@@ -13,10 +13,21 @@
               ]),
               'search'  => new Object([
                 'name'  => 'Поиск'
-              ])
+              ]),
+              'control_panel'  => new Object([
+                'name'  => 'Панель управления'
+              ]),
+              'news'  => new Object([
+                'name'  => 'Новости'
+              ]),
             ];
 
             $this->action_names = [
+
+                // Search
+                'news/index'  => new Object([
+                        'name'  => 'Главная страница'
+                ]),
 
                 // Videos
                 'videos/index'  => new Object([

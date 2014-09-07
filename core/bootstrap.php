@@ -12,6 +12,7 @@ Autoloader::add_classes([
     '_db' => ROOT_DIR . '/core/systems/_db.php',
     'Modules_names' => ROOT_DIR . '/design/texts/modules.php',
 
+    'News' => ROOT_DIR . '/db/_minecraft/News.php',
     'User' => ROOT_DIR . '/db/user.php',
     'Servers' => ROOT_DIR . '/db/Servers.php',
     'Projects' => ROOT_DIR . '/db/Projects.php',
