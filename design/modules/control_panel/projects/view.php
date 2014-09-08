@@ -14,8 +14,10 @@
 
                 <a onclick="display_page_with_id('control_panel', 'projects/update', '<?php echo $project->id?>')" class="btn btn-primary">Обновить сведения</a>
                 <a onclick="display_page_with_id('control_panel', 'projects/access_settings', '<?php echo $project->id?>')" class="btn btn-primary">Настройки доступа</a>
+                <a onclick="display_page_with_id('control_panel', 'projects/buttons', '<?php echo $project->id?>')" class="btn btn-primary">Кнопки для проекта</a>
                 <a onclick="display_page_with_id('control_panel', 'servers/create', '<?php echo $project->id?>')" class="btn btn-success">Добавить сервер</a>
                 <a onclick="display_page_with_id('control_panel', 'projects/remove', '<?php echo $project->id?>')" class="btn btn-primary">Удаление проекта</a>
+
 
                 <div class="servers">
                     <?php
