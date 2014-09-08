@@ -50,4 +50,54 @@ class Projects_api extends API
 
     }
 
+    function get($id = null)
+    {
+        if(!is_null($id))
+            $_GET['id'] = $id;
+        return new Projects_api_object(Projects::get_project(intval($_GET['id'])));
+    }
+
+}
+
+class Projects_api_object
+{
+    public $name, $description, $avatar, $servers, $score, $minus_score, $plus_score, $position;
+
+    public function __construct(Projects $project)
+    {
+        foreach($project as $key => $value)
+        {
+            if(array_key_exists($key, get_class_vars('Projects_api_object')))
+                if($key == 'servers')
+                    $this->$key = Projects_api_server_object::get_servers($value);
+                else
+                    $this->$key = $value;
+        }
+    }
+}
+
+class Projects_api_server_object
+{
+    public $name, $description, $project, $features, $map_url, $address;
+
+    public static function get_servers($servers = null, $behaviour = null)
+    {
+
+        $servers_to_callback = [];
+
+        foreach($servers as $server)
+        {
+            $_server_to_callback = new Projects_api_server_object();
+
+            foreach($server as $key => $value)
+            {
+                if(array_key_exists($key, get_class_vars('Projects_api_server_object')))
+                    $_server_to_callback->$key = $value;
+            }
+
+            $servers_to_callback[] = $_server_to_callback;
+        }
+
+        return $servers_to_callback;
+    }
 }

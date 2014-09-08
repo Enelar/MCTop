@@ -1,7 +1,7 @@
 
     <?php $projects = Projects::get_user_projects(Core::get_current_user_profile()->id, 0, 100);?>
 
-    <h1><span class="glyphicon glyphicon-plane"></span> Контрольная панель</h1><hr>
+    <h1><span class="glyphicon glyphicon-plane"></span> Панель управления</h1><hr>
 
     <div class="control_panel">
 

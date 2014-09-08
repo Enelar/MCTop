@@ -127,7 +127,13 @@ class Settings
                         array(
                             'show_in_navbar' => false
                         )
-                    )
+                    ),
+                'api' => new Object(
+                        array(
+                            'show_in_navbar' => false,
+                            'icon' => 'glyphicon glyphicon-picture',
+                        )
+                )
 
             ),
 

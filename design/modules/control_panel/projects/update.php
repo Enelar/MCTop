@@ -1,12 +1,6 @@
 
     <?php $project = Projects::get_project($_GET['id']);?>
 
-    <ol class="breadcrumb">
-        <li><a onclick="display_page('control_panel', 'index')">Контрольная панель</a></li>
-        <li><a onclick="display_page_with_id('control_panel', 'projects/view', '<?php echo $project->id;?>')"><?php echo $project->name;?></a></li>
-        <li class="active">Обновление cведений</li>
-    </ol>
-
     <form method="POST" id="formx" action="javascript:void(null);" onsubmit="project_update('<?php echo $project->id?>', '<?php echo Core::get_current_user_profile()->id?>')">
 
         <div class="form-group">

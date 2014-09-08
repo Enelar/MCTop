@@ -66,10 +66,13 @@ if (!$ajax): ?>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a onclick="display_page('control_panel','index')"><span class="glyphicon glyphicon-plane"></span> Контрольная панель</a>
+                                <a onclick="display_page('control_panel','index')"><span class="glyphicon glyphicon-plane"></span> Панель управления</a>
                             </li>
                             <li>
                                 <a onclick="display_page('community','index')"><span class="glyphicon glyphicon-globe"></span> Сообщество</a>
+                            </li>
+                            <li>
+                                <a onclick="display_page('api','index')"><span class="glyphicon glyphicon-picture"></span> API</a>
                             </li>
                             <li class="divider"></li>
                             <li><a onclick="display_page('outdoor','logout')">Выход</a></li>

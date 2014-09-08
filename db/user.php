@@ -187,12 +187,7 @@ class User extends X
     {
         $_offset = $page * 10;
 
-        $sth = Core::get_db()->prepare("select * from users limit $limit");
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = Core::get_db()->Query("select * from main.users limit $1", [$limit]);
         $users = [];
 
         foreach ($result as $user) {

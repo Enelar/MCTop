@@ -134,6 +134,27 @@ class Users extends API
         return Core::$redis_db->sMembers('user:' . $id . ':contacts:ids');
     }
 
+    function get_user_projects($id = null)
+    {
+        if(!is_null($id))
+            $_GET['id'] = $id;
+
+        $projects_ids = Core::get_db()->Query("select id from main.projects where owner = $1", [$_GET['id']]);
+        if(sizeof($projects_ids) == 0)
+            Core::throw_error('У пользователя нет проектов');
+
+        $projects = [];
+        $idle_project = new Projects_api();
+
+        foreach($projects_ids as $project_id)
+        {
+            $projects[] = $idle_project->get($project_id);
+        }
+
+        return $projects;
+
+    }
+
     function get_user_clubs()
     {
 
@@ -148,5 +169,7 @@ class Users extends API
     {
 
     }
+
+
 
 }

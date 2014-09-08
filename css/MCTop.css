@@ -984,11 +984,12 @@ li a:hover
 
 .rating .server
 {
-    background-color: #eeeeee;
+    background-color: rgba(232, 250, 255, 1);
     padding: 15px;
     overflow: auto;
     border-radius: 5px;
     border: 1px solid #cacaca;
+    margin-bottom: 10px;
 }
 
 .rating .server .left_block {
@@ -1047,6 +1048,81 @@ li a:hover
 }
 
 .rating .server .right_block .vote a
+{
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+/*
+    pRoject
+*/
+
+.rating .project
+{
+    background-color: #eeeeee;
+    padding: 15px;
+    overflow: auto;
+    border-radius: 5px;
+    border: 1px solid #cacaca;
+}
+
+.rating .project .left_block {
+    float: left;
+}
+
+.rating .project .left_block .position {
+    display: inline;
+    font-size: 20px;
+    background-color: #cacaca;
+    padding: 4px;
+    text-align: center;
+    padding-left: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #bbbbbb;
+}
+
+.rating .project .left_block .name {
+    font-size: 24px;
+    display: inline;
+}
+
+.rating .project .left_block .name a
+{
+    color: #7f7f7f;
+}
+
+.rating .project .left_block .avatar
+{
+    margin-top: 10px;
+}
+
+.rating .project .right_block {
+    float: right;
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+    padding: 15px;
+    position: relative;
+    top: 0px;
+}
+
+.rating .project .right_block .score
+{
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 5px;
+    position: relative;
+    top: -5px;
+}
+
+.rating .project .right_block .vote
+{
+    background-color: #cacaca;
+    padding: 15px;
+}
+
+.rating .project .right_block .vote a
 {
     padding: 15px;
     padding-left: 25px;

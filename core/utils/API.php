@@ -5,7 +5,7 @@ class API
 
     public static function answer($object)
     {
-        echo json_encode($object);
+        echo Core::json_encode_cyr($object);
     }
 
     public static function check_for_post_request()

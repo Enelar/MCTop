@@ -1,11 +1,6 @@
 
 <?php $project = Projects::get_project($_GET['id'])?>
 
-    <ol class="breadcrumb">
-        <li><a onclick="display_page('control_panel', 'index')">Контрольная панель</a></li>
-        <li class="active"><?php echo $project->name;?></li>
-    </ol>
-
     <div class="control_panel">
         <h1><?php echo $project->name;?></h1><hr>
 

@@ -17,9 +17,13 @@ Autoloader::add_classes([
     'Servers' => ROOT_DIR . '/db/Servers.php',
     'Projects' => ROOT_DIR . '/db/Projects.php',
     'HelpCategories' => ROOT_DIR . '/db/Help.php',
+    'Help_Topic' => ROOT_DIR . '/db/Help.php',
     'Notes' => ROOT_DIR . '/db/Notes.php',
     'Blog_Posts' => ROOT_DIR . '/db/Blog_posts.php',
     'Clubs' => ROOT_DIR . '/db/Clubs.php',
+
+    'Users' => ROOT_DIR . '/api/Users.php',
+    'Projects_api' => ROOT_DIR . '/api/Projects_api.php',
 
     'Servers_render_class' => ROOT_DIR . '/design/render_classes/Servers.php'
 ]);

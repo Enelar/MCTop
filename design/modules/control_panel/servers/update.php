@@ -1,11 +1,6 @@
 
 <?php $server = Servers::get_server($_GET['id']);?>
 
-<ol class="breadcrumb">
-    <li><a onclick="display_page('control_panel', 'index')">Контрольная панель</a></li>
-    <li><a onclick="display_page_with_id('control_panel', 'projects/view', '<?php echo $server->project_info->id;?>')"><?php echo $server->project_info->name;?></a></li>
-    <li class="active"><?php echo $server->name;?></li>
-</ol>
 
 <h1> Обновление сервера: <?php echo $server->name;?></h1> <hr>
 

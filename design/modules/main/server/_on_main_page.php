@@ -4,7 +4,7 @@
         <div class="left_block">
 
             <div class="position">
-                <?php echo $server->position?>
+                1
             </div>
 
             <div class="name">
@@ -22,7 +22,7 @@
         <div class="right_block">
 
             <div class="score">
-                Престиж: <?php echo $server->score?>
+                Престиж: 1
             </div>
 
             <div class="vote">

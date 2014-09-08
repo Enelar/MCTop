@@ -3,11 +3,6 @@
         $help_categories = HelpCategories::get_categories_with_topics();
     ?>
     <h1><span class="glyphicon glyphicon-leaf"></span> Помощь по сайту</h1> <hr>
-    <ol class="breadcrumb">
-        <li><a onclick="display_page('control_panel', 'index')">Контрольная панель</a></li>
-        <li class="active">Помощь по сайту</li>
-    </ol>
-    <hr>
 
     <div class="control_panel">
 
