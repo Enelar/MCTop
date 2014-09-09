@@ -155,6 +155,28 @@ class Users extends API
 
     }
 
+    static function get_user_achievements($id = null)
+    {
+
+        if($id == null)
+            $id = Core::get_current_user_profile()->id;
+
+        $count = Core::$redis_db->zSize('user:'.$id.':site_achievements');
+        if($count == 0)
+            return 0;
+
+        $achievements = Core::$redis_db->zRange('user:'.$id.':site_achievements', 0, -1, false);
+
+        foreach($achievements as $key => $achievement_id)
+        {
+            $achievement = Achievements_api::get_for_user_profile($achievement_id);
+            $achievement->time = Core::$redis_db->hGet('user:'.$id.':site_achievements:'.$achievement_id, 'time');
+            $achievements[$key] = $achievement;
+        }
+
+        return $achievements;
+    }
+
     function get_user_clubs()
     {
 

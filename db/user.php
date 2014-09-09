@@ -100,6 +100,17 @@ class User extends X
             echo '<p>Мобильный: ' . $this->mobile_phone . '</p>';
     }
 
+    function display_achievements_info()
+    {
+        Achievements_api::give(1, 2);
+        $achievements = Users::get_user_achievements();
+        if(is_array($achievements) && sizeof($achievements)>0)
+        {
+            foreach ($achievements as $achievement)
+                echo 'Достижение: '.$achievement->name.' ('.date('d/m/y',$achievement->time).')<br>Описание: '.$achievement->description.'<hr>';
+        }
+    }
+
     function display_relations()
     {
         if (!empty($this->relationship_status))

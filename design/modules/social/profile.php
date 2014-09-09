@@ -34,6 +34,7 @@
 
                     Работа: InDev<br>
                     <br>-->
+                    <?php $user->display_achievements_info();?>
                     <?php $user->display_relations();?>
                     <?php $user->display_mobile_phone();?>
                     <?php $user->display_hobby();?>
