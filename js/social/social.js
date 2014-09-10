@@ -327,3 +327,24 @@
 
         return result;
     }
+
+    function user_add_reputation(type, to, from)
+    {
+        if(from && (type == 'plus' || type == 'minus'))
+        {
+            var url = '/api.php?module=reputation_api&action=add_'+type+'_to_user_reputation';
+            $.ajax({
+                type: "POST",
+                data: ({
+                    to : to,
+                    from: from,
+                    description: $("textarea[name='description']").val()
+                }),
+                url: url,
+                cache: false,
+                success: function(msg){
+                    console.log(msg);
+                }
+            });
+        }
+    }

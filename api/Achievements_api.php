@@ -45,7 +45,7 @@ class Achievements_api extends API
 
     static function give($user, $achievement_id)
     {
-        if(Core::$redis_db->sIsMember('user:'.$user.':site_achievements', $achievement_id))
+         if(Core::$redis_db->zScore('user:'.$user.':site_achievements', $achievement_id) != 0)
             return false;
 
         $achievement = Achievements_api::get($achievement_id);

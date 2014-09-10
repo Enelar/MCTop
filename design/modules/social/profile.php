@@ -39,7 +39,7 @@
                     <?php $user->display_mobile_phone();?>
                     <?php $user->display_hobby();?>
                     <?php $user->display_city();?>
-                    <?php //echo $user->display_reputation();?>
+                    <?php $user->display_reputation();?>
                     <?php //echo $user->display_prestige();?>
                 </td>
             </tr>

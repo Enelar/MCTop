@@ -48,12 +48,7 @@ class User extends X
         if (DEBUG)
             echo 'Getting user with id:' . $id . '<br>';
 
-        $sth = Core::get_db()->prepare('select * from users where id = ' . $id);
-        $sth->execute()
-        or
-        self::abort($sth);
-
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $result = Core::get_db()->Query('select * from main.users where id = $1', [$id], true);
 
         if (!$result)
             Core::throw_error();
@@ -102,7 +97,6 @@ class User extends X
 
     function display_achievements_info()
     {
-        Achievements_api::give(1, 2);
         $achievements = Users::get_user_achievements();
         if(is_array($achievements) && sizeof($achievements)>0)
         {
@@ -133,8 +127,16 @@ class User extends X
 
     function display_reputation()
     {
-        $reputation = 4;
-        return '<p>' . '<a class="btn btn-success" onclick="display_page_with_id(\'social\', \'people/reputation\', \'' . $this->id . '\')"><span class="glyphicon glyphicon-adjust"></span></a> Репутация: ' . $reputation . '</p>';
+        $reputation = Reputation_api::get_user_reputation_score($_GET['id']);
+
+        $buttons = '';
+
+        if(Reputation_api::can_change_user_reputation(Core::get_current_user_profile()->id, $_GET['id']))
+        {
+            $buttons .= '<a class="btn btn-primary" onclick="display_page_with_id(\'social\',\'people/reputation/give_plus\', \''.$_GET['id'].'\')">Поставить +</a> ';
+            $buttons .= '<a class="btn btn-primary" onclick="display_page_with_id(\'social\',\'people/reputation/give_minus\', \''.$_GET['id'].'\')">Поставить -</a>';
+        }
+        echo '<p>' . '<a class="btn btn-success" onclick="display_page_with_id(\'social\', \'people/reputation\', \'' . $this->id . '\')"><span class="glyphicon glyphicon-adjust"></span></a> Репутация: ' . $reputation .'<br><br>'. $buttons.'</p>';
     }
 
     function display_prestige()

@@ -25,6 +25,7 @@ Autoloader::add_classes([
     'Users' => ROOT_DIR . '/api/Users.php',
     'Projects_api' => ROOT_DIR . '/api/Projects_api.php',
     'Achievements_api' => ROOT_DIR . '/api/Achievements_api.php',
+    'Reputation_api' => ROOT_DIR . '/api/Reputation_api.php',
 
     'Servers_render_class' => ROOT_DIR . '/design/render_classes/Servers.php'
 ]);

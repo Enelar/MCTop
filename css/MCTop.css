@@ -360,6 +360,7 @@ li a:hover
 .profile p
 {
     border-bottom: 1px solid #F1F1F1;
+    padding-bottom: 10px;
 }
 
 .profile table
@@ -407,6 +408,7 @@ li a:hover
     margin: 10px;
     position: relative;
     top: -10px;
+    min-height: 265px;
 }
 
 .profile .middle_info .avatar_td

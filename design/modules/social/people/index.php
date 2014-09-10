@@ -1,5 +1,5 @@
 
-    <h1>Сообщество Vay</h1><hr>
+    <h1>Сообщество MCTop</h1><hr>
 
     <div class="contacts">
         <?php
