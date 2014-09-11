@@ -1,6 +1,7 @@
 
 
     require([
+        "https://comet-server.ru/CometServerApi.js",
         "_libs/bootstrap",
         "_libs/jqClock",
         "_libs/keymaster",
@@ -23,11 +24,21 @@
             current_user_id = api_get_request('users', 'get_current_user_id');
 
             if(!user_logged_status['is_authorized'])
-                display_page('main', 'index');
+                display_page('projects_rating', 'index');
             else
             {
 
-                display_page('control_panel','index');
+                CometServer().start({
+                    dev_id: 99//,
+                });
+
+                CometServer().subscription("user_"+current_user_id['data']+"_notifications", function(e){
+                    render_notification(e['data']['title'], e['data']['from'], e['data']['message']);
+                    console.log(e);
+                    ion.sound.play("notify");
+                });
+
+                display_page('projects_rating','index');
 
                 api_get_request('users','update_user_session_period');
                 update_user_status();

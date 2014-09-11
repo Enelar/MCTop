@@ -23,15 +23,13 @@ class Users extends API
         ];
     }
 
-    private
-
     function logout()
     {
         if (session_status() != PHP_SESSION_ACTIVE)
             session_start();
         if (session_status() == PHP_SESSION_ACTIVE) {
             session_unset();
-            //session_destroy();
+            session_destroy();
         }
         header('Location: http://mctop.ru');
     }
@@ -175,6 +173,11 @@ class Users extends API
         }
 
         return $achievements;
+    }
+
+    static function get_user_players_count_on_all_projects()
+    {
+        return Core::$redis_db->hGet('user:'.Core::get_current_user_profile()->id.':stats', 'players_count');
     }
 
     function get_user_clubs()

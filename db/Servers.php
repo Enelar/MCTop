@@ -5,9 +5,9 @@ class Servers extends X
 
     public $cl_name = 'Servers';
 
-    public $id, $name, $description, $features, $project, $map_url, $address, $port, $project_info;
+    public $id, $name, $description, $features, $project, $map_url, $address, $port, $plugins, $mods, $tags, $video_server_url, $project_info;
 
-    public $fields_to_edit = 'name, description, features, map_url, address, port';
+    public $fields_to_edit = 'name, description, features, map_url, address, port, plugins, mods, tags, video_server_url';
 
     static function get_server($id, $for_what_purposes = null)
     {

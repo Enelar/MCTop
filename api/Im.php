@@ -9,7 +9,7 @@ class Im extends API
     {
         if (Core::is_user_authorized()) {
             $this->comet_server = CometServerApi::getInstance();
-            $this->comet_server->authorization(95, "nxWX5QodcBjMrsiyB5q5GGAwhWHk49SfgQDwqU9cARq6CtQ5Fyc2dLAiB3yYb6IR");
+            $this->comet_server->authorization(99, "In9a4PPrZMzUiZJscpoZzx9l9ap3UxVhpaaHJDTGWZdHBajbmPU6J0oL2ayTdonu");
         } else
             die();
     }

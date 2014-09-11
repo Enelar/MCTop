@@ -2,7 +2,7 @@ body
 {
     font-family: "Tahoma";
     font-size: 12px;
-    background-color: #A6EEE8;
+    background-color: #ECECEC;
     color: #fff;
 }
 
@@ -35,7 +35,7 @@ form
     font-size: 13px;
     background-color: #fff;
     color: #000;
-    #border: 1px solid #d3cdd7;
+    border: 1px solid #000;
 }
 
 .content h1
@@ -55,7 +55,7 @@ a:hover
 
 .divider
 {
-    border-bottom: 1px solid #A4CEFC;
+    border-bottom: 1px solid #878787;
 }
 
 .without_pointers
@@ -97,11 +97,12 @@ a:hover
 */
 
 .navbar-default {
-    background-color: rgba(146, 146, 146, 0.86);
-    border-color: #BEBEBE;
+    background-color: #000;
     position: relative;
     top: -18px;
     min-height: 62px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .navbar-nav > li
@@ -111,7 +112,7 @@ a:hover
 
 .navbar-nav > li:hover
 {
-    background-color: rgba(14, 9, 9, 0.51);
+    background-color: rgba(255, 255, 255, 0.51);
     border-radius: 3px;
 }
 
@@ -159,15 +160,15 @@ li a:hover
     margin-top: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    background-color: rgba(242, 244, 245, 0.8);
-    border-color: #CDFFFF;
+    background-color: rgba(255, 255, 255, 1);
+    border-color: #737979;
     border-top: 1px solid #C7C2C2;
     max-width: 250px;
 }
 
 .dropdown-menu span
 {
-    border-right: 1px solid #89B1C7;
+    border-right: 1px solid #242d34;
     padding-right: 10px;
     position: relative;
     left: -5px;

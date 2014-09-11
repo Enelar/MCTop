@@ -139,6 +139,13 @@ class User extends X
         echo '<p>' . '<a class="btn btn-success" onclick="display_page_with_id(\'social\', \'people/reputation\', \'' . $this->id . '\')"><span class="glyphicon glyphicon-adjust"></span></a> Репутация: ' . $reputation .'<br><br>'. $buttons.'</p>';
     }
 
+    function display_players_count()
+    {
+        $count = Users::get_user_players_count_on_all_projects();
+        if($count)
+            echo 'У пользователя '.$count. ' игроков на всех его проектах';
+    }
+
     function display_prestige()
     {
         $prestige = 4;

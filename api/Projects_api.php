@@ -5,7 +5,9 @@ class Projects_api extends API
 
     function create()
     {
+        API::is_user_authorized_and_is_not_empty_post_request();
 
+        return ['result' => Core::get_db()->Query("INSERT INTO main.projects(name, owner) VALUES ($1, $2)", ['Название проекта', $_POST['user']])];
     }
 
     function update()

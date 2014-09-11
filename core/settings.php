@@ -82,7 +82,7 @@ class Settings
                     ),
                 'videos' => new Object(
                         array(
-                            'show_in_navbar' => true,
+                            'show_in_navbar' => false,
                             'show_to_authorized' => true,
                             'name' => 'Видео',
                             'icon' => 'glyphicon glyphicon-facetime-video',
@@ -91,7 +91,7 @@ class Settings
                     ),
                 'forum' => new Object(
                         array(
-                            'show_in_navbar' => true,
+                            'show_in_navbar' => false,
                             'show_to_authorized' => true,
                             'name' => 'Форум',
                             'icon' => 'glyphicon glyphicon-bullhorn',
@@ -168,7 +168,7 @@ class Settings
             ],
 
             'engine' => [
-                'name' => 'Vehela',
+                'name' => 'the Vay engine (ready 2 hack)',
                 'version' => '0.01a',
             ],
 
