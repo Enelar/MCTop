@@ -158,6 +158,9 @@ class Core extends X
         {
             $modules = new Modules_names();
 
+            if(isset($_GET['id']))
+                $entity_id = $_GET['id'];
+
             echo '
             <ol class="breadcrumb">
             <li>

@@ -1,5 +1,4 @@
 
-
     require([
         "https://comet-server.ru/CometServerApi.js",
         "_libs/bootstrap",
@@ -29,12 +28,13 @@
             {
 
                 CometServer().start({
-                    dev_id: 99//,
+                    dev_id: 99
                 });
+
+                //CometServer().subscription("mctop_chat", function(data){ alert('1'); } );
 
                 CometServer().subscription("user_"+current_user_id['data']+"_notifications", function(e){
                     render_notification(e['data']['title'], e['data']['from'], e['data']['message']);
-                    console.log(e);
                     ion.sound.play("notify");
                 });
 
@@ -57,6 +57,8 @@
             }
 
         }
+
+
     );
 
 

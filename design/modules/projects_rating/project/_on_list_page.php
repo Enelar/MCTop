@@ -2,6 +2,11 @@
 Description: <?php echo $project->name;?><br>
 Owner: <?php echo $project->owner;?><br>
 Servers:<br>
-<?php var_dump($project->servers);?>
+<?php
+    foreach ($project->servers as $server)
+    {
+        require ('_server_on_list_page.php');
+    }
+?>
 
 <hr>

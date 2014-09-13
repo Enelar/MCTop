@@ -1,2 +1,4 @@
 
-    <h1>Тут будут разные видео</h1>
+    <h1><span class="<?php echo Core::get_settings()->modules['video']->icon?>"></span> Видео</h1><hr>
+
+    InDev

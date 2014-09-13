@@ -180,6 +180,11 @@ class Users extends API
         return Core::$redis_db->hGet('user:'.Core::get_current_user_profile()->id.':stats', 'players_count');
     }
 
+    static function get_site_team_users()
+    {
+        return Core::get_db()->Query("select * from main.site_team");
+    }
+
     function get_user_clubs()
     {
 
@@ -194,7 +199,5 @@ class Users extends API
     {
 
     }
-
-
 
 }

@@ -91,12 +91,30 @@ class Settings
                     ),
                 'forum' => new Object(
                         array(
-                            'show_in_navbar' => false,
+                            'show_in_navbar' => true,
                             'show_to_authorized' => true,
                             'name' => 'Форум',
                             'icon' => 'glyphicon glyphicon-bullhorn',
                             'link' => 'forum\', \'index'
                         )
+                    ),
+                'chat' => new Object(
+                        [
+                            'name' => 'Chat',
+                            'link' => 'chat\', \'index',
+                            'show_in_navbar' => false,
+                            'show_to_authorized' => true,
+                            'icon' => 'glyphicon glyphicon-signal'
+                        ]
+                    ),
+                'radio' => new Object(
+                        [
+                            'name' => 'Radio',
+                            'link' => 'radio\', \'index',
+                            'show_in_navbar' => true,
+                            'show_to_authorized' => true,
+                            'icon' => 'glyphicon glyphicon-headphones'
+                        ]
                     ),
                 'outdoor' => new Object(
                         array(
@@ -133,8 +151,7 @@ class Settings
                             'show_in_navbar' => false,
                             'icon' => 'glyphicon glyphicon-picture',
                         )
-                )
-
+                ),
             ),
 
             'application' => [

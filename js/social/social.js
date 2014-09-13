@@ -348,3 +348,24 @@
             });
         }
     }
+
+    function forum_topic_leave_message(topic, author)
+    {
+        $.ajax({
+            type: "POST",
+            data: ({
+                message : $("textarea[name='message']").val(),
+                author: author,
+                topic: topic
+            }),
+            url: "/api.php?module=forum_api&action=post_new_message",
+            cache: false,
+            success: function(msg){
+                var answer = jQuery.parseJSON(msg);
+                if(answer['message'] == 'success')
+                {
+                    display_page_with_id('forum','topic/body', topic);
+                }
+            }
+        });
+    }

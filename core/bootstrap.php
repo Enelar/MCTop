@@ -13,6 +13,11 @@ Autoloader::add_classes([
     'Modules_names' => ROOT_DIR . '/design/texts/modules.php',
 
     'News' => ROOT_DIR . '/db/_minecraft/News.php',
+
+    'Forum_topics' => ROOT_DIR . '/db/_minecraft/Forum_topics.php',
+    'Forum_categories' => ROOT_DIR . '/db/_minecraft/Forum_categories.php',
+    'Forum_answers' => ROOT_DIR . '/db/_minecraft/Forum_answers.php',
+
     'User' => ROOT_DIR . '/db/user.php',
     'Servers' => ROOT_DIR . '/db/Servers.php',
     'Projects' => ROOT_DIR . '/db/Projects.php',
@@ -26,8 +31,12 @@ Autoloader::add_classes([
     'Projects_api' => ROOT_DIR . '/api/Projects_api.php',
     'Achievements_api' => ROOT_DIR . '/api/Achievements_api.php',
     'Reputation_api' => ROOT_DIR . '/api/Reputation_api.php',
+    'Forum_api' => ROOT_DIR . '/api/Forum_api.php',
+    'RatingServers' => ROOT_DIR . '/api/RatingServers.php',
+    'Votes' => ROOT_DIR . '/api/Votes.php',
 
-    'Servers_render_class' => ROOT_DIR . '/design/render_classes/Servers.php'
+    'Servers_render_class' => ROOT_DIR . '/design/render_classes/Servers.php',
+    'Forum_render_class' => ROOT_DIR . '/design/render_classes/Forum.php'
 ]);
 Autoloader::register();
 

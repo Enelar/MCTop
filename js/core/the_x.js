@@ -20,6 +20,7 @@
 
     function display_page(module, action)
     {
+
         $.ajax({
             type: "GET",
             url: "/index.php?module="+module+"&action="+action,
@@ -62,7 +63,7 @@
 
     function log(var_)
     {
-        //console.log(var_);
+        console.log(var_);
     }
 
     function call_function_with_timeout(seconds, func) {
@@ -87,6 +88,11 @@
                 $( '#'+div_id ).html( html );
             }
         });
+    }
+
+    function get_user_history()
+    {
+        return test;
     }
 
     //todo Сделать рефактор функции с _div_by_id до div
