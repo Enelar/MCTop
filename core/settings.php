@@ -155,6 +155,15 @@ class Settings
                             'show_in_navbar' => false
                         )
                     ),
+                'why' => new Object(
+                        array(
+                            'show_in_navbar' => true,
+                            'show_to_authorized' => false,
+                            'icon' => 'glyphicon glyphicon-repeat',
+                            'name' => 'Почему?',
+                            'link' => 'outdoor\', \'why'
+                        )
+                    ),
                 'api' => new Object(
                         array(
                             'show_in_navbar' => false,
