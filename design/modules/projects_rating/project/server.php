@@ -22,15 +22,17 @@
     <?php Servers_render_class::display_twitter_button($server);?>
     <hr>
 
+    <?php if(sizeof($only_tags)>0):?>
     <div class="tags">
         Теги: <?php foreach ($only_tags as $tag) echo '<span class="label label-primary">'.$tag.'</span> ';?>
     </div>
+    <?php endif;?>
 
     <?php if(Core::is_user_authorized()):?>
         <?php if(! $subscribe = RatingServers::is_server_subscriber($server->id)):?>
             <a class="btn btn-primary" onclick="display_page_with_id('projects_rating', 'project/server_subscribe', '<?php echo $server->id;?>')">Для голосования за сервере тебе нужно @Подписаться_на_сервер</a>
         <?php else:?>
-            Вы подписаны на сервер как <a onclick="display_page_with_id('projects_rating', 'project/server_subscribe_change_nick', '<?php echo $server->id?>')"><?php echo $subscribe->nickname;?></a>
+            Вы сохранили ник <a onclick="display_page_with_id('projects_rating', 'project/server_subscribe_change_nick', '<?php echo $server->id?>')"><?php echo $subscribe->nickname;?></a> на сервере
             <hr>
             <?php
             if(Votes::is_user_have_voted_today($server->project, Core::get_current_user_profile()->id))
