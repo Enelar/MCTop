@@ -67,6 +67,13 @@ class User extends X
         return Core::get_db()->Query("select * from main.users where login = $1", [$login], true);
     }
 
+    static function find_user_by_id($id)
+    {
+        $id = strip_tags(htmlentities($id));
+
+        return Core::get_db()->Query("select * from main.users where id = $1", [$id], true);
+    }
+
     function display_name()
     {
         if (!empty($this->name))

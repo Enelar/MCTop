@@ -28,8 +28,9 @@ class Servers_api extends API
 
 
         foreach ($fields as $key => $field) {
-            if ($field != 'owner' && $server->$field != $_POST[$field])
-                $changed_fields[$field] = 1;
+            if(isset($_POST[$field]))
+                if ($field != 'owner' && $server->$field != $_POST[$field])
+                    $changed_fields[$field] = 1;
         }
 
         if(sizeof($changed_fields) == 0)

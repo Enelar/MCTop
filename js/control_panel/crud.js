@@ -99,6 +99,9 @@
                 map_url : $("input[name='map_url']").val(),
                 address : $("input[name='address']").val(),
                 port : $("input[name='port']").val(),
+                plugins : $("input[name='plugins']").val(),
+                mods : $("input[name='mods']").val(),
+                tags : $("input[name='tags']").val(),
                 user: user
             }),
             url: "/api.php?module=servers_api&action=update",

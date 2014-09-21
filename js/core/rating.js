@@ -1,22 +1,15 @@
 
 
-    function vote_for_server(mode, server)
+    function vote_for_server(server)
     {
-        if(mode == '+')
-            console.log('плюс одно очко серверу ' + server);
-        else
-            console.log('минус одно очко серверу ' + server);
-
         $.ajax({
             type: "POST",
             data: ({
-                server_id : server,
-                mode : mode
+                server_id : server
             }),
             url: "/api.php?module=ratingservers&action=vote",
             success: function(msg){
-                var answer = jQuery.parseJSON(msg);
-                log(answer);
+                display_page_with_id('projects_rating', 'project/server', server);
             }
         });
 

@@ -18,6 +18,24 @@
         });
     }
 
+    function register_user()
+    {
+        $.ajax({
+            type: "POST",
+            url: "/api.php?module=users&action=register",
+            success: function(msg){
+                var answer = jQuery.parseJSON(msg);
+                if(answer['message'] == 'success')
+                {
+                    var text = 'ID для входа: '+ answer['id'] + '<br>';
+                    text += 'Пароль для входа: '+ answer['password'];
+                    $( ".account_info" ).html(text);
+                    //window.location.replace("http://mctop.ru");
+                }
+            }
+        });
+    }
+
     function logout_user()
     {
         window.location.replace("http://mctop.ru/api.php?module=users&action=logout");

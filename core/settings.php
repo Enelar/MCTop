@@ -91,7 +91,7 @@ class Settings
                     ),
                 'forum' => new Object(
                         array(
-                            'show_in_navbar' => true,
+                            'show_in_navbar' => false,
                             'show_to_authorized' => true,
                             'name' => 'Форум',
                             'icon' => 'glyphicon glyphicon-bullhorn',
@@ -123,6 +123,15 @@ class Settings
                             'name' => 'Авторизация',
                             'icon' => 'glyphicon glyphicon-lock',
                             'link' => 'outdoor\', \'login'
+                        )
+                    ),
+                'registration' => new Object(
+                        array(
+                            'show_in_navbar' => true,
+                            'show_to_authorized' => false,
+                            'name' => 'Регистрация',
+                            'icon' => 'glyphicon glyphicon-plus',
+                            'link' => 'outdoor\', \'register'
                         )
                     ),
                 'static_pages' => new Object(

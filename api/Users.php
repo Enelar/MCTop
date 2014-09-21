@@ -7,6 +7,8 @@ class Users extends API
         API::check_for_post_request();
 
         $user = User::find_user_by_login($_POST['login']);
+        if(sizeof($user) == 0)
+            $user = User::find_user_by_id($_POST['login']);
 
         $message = (md5($_POST['password']) == $user['salted_password']) ? 'success' : 'fail';
 
@@ -21,6 +23,24 @@ class Users extends API
         return [
             'message' => $message
         ];
+    }
+
+    function register()
+    {
+        //141094196054194408f28c2
+        $password = uniqid(time());
+        $salted_password = md5($password);
+
+        Core::$db->Query("insert into main.users (salted_password) values ($1)", [$salted_password]);
+        $user = Core::$db->Query("select * from main.users where salted_password = $1 order by id desc", [$salted_password], true);
+
+        return
+        [
+            'message' => 'success',
+            'password' => $password,
+            'id'       => $user['id']
+        ];
+
     }
 
     function logout()

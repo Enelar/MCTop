@@ -33,7 +33,7 @@ class Projects extends X
     {
         $_offset = $page * 10;
 
-        $result = Core::get_db()->Query("select * from main.projects limit $1", [$limit]);
+        $result = Core::get_db()->Query("select * from main.projects order by score limit $1 ", [$limit]);
         $projects = [];
 
         foreach ($result as $project) {

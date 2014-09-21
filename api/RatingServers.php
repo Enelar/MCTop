@@ -5,7 +5,23 @@ class RatingServers extends API
 
     function vote()
     {
-        API::check_for_post_request();
+        API::is_user_authorized_and_is_not_empty_post_request();
+
+        $server = Servers::get_server($_POST['server_id']);
+        require('Votes.php');
+        $votes = new Votes();
+
+        $project = Projects::get_project($server->project);
+        $votes_count = Core::$db->Query("select count(*) from votes.main where project_id = $1", [$project->id], true);
+        $votes_count = $votes_count['count'];
+        $votes_count++;
+
+        Core::$db->Query("update main.projects set score = $1 where id = $2", [$votes_count, $project->id]);
+        if(!$votes->is_user_have_voted_today($server->project, Core::get_current_user_profile()->id))
+        {
+            $time = date('Y-m-d H:i:s', time());
+            Core::$db->Query("insert into votes.main (server_id, user_id, time, project_id) values ($1, $2, $3, $4)", [$server->id, Core::get_current_user_profile()->id, $time, $server->project]);
+        }
 
         return [
             'message' => Servers::get_server($_POST['server_id'], 'for_api')
