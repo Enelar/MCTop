@@ -1,5 +1,10 @@
+<?php $server = Servers::get_server($_GET['id'])?>
+<h1><span class="glyphicon glyphicon-align-justify"></span> Сервер <?php echo $server->name;?></h1><hr>
+<p><?php echo $server->description;?></p><hr>
+
+
 <div class="full_server">
-    <?php $server = Servers::get_server($_GET['id'])?>
+
     <?php
     $only_tags = [];
 
@@ -10,7 +15,12 @@
             $only_tags[] = $tag;
 
     ?>
-    <h1><?php echo $server->name;?></h1><hr>
+
+    <?php Servers_render_class::display_photo_gallery_button($server);?>
+    <?php Servers_render_class::display_vk_button($server);?>
+    <?php Servers_render_class::display_facebook_button($server);?>
+    <?php Servers_render_class::display_twitter_button($server);?>
+
     <div class="tags">
         Теги: <?php foreach ($only_tags as $tag) echo '<span class="label label-primary">'.$tag.'</span> ';?>
     </div>

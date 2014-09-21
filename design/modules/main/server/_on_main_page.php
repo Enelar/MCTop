@@ -8,12 +8,11 @@
             </div>
 
             <div class="name">
-                <a onclick="display_page_with_id('main','server', '<?php echo $server->id?>')"><?php echo $server->name?></a>
+                <a onclick="display_page_with_id('projects_rating','project/server', '<?php echo $server->id?>')"><?php echo $server->name?></a>
             </div>
 
             <div class="avatar">
-                <a onclick="display_page_with_id('main','server', '<?php echo $server->id?>')">
-                    <img src="<?php echo $server->avatar;?>"/>
+                <a onclick="display_page_with_id('projects_rating','project', '<?php echo $server->id?>')">
                 </a>
             </div>
 
@@ -22,12 +21,7 @@
         <div class="right_block">
 
             <div class="score">
-                Престиж: 1
-            </div>
-
-            <div class="vote">
-                <a onclick="vote_for_server('+', '<?php echo $server->id;?>')" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span> </a>
-                <a onclick="vote_for_server('-', '<?php echo $server->id;?>')" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                Голосов: <?php echo $server->votes;?>
             </div>
 
         </div>

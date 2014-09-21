@@ -197,6 +197,7 @@ class Users extends API
 
     static function get_user_players_count_on_all_projects()
     {
+        return '<b>[ в разработке ]</b>';
         return Core::$redis_db->hGet('user:'.Core::get_current_user_profile()->id.':stats', 'players_count');
     }
 

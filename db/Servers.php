@@ -47,7 +47,7 @@ class Servers extends X
     static function get_servers_for_rating_page($page, $limit = 10)
     {
         $_offset = $page * 10;
-        $result = Core::get_db()->Query("select * from main.servers limit $1", [$limit]);
+        $result = Core::get_db()->Query("select * from main.servers order by votes desc limit $1 ", [$limit]);
         $servers = [];
 
         foreach ($result as $server) {

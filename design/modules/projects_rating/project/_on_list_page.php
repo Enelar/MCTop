@@ -1,7 +1,6 @@
-<h2>Project: <?php echo $project->name;?></h2><br>
-Description: <?php echo $project->name;?><br>
-Owner: <?php echo $project->owner;?><br>
-Servers:<br>
+<h2><?php echo $project->name;?></h2>
+Голосов: <?php echo $project->score;?><br>
+
 <?php
     foreach ($project->servers as $server)
     {

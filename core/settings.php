@@ -111,7 +111,7 @@ class Settings
                         [
                             'name' => 'Radio',
                             'link' => 'radio\', \'index',
-                            'show_in_navbar' => true,
+                            'show_in_navbar' => false,
                             'show_to_authorized' => true,
                             'icon' => 'glyphicon glyphicon-headphones'
                         ]

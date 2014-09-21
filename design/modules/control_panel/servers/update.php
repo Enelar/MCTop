@@ -1,3 +1,13 @@
+<script src="/js/_libs/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+            selector:'#test',
+            language : 'ru',
+            plugins : 'advlist autolink link image lists charmap print preview',
+            rows: 15
+        }
+    );
+</script>
 <script src="/js/jquery.tagsinput.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
 <script>
@@ -34,7 +44,7 @@
 
     <div class="form-group">
         <label>Описание сервера</label>
-        <textarea name="description" type="text" class="form-control" placeholder="Описание"><?php echo $server->description;?></textarea>
+        <textarea id="test" name="description" type="text" class="form-control" placeholder="Описание"><?php echo $server->description;?></textarea>
     </div>
 
     <hr>
@@ -50,6 +60,7 @@
         <span class="label label-default">New</span> <label>Ссылка на карту сервера</label>
         <input name="map_url" type="text" class="form-control" placeholder="Карта сервера" value="<?php echo $server->map_url;?>"/>
     </div>
+
 
     <hr>
 

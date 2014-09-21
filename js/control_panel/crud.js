@@ -94,7 +94,7 @@
             data: ({
                 id: id,
                 name : $("input[name='name']").val(),
-                description : $("textarea[name='description']").val(),
+                description : tinyMCE.activeEditor.getContent({format : 'raw'}),
                 features : $("textarea[name='features']").val(),
                 map_url : $("input[name='map_url']").val(),
                 address : $("input[name='address']").val(),

@@ -63,7 +63,7 @@ class Servers_api extends API
 
         $query = substr($query, 0, strlen($query) - 2);
         $query .= ' where id = ' . $server->id;
-
+        //return new Object(array($params, $query));
         return Core::get_db()->Query($query, $params);
     }
 
