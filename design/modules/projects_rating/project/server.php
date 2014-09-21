@@ -20,6 +20,7 @@
     <?php Servers_render_class::display_vk_button($server);?>
     <?php Servers_render_class::display_facebook_button($server);?>
     <?php Servers_render_class::display_twitter_button($server);?>
+    <hr>
 
     <div class="tags">
         Теги: <?php foreach ($only_tags as $tag) echo '<span class="label label-primary">'.$tag.'</span> ';?>
