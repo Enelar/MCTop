@@ -48,3 +48,19 @@
             }
         });
     }
+
+    function servers_search()
+    {
+        $.ajax({
+            type: "POST",
+            data: ({
+                tags: $("input[name='tags']").val(),
+                strictly_search: $("input[name='strictly_search']").val()
+            }),
+            url: "/api.php?module=search&action=results",
+            cache: false,
+            success: function(content){
+                $( "#results" ).html( content );
+            }
+        });
+    }

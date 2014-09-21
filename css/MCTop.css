@@ -108,12 +108,15 @@ a:hover
 .navbar-nav > li
 {
     margin: 5px;
+    border-radius: 1px;
+    border: 1px solid #000;
 }
 
 .navbar-nav > li:hover
 {
-    background-color: rgba(255, 255, 255, 0.51);
-    border-radius: 3px;
+    border: 1px solid #566BC0;
+    background-color: #232323;
+    border-radius: 2px;
 }
 
 .navbar-default .navbar-nav > li > a
@@ -254,7 +257,7 @@ li a:hover
 #mctop_logo{
     color: #FFFFFF;
     background-color: rgba(78, 70, 70, 0.43);
-    border: 1px solid #A09B9B;
+    border: 1px solid #2650BD;
     border-radius: 4px;
     position: relative;
     top: 10px;

@@ -14,22 +14,6 @@ Class Votes extends API
         return true;
     }
 
-    function register_vote()
-    {
-        self::is_user_authorized_and_is_not_empty_post_request();
-
-        if(self::is_user_have_voted_today($_POST['project_id']))
-            return ['message' => 'user_already_has_voted_today'];
-
-        $nickname = RatingServers::get_user_nickname_on_server($_POST['server_id']);
-        $server = Servers::get_server($_POST['server_id']);
-        $project = Projects::get_project($server->project);
-
-        if($this->is_needs_to_give_bonus($server))
-            $this->give_bonus_for_vote($server, $nickname);
-
-    }
-
     function recount_project_score()
     {
 

@@ -17,6 +17,11 @@ class RatingServers extends API
         $votes_count++;
 
         Core::$db->Query("update main.projects set score = $1 where id = $2", [$votes_count, $project->id]);
+
+        $votes_count = Core::$db->Query("select count(*) from votes.main where server_id = $1", [$server->id], true);
+        $votes_count = $votes_count['count'];
+        $votes_count++;
+        Core::$db->Query("update main.servers set votes = $1 where id = $2", [$votes_count, $server->id]);
         if(!$votes->is_user_have_voted_today($server->project, Core::get_current_user_profile()->id))
         {
             $time = date('Y-m-d H:i:s', time());
