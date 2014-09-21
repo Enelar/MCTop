@@ -107,6 +107,7 @@
             url: "/api.php?module=servers_api&action=update",
             cache: false,
             success: function(msg){
+                log(msg);
                 var answer = jQuery.parseJSON(msg);
                 if(answer)
                 {

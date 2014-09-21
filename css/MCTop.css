@@ -1347,3 +1347,22 @@ li a:hover
 {
 
 }
+
+.full_server .tags
+{
+    border-bottom: 1px solid #cacaca;
+    padding-bottom: 10px;
+}
+
+.full_server .tags span
+{
+    font-size: 13px;
+}
+
+.full_server .label-primary
+{
+    background-color: #3E4C58;
+    font-weight: normal;
+    border-left: 2px solid #1570FF;
+    border-radius: 2px;
+}

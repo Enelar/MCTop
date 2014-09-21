@@ -27,9 +27,22 @@ class Servers_api extends API
         $changed_fields = [];
 
 
+        if(isset($_POST['tags']))
+        {
+            $tags = explode(',',$_POST['tags']);
+
+            $tags_string = '';
+
+            if(sizeof($tags)>0)
+                foreach($tags as $tag)
+                    $tags_string .= ':'.$tag.': ';
+
+            Core::$db->Query("update main.servers set tags = $1 where id = $2", [$tags_string, $server->id]);
+        }
+
         foreach ($fields as $key => $field) {
             if(isset($_POST[$field]))
-                if ($field != 'owner' && $server->$field != $_POST[$field])
+                if ($field != 'owner' && $server->$field != $_POST[$field] && $field != 'tags')
                     $changed_fields[$field] = 1;
         }
 
