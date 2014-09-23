@@ -27,10 +27,10 @@
                 var answer = jQuery.parseJSON(msg);
                 if(answer['message'] == 'success')
                 {
-                    var text = 'ID для входа: '+ answer['id'] + '<br>';
-                    text += 'Пароль для входа: '+ answer['password'];
-                    $( ".account_info" ).html(text);
-                    //window.location.replace("http://mctop.ru");
+                    //var text = 'ID для входа: '+ answer['id'] + '<br>';
+                    //text += 'Пароль для входа: '+ answer['password'];
+                    //$( ".account_info" ).html(text);
+                    window.location.replace("http://mctop.ru");
                 }
             }
         });
@@ -73,6 +73,7 @@
                 lastname : $("input[name='lastname']").val(),
                 email : $("input[name='email']").val(),
                 nickname : $("input[name='nickname']").val(),
+                password : $("input[name='password']").val(),
                 city : $("input[name='city']").val(),
                 hobby : $("input[name='hobby']").val(),
                 mobile_phone : $("input[name='mobile_phone']").val(),

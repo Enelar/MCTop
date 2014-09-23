@@ -27,12 +27,19 @@ class Users extends API
 
     function register()
     {
-        //141094196054194408f28c2
         $password = uniqid(time());
         $salted_password = md5($password);
 
+
         Core::$db->Query("insert into main.users (salted_password) values ($1)", [$salted_password]);
         $user = Core::$db->Query("select * from main.users where salted_password = $1 order by id desc", [$salted_password], true);
+
+        if (session_status() != PHP_SESSION_ACTIVE)
+            session_start();
+
+        $_SESSION['uid'] = $user['id'];
+        $_SESSION['last_update'] = time();
+        $_SESSION['session_id'] = md5($user['id'] . 'salt');
 
         return
         [
@@ -64,13 +71,25 @@ class Users extends API
         $fields = explode(', ', $user->fields_to_edit);
         $changed_fields = [];
 
+        if(isset($_POST['login']))
+        {
+            $check = Core::$db->Query('select * from main.users where login = $1', [$_POST['login']], true);
+            if(is_array($check) && sizeof($check)>0)
+            {
+                return ['error' => 'login_is_unavailable'];
+            }
+        }
+
+        if(isset($_POST['password']))
+            $_POST['password'] = md5($_POST['password']);
+
         foreach ($fields as $key => $field) {
-            if ($field != 'password' && $user->$field != $_POST[$field]) {
+            if ($user->$field != $_POST[$field]) {
                 $changed_fields[$field] = 1;
             }
         }
 
-        $query = 'UPDATE users set ';
+        $query = 'UPDATE main.users set ';
 
         foreach ($changed_fields as $key => $field)
             $query .= "$key = '{$_POST[$key]}', ";
@@ -78,11 +97,7 @@ class Users extends API
         $query = substr($query, 0, strlen($query) - 2);
         $query .= ' where id = ' . $user->id;
 
-        $sth = Core::get_db()->prepare($query);
-        $status = $sth->execute()
-        or
-        self::abort($sth);
-        return $status;
+        return Core::$db->Query($query);
     }
 
     function get_test_data_for_home()
