@@ -1,6 +1,5 @@
 
     require([
-        "https://comet-server.ru/CometServerApi.js",
         "_libs/bootstrap",
         "_libs/jqClock",
         "_libs/keymaster",
@@ -26,18 +25,6 @@
                 display_page('projects_rating', 'index');
             else
             {
-
-                CometServer().start({
-                    dev_id: 99
-                });
-
-                //CometServer().subscription("mctop_chat", function(data){ alert('1'); } );
-
-                CometServer().subscription("user_"+current_user_id['data']+"_notifications", function(e){
-                    render_notification(e['data']['title'], e['data']['from'], e['data']['message']);
-                    ion.sound.play("notify");
-                });
-
                 display_page('projects_rating','index');
 
                 api_get_request('users','update_user_session_period');

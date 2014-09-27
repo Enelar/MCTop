@@ -9,7 +9,11 @@
             }),
             url: "/api.php?module=ratingservers&action=vote",
             success: function(msg){
-                display_page_with_id('projects_rating', 'project/server', server);
+                var answer = jQuery.parseJSON(msg);
+                if(answer['message'] == 'is_first_vote')
+                    display_page_with_id('social', 'misc/email_approving', server);
+                else
+                    display_page_with_id('projects_rating', 'project/server', server);
             }
         });
 

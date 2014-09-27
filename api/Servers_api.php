@@ -29,7 +29,7 @@ class Servers_api extends API
 
         if(isset($_POST['tags']))
         {
-            $tags = explode(',',$_POST['tags']);
+            $tags = explode(',',strtolower($_POST['tags']));
 
             $tags_string = '';
 

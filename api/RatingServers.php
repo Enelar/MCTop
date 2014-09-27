@@ -28,6 +28,13 @@ class RatingServers extends API
             Core::$db->Query("insert into votes.main (server_id, user_id, time, project_id) values ($1, $2, $3, $4)", [$server->id, Core::get_current_user_profile()->id, $time, $server->project]);
         }
 
+        $votes_count = Core::$db->Query('select count (*) from votes.main where user_id = $1', [Core::get_current_user_profile()->id], true);
+
+        if($votes_count['count'] == 1)
+            return [
+                'message' => 'is_first_vote'
+            ];
+
         return [
             'message' => Servers::get_server($_POST['server_id'], 'for_api')
         ];

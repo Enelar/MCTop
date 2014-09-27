@@ -388,3 +388,26 @@
             }
         });
     }
+
+    function email_approving(server)
+    {
+        $.ajax({
+            type: "POST",
+            data: ({
+                email : $("input[name='email']").val()
+            }),
+            url: "/api.php?module=users&action=email_approving",
+            cache: false,
+            success: function(msg){
+                var answer = jQuery.parseJSON(msg);
+                if(answer['message'] == 'email_had_registered')
+                {
+                    alert('Данный email уже занят');
+                }
+                if(answer['message'] == 'success')
+                {
+                    display_page_with_id('projects_rating', 'project/server', server);
+                }
+            }
+        });
+    }

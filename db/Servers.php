@@ -24,7 +24,8 @@ class Servers extends X
         foreach ($result as $key => $value)
             $idle_server->$key = $value;
 
-        $idle_server->project_info = Projects::get_project($idle_server->project);
+        if($for_what_purposes != 'just_server')
+            $idle_server->project_info = Projects::get_project($idle_server->project);
 
         return $idle_server;
     }
@@ -47,7 +48,7 @@ class Servers extends X
     static function get_servers_for_rating_page($page, $limit = 10)
     {
         $_offset = $page * 10;
-        $result = Core::get_db()->Query("select * from main.servers order by votes desc limit $1 ", [$limit]);
+        $result = Core::get_db()->Query("select * from main.servers where active = 1 order by votes desc limit $1 ", [$limit]);
         $servers = [];
 
         foreach ($result as $server) {

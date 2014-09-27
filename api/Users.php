@@ -10,7 +10,7 @@ class Users extends API
         if(sizeof($user) == 0)
             $user = User::find_user_by_id($_POST['login']);
 
-        $message = (md5($_POST['password']) == $user['salted_password']) ? 'success' : 'fail';
+        $message = (md5($_POST['password']) == $user['password']) ? 'success' : 'fail';
 
         if ($message == 'success') {
             if (session_status() != PHP_SESSION_ACTIVE)
@@ -234,6 +234,34 @@ class Users extends API
     function get_user_books_pages()
     {
 
+    }
+
+    function email_approving()
+    {
+        $email = $_POST['email'];
+        $check = Core::$db->Query('select * from main.users where email = $1', [$email], true);
+
+        if(is_array($check) && sizeof($check)>0)
+            return [
+                'message' => 'email_had_registered'
+            ];
+
+        $hash = uniqid();
+        Core::$db->Query('update main.users set email = $1 where id = $2', [$email, Core::get_current_user_profile()->id]);
+        Core::$db->Query('insert into users.email_approving (user_id, hash) values ($1, $2)', [Core::get_current_user_profile()->id, $hash]);
+        $to      = $email;
+        $subject = 'MCTop: подтверждение адреса электронной почты';
+        //todo адрес ссылки
+        $message = '<a href="/user/approve_email/'.$hash.'">Подтвердить адрес электронной почты</a>';
+        $headers = 'From: webmaster@mctop.im' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+
+        return
+        [
+            'message' => 'success'
+        ];
     }
 
 }

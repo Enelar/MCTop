@@ -94,20 +94,24 @@
             data: ({
                 id: id,
                 name : $("input[name='name']").val(),
-                description : tinyMCE.activeEditor.getContent({format : 'raw'}),
-                features : $("textarea[name='features']").val(),
+                description : tinyMCE.get('description').getContent({format : 'raw'}),
+                features : tinyMCE.get('features').getContent({format : 'raw'}),
                 map_url : $("input[name='map_url']").val(),
                 address : $("input[name='address']").val(),
                 port : $("input[name='port']").val(),
                 plugins : $("input[name='plugins']").val(),
                 mods : $("input[name='mods']").val(),
+                version_id : $('#version_id option:selected').val(),
+                whitelist : $('#whitelist option:selected').val(),
+                license_type : $('#license option:selected').val(),
+                client_type : $('#client_type option:selected').val(),
+                video_trailer_url :  $("input[name='video_trailer_url']").val(),
                 tags : $("input[name='tags']").val(),
                 user: user
             }),
             url: "/api.php?module=servers_api&action=update",
             cache: false,
             success: function(msg){
-                log(msg);
                 var answer = jQuery.parseJSON(msg);
                 if(answer)
                 {
