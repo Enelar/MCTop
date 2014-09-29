@@ -25,7 +25,8 @@
                 display_page('projects_rating', 'index');
             else
             {
-                display_page('projects_rating','index');
+                if(document.URL == 'http://mctop.ru/')
+                    display_page('projects_rating','index');
 
                 api_get_request('users','update_user_session_period');
                 update_user_status();

@@ -13,8 +13,8 @@ class Servers extends X
     {
         $result = Core::get_db()->Query("select * from main.servers where id = $1", [$id], true);
 
-        if (!$result) {
-            if (is_null($for_what_purposes))
+        if (sizeof($result)==0) {
+            if (is_null($for_what_purposes) or $for_what_purposes == 'just_server')
                 Core::throw_error('Сервер не найден');
             else
                 return array('data' => null);
@@ -26,6 +26,7 @@ class Servers extends X
 
         if($for_what_purposes != 'just_server')
             $idle_server->project_info = Projects::get_project($idle_server->project);
+
 
         return $idle_server;
     }
