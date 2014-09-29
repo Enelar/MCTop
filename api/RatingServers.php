@@ -8,6 +8,8 @@ class RatingServers extends API
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $server = Servers::get_server($_POST['server_id']);
+        $nickname_info = Core::$db->Query("select * from main.servers_subscribers where user_id = $1 and server_id = $2", [Core::get_current_user_profile()->id, $_POST['server_id']]);
+
         require('Votes.php');
         $votes = new Votes();
 
@@ -30,15 +32,22 @@ class RatingServers extends API
 
         $votes_count = Core::$db->Query('select count (*) from votes.main where user_id = $1', [Core::get_current_user_profile()->id], true);
 
+        if(!empty($project->secret_url) && !empty($project->secret_key))
+        {
+            if( $curl = curl_init() ) {
+                curl_setopt($curl, CURLOPT_URL, $project->secret_url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, "nickname=".$nickname_info['nickname']."&token=".md5($project->secret_key));
+                $out = curl_exec($curl);
+                curl_close($curl);
+            }
+        }
+
         if($votes_count['count'] == 1)
             return [
                 'message' => 'is_first_vote'
             ];
-
-        if(!empty($project->secret_url) && !empty($project->secret_key))
-        {
-            //todo CURL Here
-        }
 
         return [
             'message' => Servers::get_server($_POST['server_id'], 'for_api')
@@ -70,6 +79,8 @@ class RatingServers extends API
         $server_id = $_POST['server_id'];
         $check = Core::$db->Query("select * from main.servers_subscribers where user_id = $1 and server_id = $2", [Core::get_current_user_profile()->id, $server_id]);
 
+        if(strlen($nickname) == 0)
+            Core::$db->Query('delete from main.servers_subscribers where user_id = $1 and server_id = $2', [Core::get_current_user_profile()->id, $server_id]);
         if($check)
         {
             Core::$db->Query("UPDATE main.servers_subscribers set nickname = $1 where server_id = $2 and user_id = $3", [$nickname, $server_id, Core::get_current_user_profile()->id]);

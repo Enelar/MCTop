@@ -161,7 +161,7 @@ class Core extends X
             if(isset($_GET['id']))
                 $entity_id = $_GET['id'];
 
-            echo '
+            /*echo '
             <ol class="breadcrumb">
             <li>
                 <a onclick="display_page(\''.$_GET['module'].'\', \'index\')">'.$modules->try_get_module_info()->name.'</a>
@@ -169,7 +169,7 @@ class Core extends X
             <li class="active">
                 '.$modules->try_get_module_action_info()->name.'
             </li>
-            </ol>';
+            </ol>';*/
         }
         if (file_exists(ROOT_DIR . '/design/modules/' . $module . '/' . $action . '.php'))
             require_once(ROOT_DIR . '/design/modules/' . $module . '/' . $action . '.php');
