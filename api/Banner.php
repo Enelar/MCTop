@@ -69,9 +69,11 @@ class Banner extends API
 
     private function AllocImageName( $ext )
     {
-        // Get random image name stored in ta
-        // $res = db::Query("INSERT INTO kickstart.images(author, ext) VALUES ($1, $2) RETURNING name", [C::Users()->uid(), $ext], true);
-        // return $res['name'];
+        if (Core::get_current_user_profile()->id == 0)
+          Core::throw_error('Login required');
+
+        $res = db::Query("INSERT INTO master.images(author, ext) VALUES ($1, $2) RETURNING name", [Core::get_current_user_profile()->id, $ext], true);
+        return $res['name'];
     }
 
     public function LocationByName( $name )
@@ -82,7 +84,6 @@ class Banner extends API
 
     public function info( $name )
     {
-        // Get image row by name
-        // return db::Query("SELECT * FROM kickstart.images WHERE name=$1", [$name], true);
+        return db::Query("SELECT * FROM master.images WHERE name=$1", [$name], true);
     }
 }
