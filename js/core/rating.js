@@ -59,7 +59,8 @@
             type: "POST",
             data: ({
                 tags: $("input[name='tags']").val(),
-                strictly_search: $("input[name='strictly_search']").val()
+                strictly_search: $("input[name='strictly_search']").val(),
+                version_id : $('#version_id option:selected').val()
             }),
             url: "/api.php?module=search&action=results",
             cache: false,

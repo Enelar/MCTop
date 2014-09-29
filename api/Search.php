@@ -5,6 +5,7 @@ class Search extends API
     {
         //todo make api results [json only]
 
+
         if(isset($_POST['tags']))
         {
             $tags_string = $_POST['tags'];
@@ -17,11 +18,16 @@ class Search extends API
             $test = substr($test, 0, strlen($test)-2);
 
             //if($_POST['strictly_search'] == 'no')
-                $query = 'select * from main.servers where tags like any (\'{'.$test.'}\') order by votes desc';
+                if(isset($_POST['version_id']) and strlen($_POST['version_id'])>0)
+                    $query = 'select * from main.servers where version_id = $1 and tags like any (\'{'.$test.'}\') order by votes desc';
+                else
+                    $query = 'select * from main.servers where tags like any (\'{'.$test.'}\') order by votes desc';
             //else
             //    $query = 'select * from main.servers where tags like all (\'{'.$test.'}\')';
-
-            $servers =  Core::$db->Query($query, []);
+            if(isset($_POST['version_id']) and strlen($_POST['version_id'])>0)
+                $servers =  Core::$db->Query($query, [$_POST['version_id']]);
+            else
+                $servers =  Core::$db->Query($query, []);
             foreach ($servers as $server)
             {
                 $server = new Object($server);
