@@ -1,20 +1,25 @@
 <?php $server = Servers::get_server($_GET['id'], 'just_server')?>
 <?php $server_version = Core::$db->Query('select * from main.servers_versions where id = $1', [$server->version_id], true);?>
-<h1><span class="glyphicon glyphicon-align-justify"></span> Сервер <?php echo $server->name;?></h1><hr>
+<h1>
+    <span class="glyphicon glyphicon-align-justify"></span> Сервер <?php echo $server->name;?>
+    <div class="btn_favorite">
+        <a class="btn-sm btn btn-success" onclick="add_server_to_favorite(<?php echo $server->id?>)">
+            <?php
+            $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [Core::get_current_user_profile()->id, $server->id], true);
+
+            if(sizeof($check)>0 and is_array($check))
+                echo 'Удалить из избранного';
+            else
+                echo 'В избранное';
+            ?>
+        </a>
+    </div>
+</h1>
+<hr>
 <p><?php echo $server->description;?></p><hr>
 
 
 <div class="full_server">
-    <a class="btn btn-success" onclick="add_server_to_favorite(<?php echo $server->id?>)">
-    <?php
-    $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [Core::get_current_user_profile()->id, $server->id], true);
-
-    if(sizeof($check)>0 and is_array($check))
-        echo 'Удалить из избранного';
-    else
-        echo 'В избранное';
-    ?>
-    </a>
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">

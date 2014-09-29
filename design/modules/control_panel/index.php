@@ -7,9 +7,9 @@
 
         <a onclick="display_page('control_panel', 'projects/register')" class="btn btn-primary"> <span class="glyphicon glyphicon-folder-close"></span> Регистрация проекта</a>
         <a onclick="display_page('control_panel', 'servers/register')" class="btn btn-primary"> <span class="glyphicon glyphicon-th-large"></span> Регистрация сервера</a>
-        <a onclick="display_page('control_panel', 'site/register')" class="btn btn-primary"> <span class="glyphicon glyphicon-file"></span> Регистрация сайта</a>
+        <!--<a onclick="display_page('control_panel', 'site/register')" class="btn btn-primary"> <span class="glyphicon glyphicon-file"></span> Регистрация сайта</a>-->
         <a onclick="display_page('control_panel', 'help/index')" class="btn btn-primary"> <span class="glyphicon glyphicon-leaf"></span> Помощь по сайту</a>
-        <a onclick="display_page('control_panel', 'support/index')" class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Online поддержка</a>
+        <!--<a onclick="display_page('control_panel', 'support/index')" class="btn btn-primary"> <span class="glyphicon glyphicon-envelope"></span> Online поддержка</a>-->
         <hr>
 
         <div class="projects">

@@ -19,7 +19,7 @@ if (!$ajax): ?>
 <link type="text/css" rel="stylesheet" href="css/jquery.qtip.min.css"/>
 <link type="text/css" rel="stylesheet" href="css/<?php echo Core::get_settings()->application['site_name']; ?>.css"/>
 <body>
-<div id="qtip-growl-container"></div>
+
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
 
@@ -42,7 +42,8 @@ if (!$ajax): ?>
                 if (!Core::is_user_authorized()):
                     foreach (Core::get_settings()->modules as $key => $module) {
                         if ($module->show_in_navbar)
-                            echo '<li><a onclick="display_page(\'' . $module->link . '\')"><span class="' . $module->icon . '"></span> ' . $module->name . '</a></li>';
+                            if(!isset($module->show_to_guest))
+                                echo '<li><a onclick="display_page(\'' . $module->link . '\')"><span class="' . $module->icon . '"></span> ' . $module->name . '</a></li>';
                     }
                 endif;
                 if (Core::is_user_authorized()):
@@ -58,9 +59,6 @@ if (!$ajax): ?>
             </ul>
             <?php if (Core::is_user_authorized()): ?>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="clock">
-                        <div id="clock"></div>
-                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Дополнения
                             <span class="caret"></span></a>
@@ -69,7 +67,7 @@ if (!$ajax): ?>
                                 <a onclick="display_page('control_panel','index')"><span class="glyphicon glyphicon-plane"></span> Панель управления</a>
                             </li>
                             <li>
-                                <a onclick="display_page('features','favorite')"><span class="glyphicon glyphicon-star"></span> Избранное</a>
+                                <a onclick="display_page('projects_rating','favorite')"><span class="glyphicon glyphicon-star"></span> Избранное</a>
                             </li>
                             <li>
                                 <a onclick="display_page('community','index')"><span class="glyphicon glyphicon-globe"></span> Сообщество</a>

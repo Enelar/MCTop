@@ -4,6 +4,9 @@ body
     font-size: 12px;
     background-color: #ECECEC;
     color: #fff;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 hr
@@ -35,7 +38,7 @@ form
     font-size: 13px;
     background-color: #fff;
     color: #000;
-    border: 1px solid #000;
+    border: 1px solid rgba(167, 161, 153, 0.59);
 }
 
 .content h1
@@ -95,9 +98,39 @@ a:hover
 /*
   -========================= Фиксы бутстрапа ====================-
 */
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: #FFF1DB;
+    border-radius: 4px;
+}
+
+a {
+    color: #FF780D;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #96662A;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #E28E42;
+    border-color: #BD7635;
+    margin-right: 2px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #C57333;
+    border-color: #B1802B;
+}
 
 .navbar-default {
-    background-color: #000;
+    background-color: #DA844A;
     position: relative;
     top: -18px;
     min-height: 62px;
@@ -109,14 +142,12 @@ a:hover
 {
     margin: 5px;
     border-radius: 1px;
-    border: 1px solid #000;
 }
 
 .navbar-nav > li:hover
 {
-    border: 1px solid #566BC0;
-    background-color: #232323;
     border-radius: 2px;
+    background-color: #C07234;
 }
 
 .navbar-default .navbar-nav > li > a
@@ -256,8 +287,6 @@ li a:hover
 
 #mctop_logo{
     color: #FFFFFF;
-    background-color: rgba(78, 70, 70, 0.43);
-    border: 1px solid #2650BD;
     border-radius: 4px;
     position: relative;
     top: 10px;
@@ -268,8 +297,6 @@ li a:hover
 #mctop_logo:hover
 {
     cursor: pointer;
-    color: #CAE5FF;
-    background-color: rgba(14, 9, 9, 0.51);
 }
 
 /*
@@ -353,6 +380,8 @@ li a:hover
 .profile
 {
     width: 98%;
+    position: relative;
+    top: -27px;
 }
 
 .profile hr
@@ -384,14 +413,12 @@ li a:hover
 }
 
 .profile .availability_status {
-    min-height: 16px;
-    max-height: 16px;
-    min-width: 16px;
-    max-width: 16px;
-    background-color: #cacaca;
-    border: 1px solid #a5a5a5;
+    min-height: 11px;
+    max-height: 11px;
+    min-width: 11px;
+    max-width: 11px;
     position: absolute;
-    top: 35px;
+    top: 34px;
     left: 11px;
     border-radius: 4px;
 }
@@ -990,10 +1017,9 @@ li a:hover
 
 .rating .server
 {
-    background-color: rgba(232, 250, 255, 1);
-    padding: 15px;
+    padding-top: 18px;
+    padding-left: 10px;
     overflow: auto;
-    border-radius: 5px;
     border: 1px solid #cacaca;
     margin-bottom: 10px;
 }
@@ -1033,18 +1059,20 @@ li a:hover
     float: right;
     border: 1px solid #cacaca;
     border-radius: 4px;
-    padding: 15px;
+    padding-top: 15px;
     position: relative;
-    top: 0px;
+    top: -7px;
+    right: 6px;
 }
 
 .rating .server .right_block .score
 {
-    font-size: 15px;
+    font-size: 11px;
     text-align: center;
     margin-bottom: 5px;
     position: relative;
     top: -5px;
+    padding: 3px;
 }
 
 .rating .server .right_block .vote
@@ -1133,6 +1161,26 @@ li a:hover
     padding: 15px;
     padding-left: 25px;
     padding-right: 25px;
+}
+
+.projects_rating .project
+{
+    border-bottom: 1px solid #cacaca;
+    background-color: #FFEBC8;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.projects_rating .project .name{
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #CC9A41;
+    margin-bottom: 6px;
+}
+
+.projects_rating .project .votes{
+    font-size: 11px;
+    margin-bottom: 3px;
 }
 
 /*
@@ -1381,4 +1429,10 @@ li a:hover
 .modal-dialog
 {
     width: 70%;
+}
+
+.btn_favorite
+{
+    float: right;
+    margin-right: 10px;
 }

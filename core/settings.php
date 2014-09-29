@@ -39,6 +39,7 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
+                            'show_to_guest' => false,
                             'name' => 'Новости',
                             'icon' => 'glyphicon glyphicon-volume-up',
                             'link' => 'news\', \'index'
@@ -57,6 +58,7 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
+                            'show_to_guest' => false,
                             'name' => 'Серверы',
                             'icon' => 'glyphicon glyphicon-home',
                             'link' => 'main\', \'index'
@@ -73,7 +75,7 @@ class Settings
                     ),
                 'community' => new Object(
                         array(
-                            'show_in_navbar' => true,
+                            'show_in_navbar' => false,
                             'show_to_authorized' => false,
                             'name' => 'Сообщество',
                             'icon' => 'glyphicon glyphicon-globe',

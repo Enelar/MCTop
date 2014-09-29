@@ -3,10 +3,6 @@
 
         <div class="left_block">
 
-            <div class="position">
-                1
-            </div>
-
             <div class="name">
                 <a onclick="display_page_with_id('projects_rating','project/server', '<?php echo $server->id?>')"><?php echo $server->name?></a>
             </div>
