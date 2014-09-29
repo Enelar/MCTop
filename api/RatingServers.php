@@ -8,7 +8,7 @@ class RatingServers extends API
         API::is_user_authorized_and_is_not_empty_post_request();
 
         $server = Servers::get_server($_POST['server_id']);
-        $nickname_info = Core::$db->Query("select * from main.servers_subscribers where user_id = $1 and server_id = $2", [Core::get_current_user_profile()->id, $_POST['server_id']]);
+        $nickname_info = Core::$db->Query("select * from main.servers_subscribers where user_id = $1 and server_id = $2", [Core::get_current_user_profile()->id, $_POST['server_id']], true);
 
         require('Votes.php');
         $votes = new Votes();
@@ -28,12 +28,15 @@ class RatingServers extends API
         {
             $time = date('Y-m-d H:i:s', time());
             Core::$db->Query("insert into votes.main (server_id, user_id, time, project_id) values ($1, $2, $3, $4)", [$server->id, Core::get_current_user_profile()->id, $time, $server->project]);
+            $last_vote = Core::$db->Query("select * from votes.main where project_id = $1 and user_id = $2 order by time desc limit 1", [$server->project, Core::get_current_user_profile()->id], true);
+            Core::$db->Query("insert into votes.info (vote_id, ip, user_agent, country) values ($1, $2, $3, $4)", [$last_vote['id'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], 'RUSSIA']);
         }
 
         $votes_count = Core::$db->Query('select count (*) from votes.main where user_id = $1', [Core::get_current_user_profile()->id], true);
 
         if(!empty($project->secret_url) && !empty($project->secret_key))
         {
+
             if( $curl = curl_init() ) {
                 curl_setopt($curl, CURLOPT_URL, $project->secret_url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
