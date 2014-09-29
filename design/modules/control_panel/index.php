@@ -1,3 +1,9 @@
+<ol class="breadcrumb">
+    <li class="active">
+        Панель управления
+    </li>
+</ol>
+
 
     <?php $projects = Projects::get_user_projects(Core::get_current_user_profile()->id, 0, 100);?>
 

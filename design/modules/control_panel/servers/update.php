@@ -1,3 +1,19 @@
+
+<?php $server = Servers::get_server($_GET['id']);?>
+
+<ol class="breadcrumb">
+    <li>
+        <a onclick="display_page('control_panel', 'index')">Панель управления</a>
+    </li>
+    <li>
+        <a onclick="display_page_with_id('control_panel', 'projects/view', <?php echo $server->project_info->id?>)">Проект <?php echo $server->project_info->name?></a>
+    </li>
+    <li class="active">
+        Обновление сведений о сервере <?php echo $server->name;?>
+    </li>
+</ol>
+
+
 <script src="/js/chosen.jquery.js"></script>
 <link type="text/css" rel="stylesheet" href="/css/chosen.css"/>
 <script src="/js/_libs/tinymce/tinymce.min.js"></script>
@@ -29,8 +45,6 @@
         }
     );
 </script>
-
-<?php $server = Servers::get_server($_GET['id']);?>
 
 <h1> Обновление сервера: <?php echo $server->name;?></h1> <hr>
 
@@ -135,23 +149,9 @@
                 $string .= $tag.',';
 
     ?>
+
+    <label>Теги сервера (после ввода каждого - Enter)</label>
     <input name="tags" id="tags" value="<?php echo $string;?>" />
-
-    <!--<div class="form-group">
-        <span class="label label-default">New</span> <label>Плагины сервера</label>
-        <input name="plugins" type="text" class="form-control" placeholder="Название плагинов" value="<?php echo $server->plugins;?>"/>
-    </div>
-
-    <div class="form-group">
-        <span class="label label-default">New</span> <label>Моды сервера</label>
-        <input name="mods" type="text" class="form-control" placeholder="Название модов" value="<?php echo $server->mods;?>"/>
-    </div>
-
-    <div class="form-group">
-        <span class="label label-default">New</span> <label>Теги сервера</label>
-        <input name="tags" type="text" class="form-control" placeholder="Теги для поиска" value="<?php echo $server->tags;?>"/>
-    </div>-->
-
 
     <hr>
 

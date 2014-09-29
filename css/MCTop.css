@@ -34,11 +34,12 @@ form
     position: relative;
     top: -20px;
     margin: 20px;
-    padding: 5px;
+    padding: 10px;
     font-size: 13px;
     background-color: #fff;
     color: #000;
     border: 1px solid rgba(167, 161, 153, 0.59);
+    border-radius: 15px;
 }
 
 .content h1
