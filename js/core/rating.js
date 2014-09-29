@@ -68,3 +68,18 @@
             }
         });
     }
+
+    function add_server_to_favorite(server_id)
+    {
+        $.ajax({
+            type: "POST",
+            data: ({
+                server: server_id
+            }),
+            url: "/api.php?module=servers_api&action=favorite",
+            cache: false,
+            success: function(msg){
+                display_page_with_id('projects_rating', 'project/server', server_id);
+            }
+        });
+    }

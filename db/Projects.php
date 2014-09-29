@@ -5,9 +5,9 @@ class Projects extends X
 
     public $cl_name = 'Projects';
 
-    public $id, $name, $description, $owner, $position, $score, $minus_score, $plus_score, $avatar, $servers, $site_url;
+    public $id, $name, $description, $owner, $position, $score, $minus_score, $plus_score, $avatar, $servers, $site_url, $secret_key, $secret_url;
     public $vk_group, $fb_public, $twitter_account;
-    public $fields_to_edit = 'name, description, site_url, vk_group, fb_public, twitter_account';
+    public $fields_to_edit = 'name, description, site_url, vk_group, fb_public, twitter_account, secret_key, secret_url';
 
     static function get_project($id, $for_what_purposes = null)
     {

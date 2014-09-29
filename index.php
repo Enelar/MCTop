@@ -69,6 +69,9 @@ if (!$ajax): ?>
                                 <a onclick="display_page('control_panel','index')"><span class="glyphicon glyphicon-plane"></span> Панель управления</a>
                             </li>
                             <li>
+                                <a onclick="display_page('features','favorite')"><span class="glyphicon glyphicon-star"></span> Избранное</a>
+                            </li>
+                            <li>
                                 <a onclick="display_page('community','index')"><span class="glyphicon glyphicon-globe"></span> Сообщество</a>
                             </li>
                             <li>

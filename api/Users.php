@@ -31,8 +31,8 @@ class Users extends API
         $salted_password = md5($password);
 
 
-        Core::$db->Query("insert into main.users (salted_password) values ($1)", [$salted_password]);
-        $user = Core::$db->Query("select * from main.users where salted_password = $1 order by id desc", [$salted_password], true);
+        Core::$db->Query("insert into main.users (password) values ($1)", [$salted_password]);
+        $user = Core::$db->Query("select * from main.users where password = $1 order by id desc", [$salted_password], true);
 
         if (session_status() != PHP_SESSION_ACTIVE)
             session_start();

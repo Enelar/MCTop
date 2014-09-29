@@ -35,6 +35,11 @@ class RatingServers extends API
                 'message' => 'is_first_vote'
             ];
 
+        if(!empty($project->secret_url) && !empty($project->secret_key))
+        {
+            //todo CURL Here
+        }
+
         return [
             'message' => Servers::get_server($_POST['server_id'], 'for_api')
         ];

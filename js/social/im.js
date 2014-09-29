@@ -17,7 +17,6 @@
                 }
             });
 
-        //todo: Обновление страницы при получении сообщения юзером, если у него открыт чат.
     }
 
     function render_notification(persistent, title, data) {

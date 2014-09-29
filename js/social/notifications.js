@@ -1,9 +1,4 @@
 
-    function contact_had_authorized()
-    {
-        //todo
-    }
-
     function send_notification(to, title, message)
     {
 

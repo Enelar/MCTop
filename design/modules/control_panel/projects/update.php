@@ -16,6 +16,18 @@
         <hr>
 
         <div class="form-group">
+            <label>Бонусы. [Секретный ключ]</label>
+            <input name="secret_key" type="text" class="form-control" placeholder="Необходим, для обеспечения безопасности, при начислении бонусов за голосование" value="<?php echo $project->secret_key;?>"/>
+        </div>
+
+        <div class="form-group">
+            <label>Бонусы. [Секретный адрес]</label>
+            <input name="secret_url" type="text" class="form-control" placeholder="Адрес для скрипта на вашем сайте" value="<?php echo $project->secret_url;?>"/>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
             <label>Сайт проекта</label>
             <input name="site_url" type="text" class="form-control" placeholder="Сайт" value="<?php echo $project->site_url;?>"/>
         </div>

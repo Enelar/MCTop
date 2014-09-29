@@ -16,6 +16,7 @@ Class Votes extends API
         if($day<$today_day)
         {
             //todo проверка на месяц голосования
+            //само голосование находится в RatingServers/vote
             return false;
         }
 

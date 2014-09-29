@@ -60,8 +60,7 @@ class Im extends API
 
         Core::$redis_db->zAdd('im:chat_users:' . $from . '_' . $to, $new_message_id, $new_message_id);
 
-        //todo сделать сохранение сообщения только под .._from_to..
-        //чтобы даже в случае если юзер_2 пишет юзеру_1
+
         return [
             'comet' => 'message_had_sent'
         ];

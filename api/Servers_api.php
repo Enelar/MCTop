@@ -72,4 +72,26 @@ class Servers_api extends API
 
     }
 
+    function favorite()
+    {
+        self::is_user_authorized_and_is_not_empty_post_request();
+
+        $server_id = $_POST['server'];
+
+        $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [Core::get_current_user_profile()->id, $server_id], true);
+        if(sizeof($check)>0 and is_array($check))
+        {
+            Core::$db->Query('delete from users.servers_favorite where user_id = $1 and server_id = $2', [Core::get_current_user_profile()->id, $server_id]);
+        }
+        else
+        {
+            Core::$db->Query('insert into users.servers_favorite (user_id, server_id) values ($1, $2)', [Core::get_current_user_profile()->id, $server_id]);
+        }
+
+        return
+        [
+            'message' => 'success'
+        ];
+    }
+
 }

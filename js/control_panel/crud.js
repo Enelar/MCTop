@@ -24,6 +24,8 @@
                 name : $("input[name='name']").val(),
                 description : $("textarea[name='description']").val(),
                 site_url : $("input[name='site_url']").val(),
+                secret_key : $("input[name='secret_key']").val(),
+                secret_url : $("input[name='secret_url']").val(),
                 vk_group : $("input[name='vk_group']").val(),
                 fb_public : $("input[name='fb_public']").val(),
                 twitter_account : $("input[name='twitter_account']").val(),

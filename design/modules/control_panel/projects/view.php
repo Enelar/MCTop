@@ -13,6 +13,9 @@
                 </div>
 
                 <a onclick="display_page_with_id('control_panel', 'projects/update', '<?php echo $project->id?>')" class="btn btn-primary">Обновить сведения</a>
+                <?php if(!empty($project->secret_key) && !empty($project->secret_url)):?>
+                    <a href="/mctb.php" target="_blank">Скрипт для выдачи бонуса</a>
+                <?php endif;?>
                 <a onclick="display_page_with_id('control_panel', 'projects/buttons', '<?php echo $project->id?>')" class="btn btn-primary">Кнопки для проекта</a>
                 <a onclick="display_page_with_id('control_panel', 'servers/create', '<?php echo $project->id?>')" class="btn btn-success">Добавить сервер</a>
 

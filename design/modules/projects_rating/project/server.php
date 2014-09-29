@@ -5,6 +5,16 @@
 
 
 <div class="full_server">
+    <a class="btn btn-success" onclick="add_server_to_favorite(<?php echo $server->id?>)">
+    <?php
+    $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [Core::get_current_user_profile()->id, $server->id], true);
+
+    if(sizeof($check)>0 and is_array($check))
+        echo 'Удалить из избранного';
+    else
+        echo 'В избранное';
+    ?>
+    </a>
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
