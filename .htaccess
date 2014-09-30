@@ -6,6 +6,7 @@ RewriteRule ^vote/([0-9]*)$ index.php?module=projects_rating&action=project/vote
 RewriteRule ^static/([^/]+)/([^/]+)$ index.php?module=$1&action=$2 [L]
 RewriteRule ^news/([^/]+)/([^/]+)$ index.php?module=news&action=$1&id=$2 [L]
 RewriteRule ^server/([0-9]*)$ index.php?module=projects_rating&action=project/server&id=$1 [L]
+RewriteRule ^user/approve_email/([^/]+)$ index.php?module=outdoor&action=approve_email&hash=$1 [L]
 
 Options All -Indexes
 
