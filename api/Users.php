@@ -63,49 +63,35 @@ class Users extends API
 
     function edit_profile()
     {
-        API::is_user_authorized_and_is_not_empty_post_request();
+        $uid = Core::get_current_user_profile()->id;
+        if ($uid === null)
+            return;
 
         $user = new User(Core::get_db());
-        $user->get_user(intval($_POST['user_id']));
+        $user->get_user($uid);
 
-        $fields = explode(', ', $user->fields_to_edit);
-        $changed_fields = [];
+        $dictonary = explode(', ', $user->fields_to_edit);
 
-        if(isset($_POST['login']))
+        $trans = Core::$db->Begin();
+        $success = true;
+
+        foreach ($dictonary as $field)
         {
-            $check = Core::$db->Query('select * from main.users where login = $1', [$_POST['login']], true);
-            if(is_array($check) && sizeof($check)>0)
-            {
-                return ['error' => 'login_is_unavailable'];
-            }
+            if (!isset($_POST[$field]))
+                continue;
+
+            $data = $_POST[$field];
+            
+            if ($field == 'password')
+                $data = md5($data); // Rainbow hash table vulnerability
+
+            $res = Core::$db->Query("UPDATE main.users SET {$field}=$2 WHERE id=$1 RETURNING id", [$uid, $data], true);
+            $success &= count($res);
         }
 
-        if(isset($_POST['password']))
-        {
-            if(strlen($_POST['password'])>0)
-            {
-                $_POST['password'] = md5($_POST['password']);
-            }
-        }
+        $res = $trans->Finish($success);
 
-
-        foreach ($fields as $key => $field) {
-            if (($user->$field != $_POST[$field]) && !empty($_POST[$field])) {
-                $changed_fields[$field] = 1;
-            }
-        }
-
-        $query = 'UPDATE main.users set ';
-
-        foreach ($changed_fields as $key => $field)
-            $query .= "$key = '{$_POST[$key]}', ";
-
-        $query = substr($query, 0, strlen($query) - 2);
-        $query .= ' where id = ' . $user->id;
-
-        return $query;
-        Core::$db->Query($query);
-        return ['message' => 'success'];
+        return ['message' => $res ? 'success' : 'failure' ];
     }
 
     function get_test_data_for_home()
