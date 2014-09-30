@@ -28,7 +28,7 @@
             <select id="version_id" name="version_id" data-placeholder="Версия игры..." class="chosen-select" style="width:350px;" tabindex="2">
                 <option value=""></option>
                 <?php
-                $servers_versions = Core::$db->Query('select * from main.servers_versions');
+                $servers_versions = Core::$db->Query('select * from main.servers_versions', []);
                 foreach ($servers_versions as $version)
                 {
                     if($server->version_id == $version['id'])

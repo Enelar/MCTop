@@ -1,6 +1,6 @@
 <?php
 
-ini_set('display_errors', 'yes');
+ini_set('display_errors', 'no');
 
 define('ROOT_DIR', __DIR__);
 require_once 'core/bootstrap.php';

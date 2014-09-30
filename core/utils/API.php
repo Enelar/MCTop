@@ -6,6 +6,8 @@ class API
     public static function answer($object)
     {
         echo Core::json_encode_cyr($object);
+        if(sizeof($_POST)>0)
+            Core::log_post_request();
     }
 
     public static function check_for_post_request()

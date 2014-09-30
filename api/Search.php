@@ -33,6 +33,9 @@ class Search extends API
                 $server = new Object($server);
                 require (ROOT_DIR.'/design/modules/search/_result.php');
             }
+
+            if(sizeof($_POST)>0)
+                Core::log_post_request();
             die();
       }
     }

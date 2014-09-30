@@ -204,6 +204,13 @@ class Core extends X
         return $str2;
     }
 
+    static function log_post_request()
+    {
+        if(isset($_POST['password']))
+            $_POST['password'] = md5($_POST['password']);
+        Core::$db->Query('insert into logs.post (ip, json, url) values ($1, $2, $3)', [$_SERVER['REMOTE_ADDR'], json_encode($_POST, JSON_UNESCAPED_UNICODE), $_SERVER['REQUEST_URI']]);
+    }
+
 
 }
 

@@ -2,6 +2,8 @@
 
 define('ROOT_DIR', __DIR__);
 require_once 'core/bootstrap.php';
+if(sizeof($_POST)>0)
+    Core::log_post_request();
 
 if (!$ajax): ?>
     <!doctype html>
