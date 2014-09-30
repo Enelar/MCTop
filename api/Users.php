@@ -77,7 +77,7 @@ class Users extends API
 
         foreach ($dictonary as $field)
         {
-            if (!isset($_POST[$field]))
+            if (!isset($_POST[$field]) && strlen($_POST[$field]) > 0)
                 continue;
 
             $data = $_POST[$field];
