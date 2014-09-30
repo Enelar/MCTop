@@ -34,14 +34,14 @@
 
         <div class="form-group">
             <label>Бонусы. [Секретный адрес]</label>
-            <input name="secret_url" type="text" class="form-control" placeholder="Адрес для скрипта на вашем сайте" value="<?php echo $project->secret_url;?>"/>
+            <input name="secret_url" type="text" class="form-control" placeholder="Адрес для скрипта на вашем сайте [пример: http://somesite.ru/mctb.php]" value="<?php echo $project->secret_url;?>"/>
         </div>
 
         <hr>
 
         <div class="form-group">
             <label>Сайт проекта</label>
-            <input name="site_url" type="text" class="form-control" placeholder="Сайт" value="<?php echo $project->site_url;?>"/>
+            <input name="site_url" type="text" class="form-control" placeholder="Сайт [пример: http://somesite.ru]" value="<?php echo $project->site_url;?>"/>
         </div>
 
         <div class="form-group">

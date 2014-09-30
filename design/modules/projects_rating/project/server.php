@@ -1,4 +1,4 @@
-<?php $server = Servers::get_server($_GET['id'], 'just_server')?>
+<?php $server = Servers::get_server($_GET['id'])?>
 <?php $server_version = Core::$db->Query('select * from main.servers_versions where id = $1', [$server->version_id], true);?>
 <h1>
     <span class="glyphicon glyphicon-align-justify"></span> Сервер <?php echo $server->name;?>
@@ -43,6 +43,8 @@
     <div class="tab-content">
         <div class="tab-pane active" id="home">
             <br>
+
+            <a target="_blank" href="<?php echo $server->project_info->site_url?>" class="btn btn-primary">Сайт проекта</a><hr>
             <?php
             $only_tags = [];
 

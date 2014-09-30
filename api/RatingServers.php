@@ -36,12 +36,11 @@ class RatingServers extends API
 
         if(!empty($project->secret_url) && !empty($project->secret_key))
         {
-
             if( $curl = curl_init() ) {
                 curl_setopt($curl, CURLOPT_URL, $project->secret_url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
                 curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, "nickname=".$nickname_info['nickname']."&token=".md5($project->secret_key));
+                curl_setopt($curl, CURLOPT_POSTFIELDS, "server_id={$_POST['server_id']}&nickname=".$nickname_info['nickname']."&token=".md5($project->secret_key));
                 $out = curl_exec($curl);
                 curl_close($curl);
             }
