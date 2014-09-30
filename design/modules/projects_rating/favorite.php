@@ -7,7 +7,7 @@
         foreach ($check as $server)
         {
             $server = Servers::get_server($server['server_id']);
-            echo '<a class="btn btn-primary" onclick="display_page_with_id(\'projects_rating\', \'project/server\', '.$server->id.')">'.$server->name.'</a><br>';
+            echo '<a class="btn btn-primary" onclick="display_page_with_id(\'projects_rating\', \'project/server\', '.$server->id.')">'.htmlspecialchars($server->name).'</a><br>';
         }
     }
 

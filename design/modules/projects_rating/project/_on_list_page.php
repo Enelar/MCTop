@@ -1,6 +1,6 @@
 <div class="project">
 
-    <div class="name"><?php echo $project->name;?></div>
+    <div class="name"><?php echo htmlspecialchars($project->name);?></div>
     <div class="votes">Голосов: <?php echo $project->score;?></div>
 
     <?php

@@ -6,12 +6,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
-                <h4 class="modal-title" id="myModalLabel"><?php echo $server->name?></h4>
+                <h4 class="modal-title" id="myModalLabel"><?php echo htmlspecialchars($server->name)?></h4>
             </div>
             <div class="modal-body">
                 <div id="test_<?php echo $server->id;?>"></div>
 
-                <p>Адрес сервера: <kbd><?php echo $server->address.':'.$server->port;?></kbd></p>
+                <p>Адрес сервера: <kbd><?php echo htmlspecialchars($server->address).':'.htmlspecialchars($server->port);?></kbd></p>
                 <p>Версия игры: <kbd><?php echo $server_version['name'];?></kbd></p>
 
                 <p>Наличие Whitelist: <kbd><?php echo $server->whitelist == 't'? 'Включен' : 'Выключен';?></kbd></p>
@@ -38,7 +38,7 @@
         </div>
     </div>
 </div>
-<a class="btn btn-default"  data-toggle="modal" data-target="#server_<?php echo $server->id?>"><?php echo $server->name;?> </a> <kbd>Голосов: <?php echo $server->votes;?></kbd>
+<a class="btn btn-default"  data-toggle="modal" data-target="#server_<?php echo $server->id?>"><?php echo htmlspecialchars($server->name);?> </a> <kbd>Голосов: <?php echo $server->votes;?></kbd>
 <br><br>
 <?php
     $only_tags = [];
@@ -52,9 +52,9 @@
     foreach ($only_tags as $tag)
     {
         if(in_array($tag, $tags))
-            echo '<a class="btn-xs btn btn-primary">'.$tag.'</a> ';
+            echo '<a class="btn-xs btn btn-primary">'.htmlspecialchars($tag).'</a> ';
         else
-            echo '<a class="btn-xs btn btn-default">'.$tag.'</a> ';
+            echo '<a class="btn-xs btn btn-default">'.htmlspecialchars($tag).'</a> ';
     }
 ?>
 

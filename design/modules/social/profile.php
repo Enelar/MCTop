@@ -35,10 +35,6 @@
                     Работа: InDev<br>
                     <br>-->
                     <?php $user->display_achievements_info();?>
-                    <?php $user->display_relations();?>
-                    <?php $user->display_mobile_phone();?>
-                    <?php $user->display_hobby();?>
-                    <?php $user->display_city();?>
                     <?php //$user->display_reputation();?>
                     <?php $user->display_players_count();?>
                     <?php //echo $user->display_prestige();?>

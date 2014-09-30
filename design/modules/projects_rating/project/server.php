@@ -1,7 +1,7 @@
 <?php $server = Servers::get_server($_GET['id'])?>
 <?php $server_version = Core::$db->Query('select * from main.servers_versions where id = $1', [$server->version_id], true);?>
 <h1>
-    <span class="glyphicon glyphicon-align-justify"></span> Сервер <?php echo $server->name;?>
+    <span class="glyphicon glyphicon-align-justify"></span> Сервер <?php echo htmlspecialchars($server->name);?>
     <div class="btn_favorite">
         <a class="btn-sm btn btn-success" onclick="add_server_to_favorite(<?php echo $server->id?>)">
             <?php
@@ -16,7 +16,7 @@
     </div>
 </h1>
 <hr>
-<p><?php echo $server->description;?></p><hr>
+<p><?php echo htmlspecialchars($server->description);?></p><hr>
 
 
 <div class="full_server">
@@ -44,7 +44,7 @@
         <div class="tab-pane active" id="home">
             <br>
 
-            <a target="_blank" href="<?php echo $server->project_info->site_url?>" class="btn btn-primary">Сайт проекта</a><hr>
+            <a target="_blank" href="<?php echo htmlspecialchars($server->project_info->site_url)?>" class="btn btn-primary">Сайт проекта</a><hr>
             <?php
             $only_tags = [];
 
@@ -90,7 +90,7 @@
                 <?php if(! $subscribe = RatingServers::is_server_subscriber($server->id)):?>
                     <a class="btn btn-primary" onclick="display_page_with_id('projects_rating', 'project/server_subscribe', '<?php echo $server->id;?>')">Для голосования за сервере тебе нужно @Подписаться_на_сервер</a>
                 <?php else:?>
-                    Вы сохранили ник <a onclick="display_page_with_id('projects_rating', 'project/server_subscribe_change_nick', '<?php echo $server->id?>')"><?php echo $subscribe->nickname;?></a> на сервере
+                    Вы сохранили ник <a onclick="display_page_with_id('projects_rating', 'project/server_subscribe_change_nick', '<?php echo $server->id?>')"><?php echo htmlspecialchars($subscribe->nickname);?></a> на сервере
                     <hr>
                     <?php
                     if(Votes::is_user_have_voted_today($server->project, Core::get_current_user_profile()->id))
@@ -104,14 +104,14 @@
         <?php
             if(!empty($server->map_url)):
         ?>
-        <div class="tab-pane" id="map"><iframe class="dynmap" src="<?php echo $server->map_url?>"></iframe></div>
+        <div class="tab-pane" id="map"><iframe class="dynmap" src="<?php echo htmlspecialchars($server->map_url)?>"></iframe></div>
         <?php
             endif;
         ?>
-        <div class="tab-pane" id="features"><br><?php echo $server->features;?></div>
+        <div class="tab-pane" id="features"><br><?php echo htmlspecialchars($server->features);?></div>
         <div class="tab-pane" id="trailer">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/<?php echo $server->video_trailer_url?>"></iframe>
+                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/<?php echo htmlspecialchars($server->video_trailer_url)?>"></iframe>
             </div>
         </div>
     </div>

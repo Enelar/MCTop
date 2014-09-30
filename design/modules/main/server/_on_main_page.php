@@ -4,7 +4,7 @@
         <div class="left_block">
 
             <div class="name">
-                <a href="/server/<?php echo $server->id;?>"><?php echo $server->name?></a>
+                <a href="/server/<?php echo $server->id;?>"><?php echo htmlspecialchars($server->name)?></a>
             </div>
 
         </div>

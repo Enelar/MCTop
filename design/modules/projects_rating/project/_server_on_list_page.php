@@ -1,1 +1,1 @@
-<a class="btn btn-primary" href="/server/<?php echo $server->id;?>"><?php echo $server->name;?></a>
+<a class="btn btn-primary" href="/server/<?php echo $server->id;?>"><?php echo htmlspecialchars($server->name);?></a>

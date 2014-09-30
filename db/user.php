@@ -77,7 +77,7 @@ class User extends X
     function display_name()
     {
         if (!empty($this->name))
-            echo $this->name;
+            echo htmlspecialchars($this->name);
         else
             echo '..';
     }
@@ -85,21 +85,9 @@ class User extends X
     function display_lastname()
     {
         if (!empty($this->lastname))
-            echo $this->lastname;
+            echo htmlspecialchars($this->lastname);
         else
             echo '..';
-    }
-
-    function display_hobby()
-    {
-        if (!empty($this->hobby))
-            echo '<p>Хобби: ' . $this->hobby . '</p>';
-    }
-
-    function display_mobile_phone()
-    {
-        if (!empty($this->mobile_phone))
-            echo '<p>Мобильный: ' . $this->mobile_phone . '</p>';
     }
 
     function display_achievements_info()
@@ -129,7 +117,7 @@ class User extends X
     function display_nickname()
     {
         if (!empty($this->nickname))
-            echo '[' . $this->nickname . ']';
+            echo '[' . htmlspecialchars($this->nickname) . ']';
     }
 
     function display_reputation()

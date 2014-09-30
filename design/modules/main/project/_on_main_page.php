@@ -8,7 +8,7 @@
         </div>
 
         <div class="name">
-            <a onclick="display_page_with_id('main','project', '<?php echo $project->id?>')"><?php echo $project->name?></a>
+            <a onclick="display_page_with_id('main','project', '<?php echo $project->id?>')"><?php echo htmlspecialchars($project->name)?></a>
         </div>
 
         <div class="avatar">
