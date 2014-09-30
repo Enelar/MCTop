@@ -71,7 +71,7 @@ if (!$ajax): ?>
                                 <a onclick="display_page('projects_rating','favorite')"><span class="glyphicon glyphicon-star"></span> Избранное</a>
                             </li>
                             <li>
-                                <a onclick="display_page('community','index')"><span class="glyphicon glyphicon-globe"></span> Сообщество</a>
+                                <a onclick="display_page('social','misc/edit_profile_info')"><span class="glyphicon glyphicon-globe"></span> Редактировать профиль</a>
                             </li>
                             <li>
                                 <a href="/static/api/index"><span class="glyphicon glyphicon-picture"></span> API</a>

@@ -251,17 +251,16 @@ class Users extends API
         Core::$db->Query('insert into users.email_approving (user_id, hash) values ($1, $2)', [Core::get_current_user_profile()->id, $hash]);
         $to      = $email;
         $subject = 'MCTop: подтверждение адреса электронной почты';
-        //todo адрес ссылки
-        $message = '<a href="/user/approve_email/'.$hash.'">Подтвердить адрес электронной почты</a>';
-        $headers = 'From: webmaster@mctop.im' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-
+        $message = "<a href='http://online.mctop.im/user/approve_email/{$hash}'>Подтвердить адрес электронной почты</a>";
+        $headers = "From: wm@mctop.im\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
         mail($to, $subject, $message, $headers);
 
         return
-        [
-            'message' => 'success'
-        ];
+            [
+                'message' => 'success'
+            ];
     }
+
 
 }
