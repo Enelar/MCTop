@@ -20,7 +20,7 @@
 
     function display_page(module, action)
     {
-
+        //window.history.pushState( {} , 'test', '/index.php?module='+module+'&action='+action );
         $.ajax({
             type: "GET",
             url: "/index.php?module="+module+"&action="+action,

@@ -12,7 +12,6 @@ if (!$ajax): ?>
 </head>
 
 <script src="js/jquery.js"></script>
-<script src="js/jquery-1.11.0.js"></script>
 <script data-main="js/main" src="js/require.js"></script>
 
 <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
@@ -87,15 +86,6 @@ if (!$ajax): ?>
     </div>
     <!-- /.container-fluid -->
 </nav>
-
-<?php
-if (Core::is_user_authorized()):
-    if (Clubs::get_current_user_invitations_count() > 0): ?>
-        <div class="main_notifications">
-            <?php Clubs_render_class::render_invitations_notifier(); ?>
-        </div>
-    <?php endif;
-endif; ?>
 
 <div class="content">
     <?php endif; ?>

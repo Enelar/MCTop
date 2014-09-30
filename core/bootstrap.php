@@ -1,6 +1,6 @@
 <?php
 
-define('DEBUG', 1);
+define('DEBUG', 0);
 
 require ROOT_DIR . '/core/utils/Autoloader.php';
 Autoloader::add_classes([
@@ -23,10 +23,9 @@ Autoloader::add_classes([
     'Projects' => ROOT_DIR . '/db/Projects.php',
     'HelpCategories' => ROOT_DIR . '/db/Help.php',
     'Help_Topic' => ROOT_DIR . '/db/Help.php',
-    'Notes' => ROOT_DIR . '/db/Notes.php',
     'Blog_Posts' => ROOT_DIR . '/db/Blog_posts.php',
-    'Clubs' => ROOT_DIR . '/db/Clubs.php',
 
+    'Banner' => ROOT_DIR . '/api/Banner.php',
     'Users' => ROOT_DIR . '/api/Users.php',
     'Projects_api' => ROOT_DIR . '/api/Projects_api.php',
     'Achievements_api' => ROOT_DIR . '/api/Achievements_api.php',
