@@ -12,7 +12,7 @@
                 var answer = jQuery.parseJSON(msg);
                 if(answer['message'] == 'success')
                 {
-                    window.location.replace("http://mctop.ru");
+                    window.location.replace("/");
                 }
             }
         });
@@ -30,7 +30,7 @@
                     //var text = 'ID для входа: '+ answer['id'] + '<br>';
                     //text += 'Пароль для входа: '+ answer['password'];
                     //$( ".account_info" ).html(text);
-                    window.location.replace("http://mctop.ru");
+                    window.location.replace("/");
                 }
             }
         });
@@ -38,7 +38,7 @@
 
     function logout_user()
     {
-        window.location.replace("http://mctop.ru/api.php?module=users&action=logout");
+        window.location.replace("/api.php?module=users&action=logout");
     }
 
     function show_profile(id)

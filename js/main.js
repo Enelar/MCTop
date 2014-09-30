@@ -16,12 +16,12 @@
 
             if(!user_logged_status['is_authorized'])
             {
-                if(document.URL == 'http://mctop.ru/')
+                if(document.URL == 'http://online.mctop.im/')
                     display_page('projects_rating', 'index');
             }
             else
             {
-                if(document.URL == 'http://mctop.ru/')
+                if(document.URL == 'http://online.mctop.im')
                     display_page('projects_rating','index');
 
                 api_get_request('users','update_user_session_period');

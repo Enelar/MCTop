@@ -33,7 +33,7 @@
                     <?php
                     if(sizeof($project->servers>0))
                         foreach($project->servers as $server)
-                            require('/../index/project_server.php');
+                            require('project_server.php');
                     ?>
                 </div>
 

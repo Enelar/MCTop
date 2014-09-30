@@ -58,7 +58,7 @@ class Users extends API
             session_unset();
             session_destroy();
         }
-        header('Location: http://mctop.ru');
+        header('Location: http://online.mctop.im');
     }
 
     function edit_profile()
