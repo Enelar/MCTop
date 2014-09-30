@@ -34,6 +34,7 @@ Autoloader::add_classes([
     'Forum_api' => ROOT_DIR . '/api/Forum_api.php',
     'RatingServers' => ROOT_DIR . '/api/RatingServers.php',
     'Votes' => ROOT_DIR . '/api/Votes.php',
+    'Banner' => ROOT_DIR . '/api/Banner.php',
 
     'Servers_render_class' => ROOT_DIR . '/design/render_classes/Servers.php',
     'Forum_render_class' => ROOT_DIR . '/design/render_classes/Forum.php'
