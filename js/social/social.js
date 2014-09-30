@@ -69,6 +69,7 @@
         $.ajax({
             type: "POST",
             data: ({
+                login : $("input[name='login']").val(),
                 name : $("input[name='name']").val(),
                 lastname : $("input[name='lastname']").val(),
                 email : $("input[name='email']").val(),
@@ -86,12 +87,14 @@
             cache: false,
             success: function(msg){
                 var answer = jQuery.parseJSON(msg);
-                if(answer['data']['edit_profile'])
+                if(answer['error'] == 'login_is_unavailable')
                 {
-                    $( ".message" ).html('<div class="alert alert-success" role="alert">Данные обновлены</div>');
-                    setTimeout(function() {
-                        $(".message").fadeOut().empty();
-                    }, 5000);
+                    alert('Логин уже занят');
+                    return false;
+                }
+                if(answer['message'] == 'success')
+                {
+                    show_profile(current_user_id['data']);
                 }
             }
         });

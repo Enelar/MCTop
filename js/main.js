@@ -14,19 +14,10 @@
             user_logged_status = api_get_request('users','is_user_authorized');
             current_user_id = api_get_request('users', 'get_current_user_id');
 
-            if(!user_logged_status['is_authorized'])
+            if(user_logged_status['is_authorized'])
             {
-                if(document.URL == 'http://online.mctop.im/')
-                    display_page('projects_rating', 'index');
-            }
-            else
-            {
-                if(document.URL == 'http://online.mctop.im')
-                    display_page('projects_rating','index');
-
                 api_get_request('users','update_user_session_period');
                 update_user_status();
-
             }
 
         }

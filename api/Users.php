@@ -81,10 +81,16 @@ class Users extends API
         }
 
         if(isset($_POST['password']))
-            $_POST['password'] = md5($_POST['password']);
+        {
+            if(strlen($_POST['password'])>0)
+            {
+                $_POST['password'] = md5($_POST['password']);
+            }
+        }
+
 
         foreach ($fields as $key => $field) {
-            if ($user->$field != $_POST[$field]) {
+            if (($user->$field != $_POST[$field]) && !empty($_POST[$field])) {
                 $changed_fields[$field] = 1;
             }
         }
@@ -97,7 +103,9 @@ class Users extends API
         $query = substr($query, 0, strlen($query) - 2);
         $query .= ' where id = ' . $user->id;
 
-        return Core::$db->Query($query);
+        return $query;
+        Core::$db->Query($query);
+        return ['message' => 'success'];
     }
 
     function get_test_data_for_home()

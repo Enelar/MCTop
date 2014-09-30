@@ -11,7 +11,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Логин для входа</label>
             <div class="col-sm-10">
-                <input name="name" class="form-control" placeholder="Можно установить только 1 раз">
+                <input name="login" class="form-control" placeholder="Можно установить только 1 раз">
             </div>
         </div>
         <?php endif;?>

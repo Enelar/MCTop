@@ -6,7 +6,7 @@ class User extends X
     public $cl_name = 'User';
 
     public $id, $login, $email, $password, $name, $lastname, $hobby, $mobile_phone, $nickname, $city, $relationship_status, $status, $session_id;
-    public $fields_to_edit = 'email, password, name, lastname, city, hobby, mobile_phone, nickname, relationship_status, status';
+    public $fields_to_edit = 'login, email, password, name, lastname, city, hobby, mobile_phone, nickname, relationship_status, status';
 
     function get_user($id)
     {

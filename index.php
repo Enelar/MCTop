@@ -97,11 +97,17 @@ if (!$ajax): ?>
     <?php endif; ?>
 
     <?php
+
     if ($ajax)
         $core->render_page($_GET['module'], $_GET['action']);
     else
+    {
         if(isset($_GET['module']) && $_GET['action'])
             $core->render_page($_GET['module'], $_GET['action']);
+        else
+            $core->render_page('projects_rating', 'index');
+    }
+
     if (!$ajax): ?>
 </div>
 
