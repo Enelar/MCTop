@@ -11,12 +11,12 @@ if (!$ajax): ?>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 </head>
 
-<script src="js/jquery.js"></script>
-<script data-main="js/main" src="js/require.js"></script>
+<script src="/js/jquery.js"></script>
+<script data-main="/js/main" src="/js/require.js"></script>
 
-<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
-<link type="text/css" rel="stylesheet" href="css/jquery.qtip.min.css"/>
-<link type="text/css" rel="stylesheet" href="css/<?php echo Core::get_settings()->application['site_name']; ?>.css"/>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.css"/>
+<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.min.css"/>
+<link type="text/css" rel="stylesheet" href="/css/<?php echo Core::get_settings()->application['site_name']; ?>.css"/>
 <body>
 
 <nav class="navbar navbar-default" role="navigation">
@@ -86,6 +86,10 @@ if (!$ajax): ?>
     </div>
     <!-- /.container-fluid -->
 </nav>
+
+<div class="faq_button">
+    <a class="btn btn-primary" href="">FAQ</a>
+</div>
 
 <div class="content">
     <?php endif; ?>

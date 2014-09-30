@@ -1437,3 +1437,10 @@ li a:hover
     float: right;
     margin-right: 10px;
 }
+
+.faq_button
+{
+    float: right;
+    position: relative;
+    right: -40px;
+}

@@ -2,9 +2,9 @@ Options +FollowSymlinks
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/]+)/([^/]+)$ index.php?module=$1&action=$2 [L]
+RewriteRule ^vote/([0-9]*)$ index.php?module=projects_rating&action=project/vote&id=$1 [L]
 RewriteRule ^news/([^/]+)/([^/]+)$ index.php?module=news&action=$1&id=$2 [L]
-RewriteRule ^vote/([^/]+)$ index.php?module=projects_rating&action=project/vote&id=$2 [L]
+
 Options All -Indexes
 
 <IfModule mod_gzip.c>
