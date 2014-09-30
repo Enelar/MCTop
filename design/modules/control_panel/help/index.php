@@ -1,3 +1,11 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="/static/control_panel/index">Панель управления</a>
+    </li>
+    <li class="active">
+        Помощь по сайту
+    </li>
+</ol>
 
     <?php
         $help_categories = HelpCategories::get_categories_with_topics();

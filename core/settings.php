@@ -176,10 +176,10 @@ class Settings
 
             'application' => [
 
-                'site_domain' => 'mctop.ru',
+                'site_domain' => 'mctop.im',
 
                 'site_name' => 'MCTop',
-                'title_content' => 'MCTop.ru - Рейтинг серверов',
+                'title_content' => 'MCTop - Minecraft сервера',
 
                 'game' => 'Minecraft',
 

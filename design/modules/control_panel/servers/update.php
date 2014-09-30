@@ -51,7 +51,7 @@
 <form method="POST" id="formx" action="javascript:void(null);" onsubmit="server_update('<?php echo $server->id?>', '<?php echo Core::get_current_user_profile()->id?>')">
 
     <div class="form-group">
-        <label>Адрес сервера (ip или домен сайта [пример: s1.mctop.ru])</label>
+        <label>Адрес сервера (ip или домен сайта [пример: s1.mctop.su])</label>
         <input name="address" type="text" class="form-control" placeholder="Название" value="<?php echo $server->address;?>"/>
     </div>
 

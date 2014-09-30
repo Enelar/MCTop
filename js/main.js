@@ -15,7 +15,10 @@
             current_user_id = api_get_request('users', 'get_current_user_id');
 
             if(!user_logged_status['is_authorized'])
-                display_page('projects_rating', 'index');
+            {
+                if(document.URL == 'http://mctop.ru/')
+                    display_page('projects_rating', 'index');
+            }
             else
             {
                 if(document.URL == 'http://mctop.ru/')

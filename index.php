@@ -29,7 +29,7 @@ if (!$ajax): ?>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a id="mctop_logo" class="navbar-brand" onclick="display_page('main','index')">
+            <a id="mctop_logo" class="navbar-brand" href="/static/main/index">
                 <span class="glyphicon glyphicon-home"></span> <?php echo Core::get_settings()->application['site_name'] ?>
             </a>
         </div>
@@ -63,7 +63,7 @@ if (!$ajax): ?>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a onclick="display_page('control_panel','index')"><span class="glyphicon glyphicon-plane"></span> Панель управления</a>
+                                <a href="/static/control_panel/index"><span class="glyphicon glyphicon-plane"></span> Панель управления</a>
                             </li>
                             <li>
                                 <a onclick="display_page('projects_rating','favorite')"><span class="glyphicon glyphicon-star"></span> Избранное</a>
@@ -72,7 +72,7 @@ if (!$ajax): ?>
                                 <a onclick="display_page('community','index')"><span class="glyphicon glyphicon-globe"></span> Сообщество</a>
                             </li>
                             <li>
-                                <a onclick="display_page('api','index')"><span class="glyphicon glyphicon-picture"></span> API</a>
+                                <a href="/static/api/index"><span class="glyphicon glyphicon-picture"></span> API</a>
                             </li>
                             <li class="divider"></li>
                             <li><a onclick="display_page('outdoor','logout')">Выход</a></li>
@@ -88,7 +88,7 @@ if (!$ajax): ?>
 </nav>
 
 <div class="faq_button">
-    <a class="btn btn-primary" href="">FAQ</a>
+    <a class="btn btn-primary" href="/static/main/faq">FAQ</a>
 </div>
 
 <div class="content">
