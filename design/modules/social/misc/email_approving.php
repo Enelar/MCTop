@@ -1,6 +1,8 @@
 
 <h1> <span class="glyphicon glyphicon-pencil"></span> Обновление сведений о Email</h1><hr>
 
+<div class="alert alert-warning" role="alert">Настоятельно рекомендуем установить логин и пароль (правый верхний угол: "Дополнения" -> Редактировать профиль).</div>
+
 <div class="alert alert-success" role="alert">Голос был успешно занесен в базу.</div>
 <div class="alert alert-info" role="alert">
     Для того, чтобы твой голос был не удален, тебе нужно подтвердить Email<br>
