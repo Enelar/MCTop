@@ -7,7 +7,7 @@
             data: ({
                 server_id : server
             }),
-            url: "/api.php?module=ratingservers&action=vote",
+            url: "/api.php?module=RatingServers&action=vote",
             success: function(msg){
                 var answer = jQuery.parseJSON(msg);
                 if(answer['message'] == 'is_first_vote')
@@ -27,7 +27,7 @@
                 server_id : server_id,
                 nickname: $("input[name='nickname']").val()
             }),
-            url: "/api.php?module=ratingservers&action=subscribe",
+            url: "/api.php?module=RatingServers&action=subscribe",
             success: function(msg){
                 var answer = jQuery.parseJSON(msg);
                 if(answer['message'] == 'success')
@@ -44,7 +44,7 @@
                 server_id : server_id,
                 nickname: $("input[name='nickname']").val()
             }),
-            url: "/api.php?module=ratingservers&action=subscriber_change_nickname",
+            url: "/api.php?module=RatingServers&action=subscriber_change_nickname",
             success: function(msg){
                 var answer = jQuery.parseJSON(msg);
                 if(answer['message'] == 'success')

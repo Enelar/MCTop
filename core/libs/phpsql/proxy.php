@@ -22,7 +22,7 @@ class proxy extends proxy_storage
 
   public function Query( $query, $params = [], $one_row = false, $reindex_by = null )
   {
-    assert(is_array($params), "phpsql->Query params should be array");
+    assert(is_array($params));
 
     $res = $this->connector->Query($query, $params);
 
