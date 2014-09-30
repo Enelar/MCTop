@@ -32,7 +32,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="display_page_with_id('projects_rating', 'project/server', '<?php echo $server->id;?>')" class="btn btn-success" data-dismiss="modal">Перейти на страницу сервера</button>
+                <a target="_blank" href="/server/<?php echo $server->id;?>" class="btn btn-success">Перейти на страницу сервера</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
