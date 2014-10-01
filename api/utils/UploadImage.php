@@ -69,9 +69,11 @@ class UploadImage extends API
 
     private function AllocImageName( $ext )
     {
-        // Get random image name stored in ta
-        // $res = db::Query("INSERT INTO kickstart.images(author, ext) VALUES ($1, $2) RETURNING name", [C::Users()->uid(), $ext], true);
-        // return $res['name'];
+        $res = Core::get_db()->Query("
+            INSERT INTO main.images(author, ext)
+                VALUES ($1, $2)
+                RETURNING name", [LoadModule('api', 'Users')->uid(), $ext], true);
+        return $res['name'];
     }
 
     public function LocationByName( $name )
@@ -82,7 +84,6 @@ class UploadImage extends API
 
     public function info( $name )
     {
-        // Get image row by name
-        // return db::Query("SELECT * FROM kickstart.images WHERE name=$1", [$name], true);
+        return Core::get_db()->Query("SELECT * FROM main.images WHERE name=$1", [$name], true);
     }
 }
