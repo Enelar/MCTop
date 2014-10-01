@@ -33,7 +33,7 @@ class pg_wrap
   }
 }
 
-class row_wraper
+class row_wraper implements arrayaccess
 {
   private $original_row_array;
   
@@ -45,18 +45,43 @@ class row_wraper
 
   public function __set ( $name , $value )
   {
-    $o = &$this->original_row_array;
-    $o[$name] = $value;
+    $this->offsetSet($name, $value);
     return $this->__get($name);
   }
 
   public function __get ( $name )
   {
+    return $this->offsetGet($name);
+  }
+
+  public function offsetExists ( $name )
+  {
     $o = &$this->original_row_array;
-    if (!isset($o[$name]))
+    return isset($o[$name]);
+  }
+  
+  public function offsetGet ( $name )
+  {    
+    if (!$this->offsetExists($name))
       return null;
+
+    $o = &$this->original_row_array;
     if (!is_array($o[$name]))
       return $o[$name];
     return new row_wraper($o[$name]);
+  }
+  
+  public function offsetSet($name, $value)
+  {
+      $o = &$this->original_row_array;
+      if (is_null($name))
+          $o[] = $value;
+      else
+          $o[$name] = $value;
+  }
+  
+  public function offsetUnset ( $name )
+  {
+      unset($this->original_row_array[$name]);
   }
 }
