@@ -2,6 +2,31 @@
 
 class Users extends API
 {
+    public function uid()
+    {
+        phoxy_protected_assert($this->is_user_authorized(), ["error" => "Auth required"]);
+        return $this->get_uid();
+    }
+
+    public function get_uid()
+    {
+        global $_session;
+
+        if (isset($_session['uid']))
+            return $_session['uid'];
+        return false;
+    }
+
+    public function is_user_authorized()
+    {
+        return !!$this->get_uid();
+    }
+
+    public function get_current_user_profile()
+    {
+        return $this->get_uid();
+    }
+
     function authorize()
     {
         API::check_for_post_request();
@@ -101,13 +126,6 @@ class Users extends API
         ];
     }
 
-    function is_user_authorized()
-    {
-        return [
-            'is_authorized' => Core::is_user_authorized() ? true : false
-        ];
-    }
-
     function update_user_session_period()
     {
         $time = 0;
@@ -119,14 +137,6 @@ class Users extends API
         return [
             'time' => $time
         ];
-    }
-
-    function get_current_user_id()
-    {
-        if (Core::is_user_authorized())
-            return [
-                'data' => Core::get_current_user_profile()->id
-            ];
     }
 
     function get_user_info()
