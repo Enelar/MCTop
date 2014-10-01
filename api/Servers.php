@@ -65,22 +65,6 @@ class Servers extends API
   protected function vote($server_id)
   {
     $votes = LoadModule('api', 'Votes');
-
-    $server = $this->info();
-
-    $trans = db::Begin();
-
-    phoxy_protected_assert($this->is_server_subscriber($server->id), ["error" => "You should be subscribed to vote"]);
-    phoxy_protected_assert($votes->is_user_have_voted_today($server->project), ["error" => "You do not have votes today"]);
-
-    Core::$db->Query("update main.projects set score = score + 1 where id = $1", [$server->project]);
-    Core::$db->Query("update main.servers set votes = votes + 1 where id = $1", [$server->id]);
-    
-    $last_vote = Core::$db->Query("insert into votes.main (server_id, user_id, time, project_id) values ($1, $2, now(), $3) RETURNING *",
-      [$server->uid, LoadModule('api', 'Users')->uid(), $server->project]);
-    Core::$db->Query("insert into votes.info (vote_id, ip, user_agent, country) values ($1, $2, $3, $4)",
-      [$last_vote->id, $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], 'RUSSIA']);
-
-    return $trans->Commit();
+    return $votes->Vote($server_id);
   }
 }

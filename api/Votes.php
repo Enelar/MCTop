@@ -1,41 +1,50 @@
 <?php
 Class Votes extends API
 {
-    static function is_user_have_voted_today($project_id, $user_id = null)
+    protected function vote($server_id)
     {
-        if(is_null($user_id))
-            $user_id = $_GET['id'];
+        $servers = LoadModule('api', 'Servers');
+        $server = $servers->info($server_id);
 
-        $last_vote = Core::$db->Query("select * from votes.main where project_id = $1 and user_id = $2 order by time desc limit 1", [$project_id, $user_id], true);
-        if(!$last_vote)
-            return false;
+        $trans = db::Begin();
 
-        $day = date('d', strtotime($last_vote['time']));
-        $today_day = date('d', time());
+        phoxy_protected_assert($servers->is_server_subscriber($server->id), ["error" => "You should be subscribed to vote"]);
+        phoxy_protected_assert($this->is_user_have_voted_today($server->project), ["error" => "You do not have votes today"]);
 
-        if($day<$today_day)
-        {
-            //todo проверка на месяц голосования
-            //само голосование находится в RatingServers/vote
-            return false;
-        }
-
-        return true;
+        $this->add_vote($server_id);
+        return $trans->Commit();
     }
 
-    function recount_project_score()
+    private function add_vote($server_id)
     {
+        $servers = LoadModule('api', 'Servers');
+        $server = $servers->info($server_id);
 
+        Core::get_db()->Query("
+            update main.projects set score = score + 1 where id = $1;
+            update main.servers set votes = votes + 1 where id = $2;", [$server->project, $server->id]);
+
+        $last_vote = Core::$db->Query("insert into votes.main (server_id, user_id, time, project_id) values ($1, $2, now(), $3) RETURNING *",
+          [$server->uid, LoadModule('api', 'Users')->uid(), $server->project]);
+        global $_SERVER;
+        Core::$db->Query("insert into votes.info (vote_id, ip, user_agent, country) values ($1, $2, $3, $4)",
+          [$last_vote->id, $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], 'RUSSIA']);
     }
 
-    function is_needs_to_give_bonus(Servers $server)
+    public function is_user_have_voted_today($project_id, $user_id = null)
     {
-        return $server->give_bonus? true : false;
-    }
+        if (!$user_id)
+            $user_id = LoadModule('api', 'Users')->uid();
 
-    function give_bonus_for_vote (Servers $server, $nick)
-    {
-        //$server->bonus_script_url
-        //$server->bonus_secret_word
+        $last_vote = 
+            Core::get_db()->Query("
+                select (now() - time < '1 day'::interval) as today
+                    from votes.main
+                    where project_id = $1
+                      and user_id = $2
+                    order by time desc
+                    limit 1", [$project_id, $user_id], true);
+
+        return isset($last_vote['today']) && $last_vote['today'] == 't';
     }
 }
