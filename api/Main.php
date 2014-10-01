@@ -13,6 +13,19 @@ class Main extends api
       ];
     }
 
+    protected function navbar_links()
+    {
+        return
+        [
+            "design" => "main/navbar",
+            "data" =>
+            [
+                "links" => Core::get_settings()->modules,
+                "is_user_authorized" => LoadModule('api', 'Users')->is_user_authorized(),
+            ],
+        ];
+    }
+
     protected function home_page()
     {
       return

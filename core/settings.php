@@ -49,9 +49,10 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
+                            'show_to_guest' => true,
                             'name' => 'Проекты',
                             'icon' => 'glyphicon glyphicon-star',
-                            'link' => 'projects_rating\', \'index'
+                            'link' => '/'
                         )
                     ),
                 'rating' => new Object(
@@ -68,6 +69,7 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
+                            'show_to_guest' => true,
                             'name' => 'Поиск',
                             'icon' => 'glyphicon glyphicon-search',
                             'link' => 'search\', \'index'
@@ -122,6 +124,7 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => false,
+                            'show_to_guest' => true,
                             'name' => 'Авторизация',
                             'icon' => 'glyphicon glyphicon-lock',
                             'link' => 'outdoor\', \'login'
@@ -131,6 +134,7 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => false,
+                            'show_to_guest' => true,
                             'name' => 'Регистрация',
                             'icon' => 'glyphicon glyphicon-plus',
                             'link' => 'outdoor\', \'register'
@@ -161,6 +165,7 @@ class Settings
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => false,
+                            'show_to_guest' => true,
                             'icon' => 'glyphicon glyphicon-repeat',
                             'name' => 'Почему?',
                             'link' => 'outdoor\', \'why'

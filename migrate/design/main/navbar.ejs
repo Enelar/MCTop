@@ -1,0 +1,57 @@
+<nav class="navbar navbar-default" role="navigation">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a id="mctop_logo" class="navbar-brand" href="/static/main/index">
+                <span class="glyphicon glyphicon-home"></span> MCTop
+            </a>
+        </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+<%
+  for (k in this.links)
+  {
+    v = this.links[k];
+    if (!v.show_in_navbar)
+        continue;
+
+    if(this.is_user_authorized)
+    {
+        if (!v.show_to_authorized)
+            continue;
+    } else if (!v.show_to_guest)
+            continue;
+%>
+        <li>
+            <a href="<%= v.link %>">
+                <span class="<%= v.icon %>"></span> <%=v.name%>
+            </a>
+        </li>
+<%
+
+  }
+%>
+        </ul>
+    </div>
+</nav>
+
+<% /* example fly to elephant transformation
+this.Defer(function()
+{
+   staff = this.first().find('.nav').find('a');
+   staff.wrap("<li></li>").wrap("<span></span>");
+   staff.each(function()
+   {
+       $(this).parent().addClass($(this).attr('data-icon'));
+   })
+
+
+})*/
+
+%>

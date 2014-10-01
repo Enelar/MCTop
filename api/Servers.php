@@ -18,7 +18,7 @@ class Servers extends API
       $query = "UPDATE main.servers_subscribers SET nickname=$3 WHERE server_id = $1 AND user_id=$2";
     }
     else
-      $query = "INSERT INTO main.servers_subscribers(server_id, user_id, nickname) VALUES ($1, $2, $3)"
+      $query = "INSERT INTO main.servers_subscribers(server_id, user_id, nickname) VALUES ($1, $2, $3)";
 
     $res = Core::$db->Query("{$query} RETURNING *",
           [ $server_id, $uid, $nickname], true);
@@ -59,7 +59,11 @@ class Servers extends API
 
   protected function info($server_id)
   {
-    return Core::$db->Query("select * from main.servers WHERE id=$1", [$server_id], true);
+    return
+    [
+        "design" => "server/info",
+        "data" => ["info" => Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true)],
+    ];
   }
 
   protected function vote($server_id)
@@ -67,4 +71,16 @@ class Servers extends API
     $votes = LoadModule('api', 'Votes');
     return $votes->Vote($server_id);
   }
+
+  protected function version($id)
+  {
+        $server_version = Core::get_db()->Query('select * from main.servers_versions where id = $1', [$id], true);
+        return
+        [
+            "design" => "server/version",
+            "data" => ["version" => $server_version],
+        ];
+  }
+
+
 }
