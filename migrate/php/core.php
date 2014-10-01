@@ -1,10 +1,9 @@
 <?php
 
-class Core extends X
+class Core
 {
-
-    public static $db;
-    public static $redis_db;
+    private static $db;
+    private static $redis_db;
     private static $_session;
     private static $settings;
     private static $_current_user;
@@ -31,7 +30,7 @@ class Core extends X
 
     private function load_settings()
     {
-        require_once('settings.php');
+        require_once('core/settings.php');
         self::$settings = $settings;
     }
 
@@ -44,8 +43,8 @@ class Core extends X
 
     private function init_postgres_db()
     {
-        include_once('libs/phpsql/phpsql.php');
-        include_once('libs/phpsql/pgsql.php');
+        include_once('core/libs/phpsql/phpsql.php');
+        include_once('core/libs/phpsql/pgsql.php');
         $sql = new phpsql();
         $pg = $sql->Connect("pgsql://postgres@127.0.0.1/mctop");
         self::$db = $pg;
@@ -57,24 +56,6 @@ class Core extends X
         $this->init_postgres_db();
     }
 
-    function handleQuery()
-    {
-        if (isset($_GET['module'])) {
-            if ($this->is_module_exists($this->define_called_module())) {
-                if (DEBUG) {
-                    $this->enable_debug_features();
-                } else
-                    ini_set('display_errors', 'no');
-            } else
-            {
-                if(DEBUG)
-                    echo 'Модуль '.$_GET['module'].' отсутствует в файле /core/settings.php';
-                Core::throw_error('Страница не найдена.<br><br>А кто сказал что она вообще существует?');
-            }
-
-        }
-    }
-
     private function enable_debug_features()
     {
         ini_set('display_errors', 'yes');
@@ -84,6 +65,7 @@ class Core extends X
         echo '<br><b>XCoreQueryHanlder:</b> initializng of '.self::$_called_module_name. ' module<br>';
     }
 
+    // @Deprecated
     private function define_called_module()
     {
         $module = $_GET['module'];
@@ -96,11 +78,13 @@ class Core extends X
         return self::$_called_module_name = substr($module, 0, $slash_position);
     }
 
+    // @Deprecated
     private function is_module_exists($module)
     {
         return array_key_exists($module, $this->get_all_modules_from_settings());
     }
 
+    // @Deprecated
     private function get_all_modules_from_settings()
     {
         $modules = [];
@@ -113,23 +97,12 @@ class Core extends X
 
     static function get_current_user_profile()
     {
-        if(sizeof(self::$_session)>0)
-        {
-            if (empty(self::$_current_user)) {
-                $user = new User(self::$db);
-                $user->get_user(self::$_session['uid']);
-                self::$_current_user = $user;
-            } else
-                $user = self::$_current_user;
-            return $user;
-        }
-
-        return false;
+        return LoadModule('api', 'Users')->info();
     }
 
     static function is_user_authorized()
     {
-        return (sizeof(self::get_session()) > 0 && self::get_session()['uid'] > 0);
+        return LoadModule('api', 'Users')-> is_user_authorized();
     }
 
     static function get_session()
@@ -149,9 +122,10 @@ class Core extends X
 
     static function is_ajax_request()
     {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+        return true;
     }
 
+    // @Deprecated
     function render_page($module, $action)
     {
         if($action != 'footer')
