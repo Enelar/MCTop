@@ -2,8 +2,6 @@
 
 class UploadImage extends api
 {
-    private $base_prefix = "./../img/";
-
     public function upload_by_name( $name )
     {
         global $_FILES;
@@ -74,16 +72,5 @@ class UploadImage extends api
                 VALUES ($1, $2)
                 RETURNING name", [LoadModule('api', 'Users')->uid(), $ext], true);
         return $res['name'];
-    }
-
-    public function location_by_name( $name )
-    {
-        $res = $this->info($name);
-        return $this->base_prefix.$res['name'].".".$res['ext'];
-    }
-
-    public function info( $name )
-    {
-        return Core::get_db()->Query("SELECT * FROM main.images WHERE name=$1", [$name], true);
     }
 }
