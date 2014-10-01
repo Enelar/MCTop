@@ -1,0 +1,4 @@
+
+Тема: <%= this.XSSEscape(this.subject)%><br>
+Текст: <%= this.XSSEscape(this.text)%><br>
+Категория: <%= this.DeferRender('News/post_category&id='+this.category)%><hr>

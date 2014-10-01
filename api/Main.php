@@ -41,4 +41,13 @@ class Main extends api
         "design" => "main/pages/faq"
       ];
     }
+
+    protected function why()
+    {
+        return
+            [
+                "design" => "main/pages/why"
+            ];
+    }
+
 }

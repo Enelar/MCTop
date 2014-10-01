@@ -1,0 +1,16 @@
+<h1><span class="glyphicon glyphicon-globe"></span> Новости по вселенной Minecraft</h1><hr>
+
+<div class="projects_rating">
+
+    <%
+        for (k in this.news)
+        {
+            v = this.news[k];
+    %>
+            <%= this.DeferRender('news/post', v) %>
+    <%
+        }
+    %>
+
+</div>
+
