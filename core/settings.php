@@ -207,6 +207,8 @@ class Settings
 
                 'official_wiki' => '',
                 'russian_wiki' => '',
+
+                'image_prefix' => "./../img/",
             ],
 
             'engine' => [

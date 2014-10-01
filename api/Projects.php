@@ -25,6 +25,28 @@ class Projects extends api
             ]
         ];
     }
+
+    protected function owner($id)
+    {
+        $row = Core::get_db()->Query('select * from main.projects where id=$1', [$id], true);
+        return $row->owner == LoadModule('api', 'Users')->uid();
+    }
+
+    protected function require_owner($id)
+    {
+        phoxy_protected_assert($this->owner($id), ["error" => "You should be project owener"]);
+    }
+
+    protected function set_banner($id, $name)
+    {
+        $this->require_owner($id);
+
+        $image = LoadModule('api/utils', 'Image');
+        $image->require_owner($name);
+
+        $res = db::Query("UPDATE main.projects SET banner=$2 WHERE id=$1 RETURNING id", [$id, $name]);
+        return !!$res;
+    }
 }
 
 
