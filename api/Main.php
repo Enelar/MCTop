@@ -1,9 +1,9 @@
 <?php
 
 // Для того что бы не запутаться при мигрировании
-class main extends api
+class Main extends api
 {
-    protected function Reserve()
+    protected function reserve()
     {
       unset($this->addons['result']);
       return
