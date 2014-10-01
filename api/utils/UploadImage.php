@@ -1,6 +1,6 @@
 <?php
 
-class Banner extends API
+class UploadImage extends API
 {
     private $base_prefix = "./../img/";
 
