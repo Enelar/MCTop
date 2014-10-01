@@ -1,10 +1,10 @@
 <?php
 
-class UploadImage extends API
+class UploadImage extends api
 {
     private $base_prefix = "./../img/";
 
-    public function UploadByName( $name )
+    public function upload_by_name( $name )
     {
         global $_FILES;
         if (!$_FILES[$name])
@@ -13,15 +13,15 @@ class UploadImage extends API
         if($file['error'])
             return false;
 
-        if (false === $ext = $this->CheckExtension($file))
+        if (false === $ext = $this->check_extension($file))
             return false;
-        $gd = $this->CreateGD($ext, $file['tmp_name']);
+        $gd = $this->create_gd($ext, $file['tmp_name']);
 
         if (!$gd)
             return false;
 
         $tran = db::Begin();
-        $name = $this->AllocImageName($ext);
+        $name = $this->alloc_image_name($ext);
 
         $fileloc = $this->base_prefix.$name.".".$ext;
         $save_res = $this->SaveTo($gd, $ext, $fileloc);
@@ -34,7 +34,7 @@ class UploadImage extends API
         return NULL;
     }
 
-    private function CheckExtension( $file )
+    private function check_extension( $file )
     {
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $ext = array_search
@@ -49,7 +49,7 @@ class UploadImage extends API
         return $ext;
     }
 
-    private function CreateGD( $ext, $filename )
+    private function create_gd( $ext, $filename )
     {
         if ($ext == 'jpg')
             return @imagecreatefromjpeg($filename);
@@ -67,7 +67,7 @@ class UploadImage extends API
         return false;
     }
 
-    private function AllocImageName( $ext )
+    private function alloc_image_name( $ext )
     {
         $res = Core::get_db()->Query("
             INSERT INTO main.images(author, ext)
@@ -76,7 +76,7 @@ class UploadImage extends API
         return $res['name'];
     }
 
-    public function LocationByName( $name )
+    public function location_by_name( $name )
     {
         $res = $this->info($name);
         return $this->base_prefix.$res['name'].".".$res['ext'];
