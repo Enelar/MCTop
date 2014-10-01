@@ -7,6 +7,11 @@ class Image extends api
       return $this->info($name)->author == LoadModule('api', 'Users')->uid;
     }
 
+    public function require_owner($name)
+    {
+      phoxy_protected_assert($this->is_image_owner($name), ["error" => "You should be image owner to do this"]);
+    }
+
     public function location( $name )
     {
         $res = $this->info($name);
