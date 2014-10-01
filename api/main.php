@@ -25,7 +25,7 @@ class main extends api
     {
       return
       [
-        "design" => "example/faq"
+        "design" => "main/pages/faq"
       ];
     }
 }
