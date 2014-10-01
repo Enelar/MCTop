@@ -5,7 +5,6 @@ class Main extends api
 {
     protected function reserve()
     {
-      Core::get_db()->Query("SELECT 1");
       unset($this->addons['result']);
       return
       [

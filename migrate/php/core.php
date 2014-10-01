@@ -55,7 +55,8 @@ class Core
           include_once('core/libs/phpsql/pgsql.php');
           $sql = new phpsql();
           $pg = $sql->Connect("pgsql://postgres@127.0.0.1/mctop");
-          self::$db = $pg;
+          include_once('pg_wrap.php');
+          self::$db = new pg_wrap($pg);
           return;
         } catch (Exception $e) {}
 
