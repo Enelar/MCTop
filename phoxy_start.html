@@ -1,0 +1,31 @@
+<script type="text/javascript">
+phoxy =
+{
+  wait: true,
+  config: "/api/phoxy",
+  skip_initiation: location.pathname != "/",  
+  OnWaiting: function()
+  {
+    phoxy._EarlyStage.async_require[1] = "/core/libs/phoxy/libs/jquery.form.js";
+    phoxy._EarlyStage.async_require[2] = "/core/libs/phoxy/libs/EJS/ejs.js";
+    phoxy._EarlyStage.EntryPoint();
+  },
+  OnBeforeCompile: function()
+  {
+    phoxy.config['api_dir'] = '/' + phoxy.config['api_dir'];
+  },
+  OnInitialClientCodeComplete: function()
+  {
+    function CoolCB()
+    {
+      requirejs.config({baseUrl: phoxy.Config()['js_dir']});
+    }
+
+    if (location.pathname != "/")
+      phoxy.ApiRequest(location.pathname, undefined, CoolCB());
+    else
+      CoolCB();
+  }
+}
+</script>
+<script phoxy="main" data-main="/core/libs/phoxy/phoxy" src="/core/libs/phoxy/libs/require.js" type="text/javascript"></script>

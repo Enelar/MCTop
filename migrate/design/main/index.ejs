@@ -1,0 +1,40 @@
+<%/*
+
+//define('ROOT_DIR', __DIR__);
+//require_once 'core/bootstrap.php';
+//if(sizeof($_POST)>0)
+//    Core::log_post_request();
+
+<head>
+    <title><?php echo Core::get_settings()->application['title_content']; ?></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+*/%>
+
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.css"/>
+<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.min.css"/>
+<%/*<link type="text/css" rel="stylesheet" href="/css/<?php echo Core::get_settings()->application['site_name']; ?>.css"/>
+*/%>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+    </div>
+</nav>
+
+<div class="faq_button">
+    <a class="btn btn-primary" href="/static/main/faq">FAQ</a>
+</div>
+
+<div class="content" id="canvas">
+</div>
+
+<div class="footer">
+</div>
+
+<script type="text/javascript">
+    window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+        window.analytics.load("f592b8nv9t");
+    window.analytics.page();
+</script>
+</body>
+</html>
