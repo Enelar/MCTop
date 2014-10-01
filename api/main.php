@@ -7,12 +7,24 @@ class main extends api
     {
       return
       [
-        "design" => "main/index"
+        "design" => "main/index",
+        "script" => ["main/segment.io", "main/url-hook"],
       ];
     }
 
     protected function home_page()
     {
+      return
+      [
+        "design" => "example/home_page"
+      ];
+    }
 
+    protected function faq()
+    {
+      return
+      [
+        "design" => "example/faq"
+      ];
     }
 }
