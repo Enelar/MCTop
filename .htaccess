@@ -3,11 +3,13 @@ DirectoryIndex phoxy_start.html
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteRule ^api/(.+)$ phoxy_ajax.php?api=$1 [L,QSA]
-RewriteRule ^api(.*)$ phoxy_ajax.php?api=main/home_page$1 [L,QSA]
+RewriteRule ^api/(.+)$ phoxy_ajax.php?api=$1 [QSA]
+RewriteRule ^api(.*)$ phoxy_ajax.php?api=main/home_page$1 [QSA]
 
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ phoxy_start.html
+
 #RewriteRule ^vote/([0-9]*)$ index.php?module=projects_rating&action=project/vote&id=$1 [L]
 #RewriteRule ^static/banners/([0-9]*).png$ static/banners/$1.png [L]
 #RewriteRule ^static/([^/]+)/([^/]+)$ index.php?module=$1&action=$2 [L]
