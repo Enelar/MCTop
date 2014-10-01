@@ -22,7 +22,7 @@ phoxy =
     }
 
     if (location.pathname != "/")
-      phoxy.ApiRequest(location.pathname, undefined, CoolCB());
+      phoxy.ApiRequest(location.pathname + location.search, undefined, CoolCB());
     else
       CoolCB();
   }
