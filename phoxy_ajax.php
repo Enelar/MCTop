@@ -15,12 +15,11 @@ function default_addons( $name )
 {
   $ret =
   [
-    "cache" => "no"
+    "cache" => ["no"],
+    "result" => "phoxy_canvas",
   ];
 
-  if ($name != 'main')
-    $ret["result"] = "phoxy_canvas";
-  return $res;
+  return $ret;
 }
 
 include('core/libs/phoxy/index.php');
