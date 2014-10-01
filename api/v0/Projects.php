@@ -1,6 +1,6 @@
 <?php
 
-class Projects_api extends API
+class Projects extends API
 {
 
     function create()

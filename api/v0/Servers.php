@@ -1,6 +1,6 @@
 <?php
 
-class Servers_api extends API
+class Servers extends API
 {
 
     function create()

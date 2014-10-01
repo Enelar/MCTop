@@ -1,6 +1,6 @@
 <?php
 
-class Forum_api extends API
+class Forum extends API
 {
     static function get_topic ($id = null, $messages_count = null, $page = null)
     {

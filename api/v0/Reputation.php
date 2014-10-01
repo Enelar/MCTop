@@ -1,6 +1,6 @@
 <?php
 
-class Reputation_api extends API
+class Reputation extends API
 {
     public $user, $type, $from, $description, $time;
 

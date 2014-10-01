@@ -1,6 +1,6 @@
 <?php
 
-class Achievements_api extends API
+class Achievements extends API
 {
 
     public $id, $name, $description, $points, $time;
