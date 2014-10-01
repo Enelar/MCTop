@@ -7,7 +7,7 @@ class Projects extends api
         $res = Core::get_db()->Query('select * from main.projects where active = 1 order by score limit 10 offset $1', [$page*10]);
 
         return [
-            'design' => 'rating/index',
+            'design' => 'rating/projects_list',
             'data' => [
               'projects' => $res,
             ],

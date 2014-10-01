@@ -2,6 +2,18 @@
 
 class Servers extends API
 {
+
+  protected function reserve($page = 0)
+  {
+    $res = Core::get_db()->Query('select * from main.servers where active = 1 order by votes limit 10 offset $1', [$page*10]);
+    return [
+        "design" => "rating/servers_list",
+        "data"   => [
+            "servers" => $res
+        ],
+    ];
+  }
+
   protected function subscribe($nickname, $server_id)
   {
     if (!strlen($nickname))

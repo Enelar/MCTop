@@ -67,7 +67,7 @@ class Users extends API
         {
             $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
             if ($hash != false)
-                db::Query("UPDATE main.users SET password=$2 WHERE id=$1", [$user->id], $hash]);
+                db::Query("UPDATE main.users SET password=$2 WHERE id=$1", [$user->id], $hash);
         }
 
         // ?? $_SESSION['last_update'] = time();

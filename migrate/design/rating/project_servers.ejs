@@ -1,0 +1,12 @@
+<%
+for (k in this.servers)
+{
+    v = this.servers[k];
+%>
+
+<a class="btn btn-primary" href="/Servers/info?id=<%= v.id %>"><%= this.XSSEscape(v.name)%></a>
+
+<%
+
+}
+%>

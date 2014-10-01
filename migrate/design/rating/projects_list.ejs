@@ -1,0 +1,17 @@
+<h1><span class="glyphicon glyphicon-star"></span> Рейтинг проектов Minecraft</h1><hr>
+
+<div class="projects_rating">
+
+<%
+    for (k in this.projects)
+    {
+        v = this.projects[k];
+%>
+    <%= this.DeferRender('rating/project', v) %>
+
+<%
+    }
+%>
+
+</div>
+
