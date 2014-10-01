@@ -17,9 +17,6 @@ class Core
         $this->init_session();
         $this->load_settings();
         $this->init_dbs();
-
-        if (substr($_SERVER['REQUEST_URI'], 0, 8) != '/api.php')
-            $this->handleQuery();
     }
 
     private function init_session()
@@ -36,18 +33,34 @@ class Core
 
     private function init_redis_db()
     {
-        self::$redis_db = new Redis();
-        self::$redis_db->connect(self::$settings->db['redis']['server_address'], self::$settings->db['redis']['redis_server_port']);
-        self::$redis_db->select(self::$settings->db['redis']['db_number']);
+        try
+        {
+          self::$redis_db = new Redis();
+          self::$redis_db->connect(self::$settings->db['redis']['server_address'], self::$settings->db['redis']['redis_server_port']);
+          self::$redis_db->select(self::$settings->db['redis']['db_number']);
+          return;
+        }
+        catch (RedisException $e) {}
+        catch (Exception $e) {}
+
+        include_once('db_failure.php');
+        self::$redis_db = new db_failure('redis');
     }
 
     private function init_postgres_db()
     {
-        include_once('core/libs/phpsql/phpsql.php');
-        include_once('core/libs/phpsql/pgsql.php');
-        $sql = new phpsql();
-        $pg = $sql->Connect("pgsql://postgres@127.0.0.1/mctop");
-        self::$db = $pg;
+        try
+        {
+          include_once('core/libs/phpsql/phpsql.php');
+          include_once('core/libs/phpsql/pgsql.php');
+          $sql = new phpsql();
+          $pg = $sql->Connect("pgsql://postgres@127.0.0.1/mctop");
+          self::$db = $pg;
+          return;
+        } catch (Exception $e) {}
+
+        include_once('db_failure.php');
+        self::$db = new db_failure('postgresql');
     }
 
     private function init_dbs()
@@ -113,6 +126,11 @@ class Core
     static function get_db()
     {
         return self::$db;
+    }
+
+    static function get_redis()
+    {
+        return self::$redis_db;
     }
 
     static function get_settings()
