@@ -1,0 +1,23 @@
+<%/*
+
+//define('ROOT_DIR', __DIR__);
+//require_once 'core/bootstrap.php';
+//if(sizeof($_POST)>0)
+//    Core::log_post_request();
+*/%>
+
+<%= this.DeferRender('main/head', {}) %>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+    </div>
+</nav>
+
+<div class="faq_button">
+    <a class="btn btn-primary" href="/main/faq">FAQ</a>
+</div>
+
+<div class="content" id="phoxy_canvas">
+</div>
+
+<%= this.DeferRender('main/foot', {}) %>
