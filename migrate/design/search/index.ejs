@@ -1,0 +1,59 @@
+<link type="text/css" rel="stylesheet" href="/css/chosen.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
+
+<h1><span class="icon_container"></span> Поиск</h1><hr>
+
+<%
+
+this.Defer(function()
+{
+    phoxy.ApiRequest('utils/CoreUtils/get_module_icon', ['search'], function(data)
+    {
+        __context.first().nextAll().find(".icon_container").attr("class", data.get_module_icon);
+    });
+
+})
+%>
+
+<%
+this.Defer(function()
+{
+    form = this.first().nextAll();
+    tags = form.find('#tags').tagsInput(
+            {
+                'defaultText':'+',
+                'width':'40%'
+            }
+    );
+
+    this.first().nextAll('button').click(function()
+    {
+        phoxy.MenuCall("Search/get_results", [tags.val()])
+    })
+})
+
+// THIS IS MCTOP
+phoxy.Appeared('#tags_tagsinput', function()
+{
+    $(this).css('height', '');
+})
+
+
+%>
+
+    <div class="form-group">
+        <label>Теги</label>
+        <input name="tags" class="form-control" id="tags" value="" />
+    </div>
+
+
+    <div class="form-group">
+        <p><label>Версия игры</label></p>
+
+    </div>
+
+    <button class="btn btn-default">Поиск</button>
+
+<div id="search_out">
+
+</div>
