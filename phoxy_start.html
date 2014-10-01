@@ -19,6 +19,11 @@ phoxy =
     function CoolCB()
     {
       requirejs.config({baseUrl: phoxy.Config()['js_dir']});
+
+      phoxy.ChangeHash = function()
+      {
+        return false;
+      }
     }
 
     if (location.pathname != "/")
