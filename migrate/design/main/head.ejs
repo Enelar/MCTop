@@ -1,0 +1,13 @@
+<div>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.css"/>
+<link type="text/css" rel="stylesheet" href="/css/jquery.qtip.min.css"/>
+<%/*<link type="text/css" rel="stylesheet" href="/css/<?php echo Core::get_settings()->application['site_name']; ?>.css"/>*/%>
+</div>
+
+<%
+this.Defer(function()
+{
+  to_head = this.first().children().detach();
+  $('head').append(to_head);
+})
+%>
