@@ -33,7 +33,7 @@ class pg_wrap
   }
 }
 
-class row_wraper implements arrayaccess
+class row_wraper implements arrayaccess, JsonSerializable
 {
   private $original_row_array;
   
@@ -83,5 +83,10 @@ class row_wraper implements arrayaccess
   public function offsetUnset ( $name )
   {
       unset($this->original_row_array[$name]);
+  }
+
+  public function jsonSerialize()
+  {
+      return $this->original_row_array;
   }
 }
