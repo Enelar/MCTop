@@ -16,38 +16,33 @@ class ControlPanel extends api
 
     protected function project_info($id)
     {
-        $info = Core::get_db()->Query('select * from main.projects where owner = $1 and id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
         $servers = LoadModule('api', 'Projects')->get_servers($id);
 
         return
             [
                 "design" => "control_panel/project/info",
                 "data"   => [
-                    "info" => $info,
+                    "info" => LoadModule('api','Projects')->info($id),
                     "servers" => $servers['servers']
             ]
         ];
     }
 
-    protected function server_info($id)
-    {
-        $info = Core::get_db()->Query('select * from main.servers where id = $1', [$id], true);
-        LoadModule('api', 'Projects')->require_owner($info->project);
-
-        return
-            [
-                "design" => "control_panel/server/info",
-                "data"   => [
-                    "info" => $info,
-                ]
-            ];
-    }
-
     protected function server_update($id)
     {
+        $server = LoadModule('api','Servers')->info($id);
+        $project = LoadModule('api', 'Projects')->info($server->project);
+        LoadModule('api', 'Projects')->require_owner($server->project);
         return
         [
-            "design" => "control_panel/server/update"
+            "design" => "control_panel/server/update",
+            "scripts" => ["chosen.jquery", "jquery.tagsinput"],
+            "data"   =>
+            [
+                "info" => $server,
+                "project" => $project,
+                "server_versions" => Core::get_db()->Query('select * from main.servers_versions')
+            ]
         ];
     }
 
@@ -84,13 +79,12 @@ class ControlPanel extends api
 
     protected function project_buttons($id)
     {
-        $info = Core::get_db()->Query('select * from main.projects where owner = $1 and id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
-        return
+         return
             [
                 "design" => "control_panel/project/buttons",
                 "data"   =>
                 [
-                    "info" => $info,
+                    "info" => LoadModule('api','Projects')->info($id),
                 ],
             ];
     }

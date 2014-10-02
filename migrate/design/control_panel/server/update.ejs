@@ -1,0 +1,130 @@
+<ol class="breadcrumb">
+    <li>
+        <a href="/ControlPanel">Панель управления</a>
+    </li>
+    <li>
+        <a href="/ControlPanel/project_info&id=<%= this.project.id %>">Проект <%= this.project.name %></a>
+    </li>
+    <li class="active">
+        Обновление сведений о сервере <%= this.info.name %>
+    </li>
+</ol>
+
+<link type="text/css" rel="stylesheet" href="/css/chosen.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
+
+<form>
+
+    <div class="form-group">
+        <label>Адрес сервера (ip или домен сайта [пример: s1.mctop.su])</label>
+        <input name="address" type="text" class="form-control" placeholder="Название" value="<%= this.info.address %>"/>
+    </div>
+
+    <div class="form-group">
+        <label>Port сервера</label>
+        <input name="port" type="text" class="form-control" placeholder="По умолчанию: 25565" value="<%= this.info.port %>"/>
+    </div>
+    <hr>
+
+    <div class="form-group">
+        <p><label>Версия игры</label></p>
+        <select id="version_id" name="version_id" data-placeholder="Версия игры..." class="chosen-select" style="width:350px;" tabindex="2">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <%
+        this.Defer(function()
+        {
+            $.each(this.server_versions, function(key, value) {
+                $('#version_id')
+                        .append($("<option></option>")
+                                .attr("value",value.id)
+                                .text(value.name));
+            });
+        });
+        //todo selected version = info.version_id
+    %>
+
+    <!--
+    <div class="form-group">
+        <p><label>Whitelist</label></p>
+        <select id="whitelist" name="whitelist" data-placeholder="Наличие Whitelist" class="chosen-select" style="width:350px;" tabindex="2">
+            <option value=""></option>
+            <option <?php if ($server->whitelist == 1) echo 'selected'?> value="1">Включен</option>
+            <option <?php if ($server->whitelist == 0) echo 'selected'?> value="0">Выключен</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <p><label>Тип доступа</label></p>
+        <select id="license" name="license" data-placeholder="Тип доступа..." class="chosen-select" style="width:350px;" tabindex="2">
+            <option value=""></option>
+            <option <?php if ($server->license_type == 1) echo 'selected'?> value="1">Только с лицензионным клиентом</option>
+            <option <?php if ($server->license_type == 0) echo 'selected'?> value="0">Лицензия + не лицензия</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <p><label>Вход на сервер</label></p>
+        <select id="client_type" name="client_type" data-placeholder="Тип доступа..." class="chosen-select" style="width:350px;" tabindex="2">
+            <option value=""></option>
+            <option <?php if ($server->client_type == 1) echo 'selected'?> value="1">Только с лицензионным клиентом</option>
+            <option <?php if ($server->client_type == 2) echo 'selected'?> value="2">У моего проекта свой лаунчер</option>
+            <option <?php if ($server->client_type == 3) echo 'selected'?> value="3">Любой лаунчер</option>
+        </select>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <label>Название сервера</label>
+        <input name="name" type="text" class="form-control" placeholder="Название" value="<%= this.info.name %>"/>
+    </div>
+
+    <div class="form-group">
+        <label>Описание сервера</label>
+        <textarea id="description" name="description" type="text" class="form-control" placeholder="Описание"><%= this.info.description %></textarea>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <span class="label label-default">New</span> <label>Преимущества сервера</label><br><br>
+        <textarea id="features" name="features" type="text" class="form-control" placeholder="Преимущества"><%= this.info.features %></textarea>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <span class="label label-default">New</span> <label>Ссылка на карту сервера</label>
+        <input name="map_url" type="text" class="form-control" placeholder="Карта сервера" value="<%= this.info.map_url %>"/>
+    </div>
+
+    <div class="form-group">
+        <span class="label label-default">New</span> <label>Трейлер сервера. Id видео в YouTube (http://www.youtube.com/watch?v=JkxaA9Mif7c - после знака = id видео)</label>
+        <input name="video_trailer_url" type="text" class="form-control" placeholder="ID видео" value="<%= this.info.video_trailer_url %>"/>
+    </div>
+
+
+    <hr>
+
+    <?php
+        $string = '';
+
+        $tags = explode(':',$server->tags);
+    foreach($tags as $tag)
+    if(strlen($tag)>0)
+    $string .= $tag.',';
+
+    ?>
+
+    <label>Теги сервера (после ввода каждого - Enter)</label>
+    <input name="tags" id="tags" value="<?php echo $string;?>" />
+
+    <hr>
+-->
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+
+<div class="message"></div>
