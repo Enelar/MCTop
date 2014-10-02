@@ -14,6 +14,16 @@ class Projects extends api
         ];
     }
 
+    protected function info($id)
+    {
+        return
+        [
+            "data" => [
+                "info" => Core::get_db()->Query('select * from main.projects where owner = $1 and id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true)
+            ]
+        ];
+    }
+
     protected function get_servers($id)
     {
         $res = Core::get_db()->Query('select * from main.servers where project = $1', [$id]);

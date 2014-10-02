@@ -66,9 +66,11 @@ class ControlPanel extends api
 
     protected function project_update($id)
     {
+        LoadModule('api', 'Projects')->require_owner($id);
         return
         [
-            "design" => "control_panel/project/update"
+            "design" => "control_panel/project/update",
+            "data"   => LoadModule('api','Projects')->info($id)
         ];
     }
 
@@ -78,6 +80,19 @@ class ControlPanel extends api
         [
             "design" => "control_panel/project/create"
         ];
+    }
+
+    protected function project_buttons($id)
+    {
+        $info = Core::get_db()->Query('select * from main.projects where owner = $1 and id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
+        return
+            [
+                "design" => "control_panel/project/buttons",
+                "data"   =>
+                [
+                    "info" => $info,
+                ],
+            ];
     }
 
     protected function project_delete($id)

@@ -13,4 +13,12 @@ class CoreUtils extends api
             "data" => Core::get_settings()->engine
         ];
     }
+
+    protected function get_site_domain()
+    {
+        return
+        [
+            "data" => $_SERVER['HTTP_HOST']
+        ];
+    }
 }

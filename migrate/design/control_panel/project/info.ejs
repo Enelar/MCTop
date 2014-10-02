@@ -1,0 +1,38 @@
+
+<ol class="breadcrumb">
+    <li>
+        <a href="/ControlPanel">Панель управления</a>
+    </li>
+    <li class="active">
+        Проект <%= this.XSSEscape(this.info.name) %>
+    </li>
+</ol>
+
+
+<div class="control_panel">
+
+    <div class="projects">
+
+        <div class="project">
+
+
+            <a href="/ControlPanel/project_update&id=<%= this.info.id %>" class="btn btn-primary">Обновить сведения</a>
+            <a href="/ControlPanel/bonuses_script&id=<%= this.info.id %>" target="_blank" class="btn btn-primary">Скрипт для выдачи бонуса</a>
+
+            <a href="/ControlPanel/project_buttons&id=<%= this.info.id %>" class="btn btn-primary">Кнопки для проекта</a>
+            <a href="/ControlPanel/server_create&project=<%= this.info.id %>" class="btn btn-success">Добавить сервер</a>
+
+
+            <div class="servers">
+                <% for(k in this.servers) {%>
+                <% v = this.servers[k]%>
+                <%= this.DeferRender('control_panel/project/server', v) %>
+
+                <%}%>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

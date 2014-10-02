@@ -106,7 +106,7 @@ class Settings
                             'show_to_authorized' => true,
                             'show_to_guest' => false,
                             'name' => 'Панель управления',
-                            'icon' => 'glyphicon glyphicon-plane',
+                            'icon' => 'glyphicon glyphicon-plus',
                             'link' => '/ControlPanel'
                         )
                     ),
