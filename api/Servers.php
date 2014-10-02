@@ -73,7 +73,7 @@ class Servers extends API
   {
     return
     [
-        "design" => "server/info",
+        "design" => "rating/server/info",
         "data" => ["info" => Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true)],
     ];
   }
@@ -89,7 +89,7 @@ class Servers extends API
         $server_version = Core::get_db()->Query('select * from main.servers_versions where id = $1', [$id], true);
         return
         [
-            "design" => "server/version",
+            "design" => "rating/server/version",
             "data" => ["version" => $server_version],
         ];
   }

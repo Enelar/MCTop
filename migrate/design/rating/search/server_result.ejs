@@ -1,0 +1,9 @@
+<%
+for (k in this.search)
+{
+    v = this.search[k];
+%>
+    <a class="btn btn-primary" href="/Servers/info?id=<%= v.id %>"><%= v.name %></a>
+<%
+}
+%>

@@ -35,7 +35,7 @@ class Search extends api
     protected function reserve()
     {
         return [
-            "design" => "search/index",
+            "design" => "rating/search/index",
             "script" => ["libs/chosen.jquery", "libs/jquery.tagsinput"],
         ];
     }
@@ -58,7 +58,7 @@ class Search extends api
         [
             "data" => ["search" => $servers],
             "result" => "search_out",
-            "design" => "search/server_result",
+            "design" => "rating/search/server_result",
         ];
     }
 }
