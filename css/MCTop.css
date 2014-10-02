@@ -75,16 +75,16 @@ a:hover
 
 .footer
 {
-    background-color: #fff;
-    color: #000;
+    background-color: #4682B4;
+    color: #FFF;
+    border: 1px solid #1B50A0;
     padding: 5px;
-    border-radius: 5px;
-    margin: 20px;
+    border-radius: 3px;
     position: relative;
     top: -30px;
     margin-bottom: 5px;
     text-align: center;
-    width: 421px;
+    width: 73px;
     margin-left: auto;
     margin-right: auto;
 }

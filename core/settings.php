@@ -42,7 +42,7 @@ class Settings
                             'show_to_guest' => false,
                             'name' => 'Новости',
                             'icon' => 'glyphicon glyphicon-volume-up',
-                            'link' => 'news\', \'index'
+                            'link' => '/News'
                         )
                     ),
                 'projects_rating' => new Object(
@@ -62,7 +62,7 @@ class Settings
                             'show_to_guest' => false,
                             'name' => 'Серверы',
                             'icon' => 'glyphicon glyphicon-home',
-                            'link' => 'main\', \'index'
+                            'link' => '/Servers/list'
                         )
                     ),
                 'search' => new Object(
@@ -72,7 +72,7 @@ class Settings
                             'show_to_guest' => true,
                             'name' => 'Поиск',
                             'icon' => 'glyphicon glyphicon-search',
-                            'link' => 'Search'
+                            'link' => '/Search'
                         )
                     ),
                 'outdoor' => new Object(
@@ -82,7 +82,7 @@ class Settings
                             'show_to_guest' => true,
                             'name' => 'Авторизация',
                             'icon' => 'glyphicon glyphicon-lock',
-                            'link' => 'outdoor\', \'login'
+                            'link' => '/Users/login_page'
                         )
                     ),
                 'registration' => new Object(
@@ -92,13 +92,7 @@ class Settings
                             'show_to_guest' => true,
                             'name' => 'Регистрация',
                             'icon' => 'glyphicon glyphicon-plus',
-                            'link' => 'outdoor\', \'register'
-                        )
-                    ),
-                'static_pages' => new Object(
-                        array(
-                            'show_in_navbar' => false,
-                            'name' => 'Статические страницы'
+                            'link' => '/Users/register_page'
                         )
                     ),
                 'social' => new Object(
@@ -118,7 +112,7 @@ class Settings
                             'show_to_guest' => true,
                             'icon' => 'glyphicon glyphicon-repeat',
                             'name' => 'Почему?',
-                            'link' => 'Main/why'
+                            'link' => '/Main/why'
                         )
                     ),
                 'api' => new Object(
@@ -162,8 +156,8 @@ class Settings
             ],
 
             'engine' => [
-                'name' => 'the Vay engine (ready 2 hack)',
-                'version' => '0.01a',
+                'name' => 'VoP', // (Vay on Phoxy)
+                'version' => '0.2',
             ],
 
         );

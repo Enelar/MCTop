@@ -142,4 +142,21 @@ class Users extends API
             return false;
         return $this->login($res['id']);
     }
+
+
+    protected function login_page()
+    {
+        return
+            [
+                "design" => "social/user/login_page",
+            ];
+    }
+
+    protected function register_page()
+    {
+        return
+        [
+            "design" => "social/user/register_page",
+        ];
+    }
 }

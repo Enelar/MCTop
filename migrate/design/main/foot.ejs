@@ -1,4 +1,10 @@
 <div class="footer">
+    <%
+        phoxy.ApiRequest('utils/CoreUtils/get_engine_info', function(data)
+        {
+            $(".footer").html(data.name+' v.'+data.version);
+        });
+    %>
 </div>
 
 <%/*
