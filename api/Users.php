@@ -8,12 +8,12 @@ class Users extends API
         return $this->get_uid();
     }
 
-    public function get_uid()
+    public  function get_uid()
     {
         global $_session;
 
-        if (isset($_session['uid']))
-            return $_session['uid'];
+        if (isset($_SESSION['uid']))
+            return $_SESSION['uid'];
         return false;
     }
 
@@ -29,16 +29,21 @@ class Users extends API
 
     private function login($id)
     {
-        $this->get_login();
+        $this->get_login($id);
         global $_SESSION;
         return $_SESSION['uid'] = $id;
     }
 
-    private function get_login()
+    private function get_login($id = null)
     {
         if (session_status() !== PHP_SESSION_ACTIVE)
             session_start();
         global $_SESSION;
+
+        //undefined index 'uid' без 43 и 44 строки, при подтверждении email
+
+        if(!is_null($id))
+            $_SESSION['uid'] = $id;
         return $_SESSION['uid'];
     }
 
@@ -70,9 +75,6 @@ class Users extends API
                 db::Query("UPDATE main.users SET password=$2 WHERE id=$1", [$user->id], $hash);
         }
 
-        // ?? $_SESSION['last_update'] = time();
-        // ?? $_SESSION['session_id'] = md5($user['id'] . 'salt');
-
         return 
         [
           "data" => ["authorize" => $this->login($user->id)],
@@ -98,9 +100,10 @@ class Users extends API
             Core::get_db()->Query("select * from main.users where email=$1", [$email]),
             ["error" => "Email already registered"]
         );
+
         // Не важно что будут еще регистрации, в процессе, главное что бы могла завершиться только одна
         $res = Core::get_db()->Query("insert into main.users (email, password) values ($1, $2) returning id",
-            [$hashed_email, $salted_password], true);
+            [$hashed_email, $hashed_pass], true);
 
         phoxy_protected_assert(isset($res['id']), ["error" => "Something went wrong"]);
 
@@ -111,11 +114,12 @@ class Users extends API
             "token" => $email_token,
         ]);
         $verify_url = phoxy_conf()['site']."/Users/email_approving?{$params}";
+        echo $verify_url;
         $cancel_url = phoxy_conf()['site']."/Users/CancelEmail?{$params}";
 
         $to      = $email;
         $subject = 'MCTop: подтверждение адреса электронной почты';
-        $message = "<a href='http://online.mctop.im/user/approve_email/{$hash}'>Подтвердить адрес электронной почты</a>";
+        $message = "<a href='http://online.mctop.im/user/approve_email/{$verify_url}'>Подтвердить адрес электронной почты</a>";
         $headers = "From: wm@mctop.im\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
@@ -124,7 +128,7 @@ class Users extends API
 
     private function info($id)
     {
-        return db::Query("SELECT * FROM main.users WHERE id=$1", [$id], true);
+        return Core::get_db()->Query("SELECT * FROM main.users WHERE id=$1", [$id], true);
     }
 
     protected function email_approving($id, $email, $token)
@@ -137,7 +141,7 @@ class Users extends API
         if (!password_verify($email, $row->email))
             return false; // Их емаил не подошел для нашего секрета. Мы не можем доверять этому адресу.
 
-        $res = Core::$db->Query('update main.users set email=$2 WHERE id=$1 RETURNING id', [$id, $email], true);
+        $res = Core::get_db()->Query('update main.users set email=$2 WHERE id=$1 RETURNING id', [$id, $email], true);
         if (!$res)
             return false;
         return $this->login($res['id']);
@@ -158,5 +162,10 @@ class Users extends API
         [
             "design" => "social/user/register_page",
         ];
+    }
+
+    protected function test()
+    {
+        var_dump($_SESSION);
     }
 }
