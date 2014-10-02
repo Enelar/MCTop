@@ -102,7 +102,12 @@ class Settings
                     ),
                 'control_panel' => new Object(
                         array(
-                            'show_in_navbar' => false
+                            'show_in_navbar' => true,
+                            'show_to_authorized' => true,
+                            'show_to_guest' => false,
+                            'name' => 'Панель управления',
+                            'icon' => 'glyphicon glyphicon-plane',
+                            'link' => '/ControlPanel'
                         )
                     ),
                 'why' => new Object(
