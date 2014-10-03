@@ -4,3 +4,6 @@
 [submodule "core/libs/phpsql"]
 	path = core/libs/phpsql
 	url = https://github.com/Enelar/phpsql
+[submodule "api/auth"]
+	path = api/auth
+	url = https://github.com/IlyaVorozhbit/MCTop.Auth
