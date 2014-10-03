@@ -75,16 +75,16 @@ a:hover
 
 .footer
 {
-    background-color: #fff;
-    color: #000;
+    background-color: #4682B4;
+    color: #FFF;
+    border: 1px solid #1B50A0;
     padding: 5px;
-    border-radius: 5px;
-    margin: 20px;
+    border-radius: 3px;
     position: relative;
     top: -30px;
     margin-bottom: 5px;
     text-align: center;
-    width: 421px;
+    width: 73px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1277,35 +1277,43 @@ li a:hover
 
 .control_panel .projects
 {
-    border: 1px solid #acacac;
-    border-radius: 4px;
-    padding: 5px;
+    padding-top: 10px;
+    border-top: 1px solid #CCCCCC;
+    margin-top: 10px;
 }
 
 .control_panel .projects h1
 {
-    margin: 0px;
-    margin-left: 10px;
     margin-top: 5px;
+    margin-bottom: 15px;
+    left: -14px;
     position: relative;
-    bottom: -5px;
-}
-
-.control_panel .projects .project
-{
-    border: 1px solid #cacaca;
-    border-radius: 4px;
-    padding: 5px;
-    margin-bottom: 5px;
+    padding: 4px;
+    border: 1px solid #CCCCCC;
+    border-radius: 7px;
+    width: 86px;
+    text-align: center;
+    font-size: 16px;
 }
 
 .control_panel .projects .project .name
 {
-    font-size: 17px;
+    font-size: 27px;
     margin: 15px;
-    margin-top: 3px;
+    margin-top: 0px;
     margin-left: 3px;
-    border-bottom: 1px solid #cacaca;
+}
+
+.control_panel .projects .project .name a
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.control_panel .projects .project .name a:hover
+{
+    background-color: #bed1e4;
+    text-decoration: none;
 }
 
 .control_panel .projects .project .servers

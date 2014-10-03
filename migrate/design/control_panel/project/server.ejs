@@ -1,0 +1,11 @@
+
+<div class="server">
+
+    <div class="name">
+        <%= this.XSSEscape(this.name) %>
+    </div>
+
+    <a href="/ControlPanel/server_update&id=<%= this.id %>" class="btn btn-primary">Обновить сведения</a>
+    <a href="/ControlPanel/server_delete&id=<%= this.id %>" class="btn btn-danger">Удалить сервер</a>
+
+</div>

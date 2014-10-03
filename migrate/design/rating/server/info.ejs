@@ -1,0 +1,20 @@
+<h1>
+    <span class="glyphicon glyphicon-align-justify"></span> Сервер <%= this.XSSEscape(this.info.name) %>
+    <!--<div class="btn_favorite">
+        //todo курит
+    </div>-->
+</h1>
+<hr>
+
+<p>
+    <%= this.XSSEscape(this.info.description) %>
+</p>
+<hr>
+
+<div class="full_server">
+
+    <%= this.DeferRender('server/info_page_navbar', {})%>
+
+</div>
+
+<%= this.DeferRender('Servers/version?id='+this.info.version_id) %>

@@ -1,3 +1,6 @@
 [submodule "core/libs/phoxy"]
 	path = core/libs/phoxy
 	url = https://github.com/Enelar/phoxy
+[submodule "core/libs/phpsql"]
+	path = core/libs/phpsql
+	url = https://github.com/Enelar/phpsql

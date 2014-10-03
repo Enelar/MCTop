@@ -19,13 +19,18 @@ phoxy =
     function CoolCB()
     {
       requirejs.config({baseUrl: phoxy.Config()['js_dir']});
+
+      phoxy.ChangeHash = function()
+      {
+        return false;
+      }
     }
 
     if (location.pathname != "/")
-      phoxy.ApiRequest(location.pathname, undefined, CoolCB());
+      phoxy.ApiRequest(location.pathname + location.search, undefined, CoolCB());
     else
       CoolCB();
   }
 }
 </script>
-<script phoxy="main" data-main="/core/libs/phoxy/phoxy" src="/core/libs/phoxy/libs/require.js" type="text/javascript"></script>
+<script phoxy="Main" data-main="/core/libs/phoxy/phoxy" src="/core/libs/phoxy/libs/require.js" type="text/javascript"></script>

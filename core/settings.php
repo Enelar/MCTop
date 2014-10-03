@@ -42,16 +42,17 @@ class Settings
                             'show_to_guest' => false,
                             'name' => 'Новости',
                             'icon' => 'glyphicon glyphicon-volume-up',
-                            'link' => 'news\', \'index'
+                            'link' => '/News'
                         )
                     ),
                 'projects_rating' => new Object(
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
+                            'show_to_guest' => true,
                             'name' => 'Проекты',
                             'icon' => 'glyphicon glyphicon-star',
-                            'link' => 'projects_rating\', \'index'
+                            'link' => '/'
                         )
                     ),
                 'rating' => new Object(
@@ -61,85 +62,37 @@ class Settings
                             'show_to_guest' => false,
                             'name' => 'Серверы',
                             'icon' => 'glyphicon glyphicon-home',
-                            'link' => 'main\', \'index'
+                            'link' => '/Servers/list'
                         )
                     ),
                 'search' => new Object(
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => true,
+                            'show_to_guest' => true,
                             'name' => 'Поиск',
                             'icon' => 'glyphicon glyphicon-search',
-                            'link' => 'search\', \'index'
+                            'link' => '/Search'
                         )
-                    ),
-                'community' => new Object(
-                        array(
-                            'show_in_navbar' => false,
-                            'show_to_authorized' => false,
-                            'name' => 'Сообщество',
-                            'icon' => 'glyphicon glyphicon-globe',
-                            'link' => 'community\', \'index'
-                        )
-                    ),
-                'videos' => new Object(
-                        array(
-                            'show_in_navbar' => false,
-                            'show_to_authorized' => true,
-                            'name' => 'Видео',
-                            'icon' => 'glyphicon glyphicon-facetime-video',
-                            'link' => 'videos\', \'index'
-                        )
-                    ),
-                'forum' => new Object(
-                        array(
-                            'show_in_navbar' => false,
-                            'show_to_authorized' => true,
-                            'name' => 'Форум',
-                            'icon' => 'glyphicon glyphicon-bullhorn',
-                            'link' => 'forum\', \'index'
-                        )
-                    ),
-                'chat' => new Object(
-                        [
-                            'name' => 'Chat',
-                            'link' => 'chat\', \'index',
-                            'show_in_navbar' => false,
-                            'show_to_authorized' => true,
-                            'icon' => 'glyphicon glyphicon-signal'
-                        ]
-                    ),
-                'radio' => new Object(
-                        [
-                            'name' => 'Radio',
-                            'link' => 'radio\', \'index',
-                            'show_in_navbar' => false,
-                            'show_to_authorized' => true,
-                            'icon' => 'glyphicon glyphicon-headphones'
-                        ]
                     ),
                 'outdoor' => new Object(
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => false,
+                            'show_to_guest' => true,
                             'name' => 'Авторизация',
                             'icon' => 'glyphicon glyphicon-lock',
-                            'link' => 'outdoor\', \'login'
+                            'link' => '/Users/login_page'
                         )
                     ),
                 'registration' => new Object(
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => false,
+                            'show_to_guest' => true,
                             'name' => 'Регистрация',
                             'icon' => 'glyphicon glyphicon-plus',
-                            'link' => 'outdoor\', \'register'
-                        )
-                    ),
-                'static_pages' => new Object(
-                        array(
-                            'show_in_navbar' => false,
-                            'name' => 'Статические страницы'
+                            'link' => '/Users/register_page'
                         )
                     ),
                 'social' => new Object(
@@ -147,23 +100,24 @@ class Settings
                             'show_in_navbar' => false
                         )
                     ),
-                'features' => new Object(
-                        array(
-                            'show_in_navbar' => false
-                        )
-                    ),
                 'control_panel' => new Object(
                         array(
-                            'show_in_navbar' => false
+                            'show_in_navbar' => true,
+                            'show_to_authorized' => true,
+                            'show_to_guest' => false,
+                            'name' => 'Панель управления',
+                            'icon' => 'glyphicon glyphicon-plus',
+                            'link' => '/ControlPanel'
                         )
                     ),
                 'why' => new Object(
                         array(
                             'show_in_navbar' => true,
                             'show_to_authorized' => false,
+                            'show_to_guest' => true,
                             'icon' => 'glyphicon glyphicon-repeat',
                             'name' => 'Почему?',
-                            'link' => 'outdoor\', \'why'
+                            'link' => '/Main/why'
                         )
                     ),
                 'api' => new Object(
@@ -202,11 +156,13 @@ class Settings
 
                 'official_wiki' => '',
                 'russian_wiki' => '',
+
+                'image_prefix' => "./../img/",
             ],
 
             'engine' => [
-                'name' => 'the Vay engine (ready 2 hack)',
-                'version' => '0.01a',
+                'name' => 'VoP', // (Vay on Phoxy)
+                'version' => '0.2',
             ],
 
         );

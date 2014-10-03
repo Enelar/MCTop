@@ -2,259 +2,170 @@
 
 class Users extends API
 {
-    function authorize()
+    public function uid()
     {
-        API::check_for_post_request();
-
-        $user = User::find_user_by_login($_POST['login']);
-        if(sizeof($user) == 0)
-            $user = User::find_user_by_id($_POST['login']);
-
-        $message = (md5($_POST['password']) == $user['password']) ? 'success' : 'fail';
-
-        if ($message == 'success') {
-            if (session_status() != PHP_SESSION_ACTIVE)
-                session_start();
-            $_SESSION['uid'] = $user['id'];
-            $_SESSION['last_update'] = time();
-            $_SESSION['session_id'] = md5($user['id'] . 'salt');
-        }
-
-        return [
-            'message' => $message
-        ];
+        phoxy_protected_assert($this->is_user_authorized(), ["error" => "Auth required"]);
+        return $this->get_uid();
     }
 
-    function register()
+    public  function get_uid()
     {
-        $password = uniqid(time());
-        $salted_password = md5($password);
+        global $_session;
 
+        if (isset($_SESSION['uid']))
+            return $_SESSION['uid'];
+        return false;
+    }
 
-        Core::$db->Query("insert into main.users (password) values ($1)", [$salted_password]);
-        $user = Core::$db->Query("select * from main.users where password = $1 order by id desc", [$salted_password], true);
+    public function is_user_authorized()
+    {
+        return !!$this->get_uid();
+    }
 
-        if (session_status() != PHP_SESSION_ACTIVE)
+    public function get_current_user_profile()
+    {
+        return $this->get_uid();
+    }
+
+    private function login($id)
+    {
+        $this->get_login($id);
+        global $_SESSION;
+        return $_SESSION['uid'] = $id;
+    }
+
+    private function get_login($id = null)
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE)
             session_start();
+        global $_SESSION;
 
-        $_SESSION['uid'] = $user['id'];
-        $_SESSION['last_update'] = time();
-        $_SESSION['session_id'] = md5($user['id'] . 'salt');
+        //undefined index 'uid' без 43 и 44 строки, при подтверждении email
 
+        if(!is_null($id))
+            $_SESSION['uid'] = $id;
+        return $_SESSION['uid'];
+    }
+
+    protected function logout()
+    {
+        $this->login(0);
         return
         [
-            'message' => 'success',
-            'password' => $password,
-            'id'       => $user['id']
+            'reset' => true,
         ];
-
     }
 
-    function logout()
+    protected function authorize()
     {
-        if (session_status() != PHP_SESSION_ACTIVE)
-            session_start();
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            session_unset();
-            session_destroy();
-        }
-        header('Location: http://online.mctop.im');
-    }
+        global $_POST;
 
-    function edit_profile()
-    {
-        $uid = Core::get_current_user_profile()->id;
-        if ($uid === null)
-            return;
+        $user = Core::get_db()->Query("SELECT * FROM main.users WHERE login=$1", [$_POST['login']], true);
 
-        $user = new User(Core::get_db());
-        $user->get_user($uid);
+        if (!$user)
+            return false;
 
-        $dictonary = explode(', ', $user->fields_to_edit);
+        if (!password_verify($_POST['password'], $user->password))
+            return false;    
 
-        $trans = Core::$db->Begin();
-        $success = true;
-
-        foreach ($dictonary as $field)
+        if (password_needs_rehash($user->password, PASSWORD_DEFAULT))
         {
-            if (!isset($_POST[$field]) && strlen($_POST[$field]) > 0)
-                continue;
-
-            $data = $_POST[$field];
-            
-            if ($field == 'password')
-                $data = md5($data); // Rainbow hash table vulnerability
-
-            $res = Core::$db->Query("UPDATE main.users SET {$field}=$2 WHERE id=$1 RETURNING id", [$uid, $data], true);
-            $success &= count($res);
+            $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            if ($hash != false)
+                db::Query("UPDATE main.users SET password=$2 WHERE id=$1", [$user->id], $hash);
         }
 
-        $res = $trans->Finish($success);
-
-        return ['message' => $res ? 'success' : 'failure' ];
-    }
-
-    function get_test_data_for_home()
-    {
-        return $some_data = [
-            'message' => time()
+        return 
+        [
+          "data" => ["authorize" => $this->login($user->id)],
+          "reset" => true,
         ];
     }
 
-    function is_user_authorized()
+    protected function register()
     {
-        return [
-            'is_authorized' => Core::is_user_authorized() ? true : false
-        ];
-    }
+        global $_POST;
 
-    function update_user_session_period()
-    {
-        $time = 0;
-        if (Core::is_user_authorized()) {
-            $time = time();
-            Core::$redis_db->hSet('user:' . Core::get_current_user_profile()->id . ':vay_data', 'last_seen', $time);
-        }
-
-        return [
-            'time' => $time
-        ];
-    }
-
-    function get_current_user_id()
-    {
-        if (Core::is_user_authorized())
-            return [
-                'data' => Core::get_current_user_profile()->id
-            ];
-    }
-
-    function get_user_info()
-    {
-
-        $info = new User();
-
-        if (isset($_GET['id'])) {
-            $id = intval($_GET['id']);
-            $info->get_user($id);
-        }
-
-        if (isset($_GET['login'])) {
-            $login = $_GET['login'];
-            $info->get_user_by_login($login);
-        }
-
-        unset($info->password, $info->session_id, $info->fields_to_edit, $info->cl_name);
-
-        return [
-            $info
-        ];
-    }
-
-    function get_user_contacts()
-    {
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ['options' => ['default' => 0, 'min_range' => 1, 'max_range' => PHP_INT_MAX]]);
-        if (!$id || is_null($id) || $id == 0) {
-            return null;
-        }
-
-        return Core::$redis_db->sMembers('user:' . $id . ':contacts:ids');
-    }
-
-    function get_user_projects($id = null)
-    {
-        if(!is_null($id))
-            $_GET['id'] = $id;
-
-        $projects_ids = Core::get_db()->Query("select id from main.projects where owner = $1", [$_GET['id']]);
-        if(sizeof($projects_ids) == 0)
-            Core::throw_error('У пользователя нет проектов');
-
-        $projects = [];
-        $idle_project = new Projects_api();
-
-        foreach($projects_ids as $project_id)
-        {
-            $projects[] = $idle_project->get($project_id);
-        }
-
-        return $projects;
-
-    }
-
-    static function get_user_achievements($id = null)
-    {
-
-        if($id == null)
-            $id = Core::get_current_user_profile()->id;
-
-        $count = Core::$redis_db->zSize('user:'.$id.':site_achievements');
-        if($count == 0)
-            return 0;
-
-        $achievements = Core::$redis_db->zRange('user:'.$id.':site_achievements', 0, -1, false);
-
-        foreach($achievements as $key => $achievement_id)
-        {
-            $achievement = Achievements_api::get_for_user_profile($achievement_id);
-            $achievement->time = Core::$redis_db->hGet('user:'.$id.':site_achievements:'.$achievement_id, 'time');
-            $achievements[$key] = $achievement;
-        }
-
-        return $achievements;
-    }
-
-    static function get_user_players_count_on_all_projects()
-    {
-        return '<b>[ в разработке ]</b>';
-        return Core::$redis_db->hGet('user:'.Core::get_current_user_profile()->id.':stats', 'players_count');
-    }
-
-    static function get_site_team_users()
-    {
-        return Core::get_db()->Query("select * from main.site_team");
-    }
-
-    function get_user_clubs()
-    {
-
-    }
-
-    function get_user_books()
-    {
-
-    }
-
-    function get_user_books_pages()
-    {
-
-    }
-
-    function email_approving()
-    {
+        // оригинальная почта
         $email = $_POST['email'];
-        $check = Core::$db->Query('select * from main.users where email = $1', [$email], true);
+        // секретное слово для проверки почты
+        $hashed_email = password_hash($email, PASSWORD_DEFAULT);
+        // сохраненный пароль
+        $hashed_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // публичное слово для проверки почты
+        $email_token = password_hash($hashed_email, PASSWORD_DEFAULT);
 
-        if(is_array($check) && sizeof($check)>0)
-            return [
-                'message' => 'email_had_registered'
-            ];
+        phoxy_protected_assert
+        (
+            Core::get_db()->Query("select * from main.users where email=$1", [$email]),
+            ["error" => "Email already registered"]
+        );
 
-        $hash = uniqid();
-        Core::$db->Query('update main.users set email = $1 where id = $2', [$email, Core::get_current_user_profile()->id]);
-        Core::$db->Query('insert into users.email_approving (user_id, hash) values ($1, $2)', [Core::get_current_user_profile()->id, $hash]);
+        // Не важно что будут еще регистрации, в процессе, главное что бы могла завершиться только одна
+        $res = Core::get_db()->Query("insert into main.users (email, password) values ($1, $2) returning id",
+            [$hashed_email, $hashed_pass], true);
+
+        phoxy_protected_assert(isset($res['id']), ["error" => "Something went wrong"]);
+
+        $params = http_build_query
+        ([
+            "id" => $res['id'],
+            "email" => rawurlencode($email),
+            "token" => $email_token,
+        ]);
+        $verify_url = phoxy_conf()['site']."/Users/email_approving?{$params}";
+        echo $verify_url;
+        $cancel_url = phoxy_conf()['site']."/Users/CancelEmail?{$params}";
+
         $to      = $email;
         $subject = 'MCTop: подтверждение адреса электронной почты';
-        $message = "<a href='http://online.mctop.im/user/approve_email/{$hash}'>Подтвердить адрес электронной почты</a>";
+        $message = "<a href='http://online.mctop.im/user/approve_email/{$verify_url}'>Подтвердить адрес электронной почты</a>";
         $headers = "From: wm@mctop.im\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-        mail($to, $subject, $message, $headers);
 
-        return
-            [
-                'message' => 'success'
-            ];
+        return true;//LoadModule('api/utils', 'Mail')->Send();
+    }
+
+    private function info($id)
+    {
+        return Core::get_db()->Query("SELECT * FROM main.users WHERE id=$1", [$id], true);
+    }
+
+    protected function email_approving($id, $email, $token)
+    {
+        $row = $this->info($id);
+
+        if (!password_verify($row->email, $token))
+            return false; // Наш секрет не подошел для проверки публичного слова. Валидация провалена
+        // Регистрация разрешена
+        if (!password_verify($email, $row->email))
+            return false; // Их емаил не подошел для нашего секрета. Мы не можем доверять этому адресу.
+
+        $res = Core::get_db()->Query('update main.users set email=$2 WHERE id=$1 RETURNING id', [$id, $email], true);
+        if (!$res)
+            return false;
+        return $this->login($res['id']);
     }
 
 
+    protected function login_page()
+    {
+        return
+            [
+                "design" => "social/user/login_page",
+            ];
+    }
+
+    protected function register_page()
+    {
+        return
+        [
+            "design" => "social/user/register_page",
+        ];
+    }
+
+    protected function test()
+    {
+        var_dump($_SESSION);
+    }
 }

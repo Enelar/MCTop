@@ -1,1 +1,0 @@
-<a onclick="show_profile('<?php echo $member->user->id;?>')" class="btn btn-success"><?php echo $member->user->name.' '.$member->user->lastname;?></a> - <?php echo $member->post;?><hr>

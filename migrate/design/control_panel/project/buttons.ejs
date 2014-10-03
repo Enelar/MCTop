@@ -1,0 +1,19 @@
+
+<ol class="breadcrumb">
+    <li>
+        <a href="/ControlPanel">Панель управления</a>
+    </li>
+    <li>
+        <a href="/ControlPanel/project_info&id=<%= this.info.id %>">Проект <%= this.XSSEscape(this.info.name) %></a>
+    </li>
+    <li class="active">
+        Кнопки для проекта
+    </li>
+</ol>
+
+<form role="form">
+    <!-- todo получить название домена: /utils/CoreUtils/get_site_domain-->
+    <% for(k = 1; k<=10; k++) {%>
+        <%= this.DeferRender('control_panel/project/buttons_entity', {"index":k, "id":this.info.id}) %>
+    <%}%>
+</form>
