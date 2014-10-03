@@ -9,7 +9,12 @@ class Main extends api
       return
       [
         "design" => "main/index",
-        "script" => ["main/segment.io", "main/url-hook"],
+        "script" =>
+        [
+          "main/segment.io",
+          "main/url-hook",
+          "main/jquery.form.patch",
+        ],
       ];
     }
 
