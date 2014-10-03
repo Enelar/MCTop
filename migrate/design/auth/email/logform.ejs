@@ -3,3 +3,13 @@
     <input type='password' name='password'>
     <button role='submit'>Login</button>
 </form>
+
+<%
+this.Defer(function()
+{
+    this.first().ajaxForm(function(data)
+    {
+        debugger;
+    })
+})
+%>
