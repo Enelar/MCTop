@@ -23,13 +23,7 @@ class pg_wrap
       return new row_wraper($row);
     };
 
-    if ($one_row)
-      return $row_array_to_obj($res);
-
-    $ret = [];
-    foreach ($res as $row)
-      $ret[] = $row_array_to_obj($row);
-    return $ret;
+    return $row_array_to_obj($res);
   }
 }
 
@@ -41,6 +35,11 @@ class row_wraper implements arrayaccess, JsonSerializable
   {
     phoxy_protected_assert(is_array($row), "Row wrapper support only arrays");
     $this->original_row_array = $row;
+  }
+
+  public function __invoke()
+  {
+    return count($this->original_row_array);
   }
 
   public function __set ( $name , $value )
