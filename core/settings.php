@@ -146,6 +146,10 @@ class Settings
                 'version' => '0.2',
             ],
 
+            'breadcrumbs' =>
+            [
+                'Main' => 'Главная'
+            ],
         ];
 
         include_once('migrate/php/pg_wrap.php');
