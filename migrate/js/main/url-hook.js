@@ -35,12 +35,11 @@ window.onpopstate = function(e)
 }
 
 phoxy.plugin.url_hook = {MenuCall: phoxy.MenuCall};
-phoxy.MenuCall = function(url)
+phoxy.MenuCall = function(url, obj, callback)
 {
   TrackPage(url);
 
-  var args = [url, undefined];
-  var callback = arguments[2];
+  var args = [url, obj];
   args[2] = function(data)
   {
     breadcrumbs.TryApply(data)
@@ -51,7 +50,7 @@ phoxy.MenuCall = function(url)
   function DeferInit()
   {
     if (phoxy.plugin.breadcrumbs.await)
-      return phoxy.Defer(args.callee, 100);
+      return phoxy.Defer(arguments.callee, 100);
 
     phoxy.plugin.url_hook.MenuCall.apply(phoxy, args);
   }

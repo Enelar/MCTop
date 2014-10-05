@@ -3,7 +3,7 @@ phoxy =
 {
   wait: true,
   config: "/api/phoxy",
-  skip_initiation: location.pathname != "/",  
+  skip_initiation: true,  
   OnWaiting: function()
   {
     phoxy._EarlyStage.async_require[1] = "/core/libs/phoxy/libs/jquery.form.js";
@@ -23,24 +23,18 @@ phoxy =
       if (typeof breadcrumbs == 'undefined' || typeof breadcrumbs.canvas == 'undefined')
         return phoxy.Defer(arguments.callee, 100);
       phoxy.plugin.breadcrumbs.await = false;
-    }, 100);
-  },
-  OnInitialClientCodeComplete: function()
-  {
-    function CoolCB()
-    {
-      requirejs.config({baseUrl: phoxy.Config()['js_dir']});
 
       phoxy.ChangeHash = function()
       {
         return false;
       }
-    }
 
-    if (location.pathname != "/")
-      phoxy.MenuCall(location.pathname + location.search, undefined, CoolCB());
-    else
-      CoolCB();
+      requirejs.config({baseUrl: phoxy.Config()['js_dir']});
+    }, 100);
+  },
+  OnInitialClientCodeComplete: function()
+  {
+    phoxy.MenuCall(location.pathname + location.search);  
   }
 }
 </script>
