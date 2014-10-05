@@ -17,20 +17,9 @@ class Settings
 
     private function init()
     {
-        $settings =
+        $public =
         [
-            'db' =>
-            [
-                'connect_url' => 'pgsql://postgres@127.0.0.1/mctop',
-                'redis' =>
-                [
-                    'server_address' => '127.0.0.1',
-                    'using_password' => false,
-                    'user_name' => 'root',
-                    'redis_server_port' => 6379,
-                    'db_number' => 2,
-                ],
-            ],
+            'secret_location' => './../settings.yaml',
 
             'modules' =>
             [
@@ -161,8 +150,16 @@ class Settings
 
         include_once('migrate/php/pg_wrap.php');
 
+        $secret = $this->load_secret($public['secret_location']);
+        $settings = array_merge_recursive($public, $secret);
+
         $settings = new row_wraper($settings);
 
         return $settings;
+    }
+
+    private function load_secret($location)
+    {
+        return yaml_parse_file($location);
     }
 }
