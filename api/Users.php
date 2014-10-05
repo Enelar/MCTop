@@ -27,7 +27,7 @@ class Users extends API
         return $this->get_uid();
     }
 
-    private function login($id)
+    public function login($id)
     {
         $this->get_login($id);
         global $_SESSION;
