@@ -11,12 +11,13 @@ class Core
     public $router;
     public $user;
     public $user_session;
+    private static $that;
 
     function __construct()
     {
+        self::$that = $this;
         $this->init_session();
         $this->load_settings();
-        $this->init_dbs();
     }
 
     private function init_session()
@@ -126,11 +127,15 @@ class Core
 
     static function get_db()
     {
+        if (!self::$db)
+            self::$that->init_postgres_db();
         return self::$db;
     }
 
     static function get_redis()
     {
+        if (!self::$redis_db)
+            self::$that->init_redis_db();
         return self::$redis_db;
     }
 
