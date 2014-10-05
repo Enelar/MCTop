@@ -1,0 +1,11 @@
+breadcrumbs:
+    Main:
+        0: Главная
+        why: Почему мы?
+        faq: FAQ
+    Projects: Проекты
+    Search: Поиск
+    Users: 
+        0: Пользователи
+        login_page: Войти
+        register_page: Регистрация

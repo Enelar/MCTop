@@ -16,6 +16,10 @@ for (k in this.breadcrumbs)
 this.Defer(function()
 {
     if (this.first() != null)
-        this.first().find('li:last').addClass('active');
+        this.first().find('li:last').each(function()
+        {
+            $(this).addClass('active');
+            $(this).html($(this).text())
+        });
 })
 %>

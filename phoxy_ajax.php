@@ -34,22 +34,23 @@ function breadcrumbs()
     $array = explode("/", $url);
     $runner = Core::get_settings()->breadcrumbs;
 
-    $ret = ["/" => "/"];
+    $ret = ["/" => "Главная"];
 
     $moan = "";
     foreach ($array as $stone)
     {
       $moan .= "/".$stone;
+
       if (!isset($runner[$stone]))
       {
         $ret[$moan] = $stone;
         $runner = [];
         continue;
       }
-      
+
       $runner = $runner[$stone];
 
-      if (is_array($runner))
+      if (is_array($runner) || is_object($runner))
         $sign = $runner[0];
       else
       {
@@ -57,13 +58,12 @@ function breadcrumbs()
         $runner = [];
       }
 
-
       if ($sign === false)
         continue;
       //if ($sign === true)
       // append to previous one
       //if ($sign === null)
-      // wait for next and append
+      // wait for next and append      
       $ret[$moan] = $sign;
     }
 

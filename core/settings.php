@@ -20,6 +20,7 @@ class Settings
         $public =
         [
             'secret_location' => './../settings.yaml',
+            'settings_location' => './settings.yaml',
 
             'modules' =>
             [
@@ -145,17 +146,13 @@ class Settings
                 'name' => 'VoP', // (Vay on Phoxy)
                 'version' => '0.2',
             ],
-
-            'breadcrumbs' =>
-            [
-                'Main' => 'Главная'
-            ],
         ];
 
         include_once('migrate/php/pg_wrap.php');
 
-        $secret = $this->load_secret($public['secret_location']);
-        $settings = array_merge_recursive($public, $secret);
+        $settings = $public;
+        $settings = array_merge_recursive($settings, $this->load_secret($public['settings_location']));
+        $settings = array_merge_recursive($settings, $this->load_secret($public['secret_location']));
 
         $settings = new row_wraper($settings);
 
