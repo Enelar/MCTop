@@ -6,8 +6,16 @@
 
 class Settings
 {
+    private $settings = false;
 
-    public function __construct()
+    public function __invoke()
+    {
+        if (!$this->settings)
+            $this->settings = $this->init();
+        return $this->settings();
+    }
+
+    private function init()
     {
         $settings =
         [
@@ -161,12 +169,14 @@ class Settings
 
         ];
 
+        include_once('migrate/php/pg_wrap.php');
+        var_dump($settings);
+        $settings = new row_wraper($settings);
+
         $this->db = $settings['databases']['db'];
         $this->application = $settings['application'];
         $this->modules = $settings['modules'];
         $this->engine = $settings['engine'];
-
+        return $settings;
     }
 }
-
-$settings = new Settings();

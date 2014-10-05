@@ -28,7 +28,7 @@ class Core
     private function load_settings()
     {
         require_once('core/settings.php');
-        self::$settings = $settings;
+        self::$settings = new Settings();
     }
 
     private function init_redis_db()
@@ -36,8 +36,8 @@ class Core
         try
         {
           self::$redis_db = new Redis();
-          self::$redis_db->connect(self::$settings->db['redis']['server_address'], self::$settings->db['redis']['redis_server_port']);
-          self::$redis_db->select(self::$settings->db['redis']['db_number']);
+          self::$redis_db->connect(self::get_settings()->db['redis']['server_address'], self::get_settings()->db['redis']['redis_server_port']);
+          self::$redis_db->select(self::get_settings()->db['redis']['db_number']);
           return;
         }
         catch (RedisException $e) {}
@@ -136,7 +136,8 @@ class Core
 
     static function get_settings()
     {
-        return self::$settings;
+        $t = self::$settings;
+        return $t();
     }
 
     static function is_ajax_request()
