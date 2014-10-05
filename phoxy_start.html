@@ -14,6 +14,35 @@ phoxy =
   {
     phoxy.config['api_dir'] = '/' + phoxy.config['api_dir'];
   },
+  OnAfterCompile: function()
+  {
+    phoxy.plugin.breadcrumbs = {Origin_ApiAnswer: phoxy.ApiAnswer, await: true};
+
+    phoxy.ApiAnswer = function()
+    {
+      var args = arguments;
+
+      function DeferInit()
+      {
+        if (phoxy.plugin.breadcrumbs.await)
+          return phoxy.Defer(arguments.callee, 100);
+        breadcrumbs.TryApply(args[0]);
+      }
+
+      DeferInit();
+
+      phoxy.plugin.breadcrumbs.Origin_ApiAnswer.apply(phoxy, arguments)
+    }
+
+    phoxy.Defer(function()
+    {
+      if (typeof breadcrumbs == 'undefined' || typeof breadcrumbs.canvas == 'undefined')
+        return phoxy.Defer(arguments.callee, 100);
+      phoxy.ApiAnswer = phoxy.plugin.breadcrumbs.Origin_ApiAnswer;
+      breadcrumbs.init();
+      phoxy.plugin.breadcrumbs.await = false;
+    }, 100);
+  },
   OnInitialClientCodeComplete: function()
   {
     function CoolCB()

@@ -1,0 +1,21 @@
+<ol class="breadcrumb">
+<%
+for (k in this.breadcrumbs)
+{
+  v = this.breadcrumbs[k];
+%>
+    <li>
+        <a href='<%= this.XSSEscape(k) %>'><%= this.XSSEscape(v) %></a>
+    </li>
+<%    
+}
+%>
+</ol>
+
+<%
+this.Defer(function()
+{
+    if (this.first() != null)
+        this.first().find('li:last').addClass('active');
+})
+%>

@@ -20,17 +20,14 @@ function default_addons( $name )
   [
     "cache" => ["no"],
     "result" => "phoxy_canvas",
+    "breadcrumbs" => breadcrumbs(),
   ];
 
   return $ret;
 }
 
-include('core/libs/phoxy/phoxy_return_worker.php');
-
-phoxy_return_worker::$add_hook_cb = function($obj)
+function breadcrumbs()
 {
-  $obj->hooks['breadcrumbs'] = function($t)
-  {
     global $_GET;
     $url = $_GET[phoxy_conf()["get_api_param"]];
 
@@ -76,8 +73,7 @@ phoxy_return_worker::$add_hook_cb = function($obj)
       unset($ret['/Main']);
     }
 
-    $t->obj['breadcrumbs'] = $ret;
-  };
-};
+    return $ret; 
+}
 
 include('core/libs/phoxy/index.php');

@@ -14,6 +14,7 @@ class Main extends api
           "main/segment.io",
           "main/url-hook",
           "main/jquery.form.patch",
+          "main/breadcrumbs",
         ],
       ];
     }
@@ -54,5 +55,4 @@ class Main extends api
                 "design" => "main/pages/why"
             ];
     }
-
 }
