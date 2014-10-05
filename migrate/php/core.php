@@ -37,8 +37,11 @@ class Core
         try
         {
           self::$redis_db = new Redis();
-          self::$redis_db->connect(self::get_settings()->db['redis']['server_address'], self::get_settings()->db['redis']['redis_server_port']);
-          self::$redis_db->select(self::get_settings()->db['redis']['db_number']);
+          self::$redis_db->connect(
+            self::get_settings()->db->redis->server_address,
+            self::get_settings()->db->redis->redis_server_port);
+          self::$redis_db->select(
+            self::get_settings()->db->redis->db_number);
           return;
         }
         catch (RedisException $e) {}
@@ -55,7 +58,7 @@ class Core
           include_once('core/libs/phpsql/phpsql.php');
           include_once('core/libs/phpsql/pgsql.php');
           $sql = new phpsql();
-          $pg = $sql->Connect("pgsql://postgres@127.0.0.1/mctop");
+          $pg = $sql->Connect(self::get_settings()->db->connect_url);
           include_once('pg_wrap.php');
           self::$db = new pg_wrap($pg);
           return;

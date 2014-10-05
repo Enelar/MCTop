@@ -12,33 +12,23 @@ class Settings
     {
         if (!$this->settings)
             $this->settings = $this->init();
-        return $this->settings();
+        return $this->settings;
     }
 
     private function init()
     {
         $settings =
         [
-            'databases' =>
+            'db' =>
             [
-                'db' =>
+                'connect_url' => 'pgsql://postgres@127.0.0.1/mctop',
+                'redis' =>
                 [
-                    'postgres' =>
-                    [
-                        'server_address'    => '127.0.0.1',
-                        'server_port'       => '5432',
-                        'user_name'         => 'postgres',
-                        'password'          => '',
-                        'working_base_name' => 'mctop',
-                    ],
-                    'redis' =>
-                    [
-                        'server_address' => '127.0.0.1',
-                        'using_password' => false,
-                        'user_name' => 'root',
-                        'redis_server_port' => 6379,
-                        'db_number' => 2,
-                    ],
+                    'server_address' => '127.0.0.1',
+                    'using_password' => false,
+                    'user_name' => 'root',
+                    'redis_server_port' => 6379,
+                    'db_number' => 2,
                 ],
             ],
 
@@ -170,13 +160,9 @@ class Settings
         ];
 
         include_once('migrate/php/pg_wrap.php');
-        var_dump($settings);
+
         $settings = new row_wraper($settings);
 
-        $this->db = $settings['databases']['db'];
-        $this->application = $settings['application'];
-        $this->modules = $settings['modules'];
-        $this->engine = $settings['engine'];
         return $settings;
     }
 }
