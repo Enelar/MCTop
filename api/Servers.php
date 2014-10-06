@@ -48,7 +48,7 @@ class Servers extends API
       return $this->unsubscribe(); // не знаю зачем здесь но ок
 
     $uid = LoadModule('api', 'Users')->uid();
-    $trans = db::Begin();
+    $trans = Core::get_db()->Begin();
     // Дерьмово, но я не хочу морочить тебе голову с условной блокировкой
     if ($subscr = $this->is_server_subscriber($server_id))
     {
@@ -60,7 +60,7 @@ class Servers extends API
     else
       $query = "INSERT INTO main.servers_subscribers(server_id, user_id, nickname) VALUES ($1, $2, $3)";
 
-    $res = Core::$db->Query("{$query} RETURNING *",
+    $res = Core::get_db()->Query("{$query} RETURNING *",
           [ $server_id, $uid, $nickname], true);
 
     return $trans->Finish(count($res));

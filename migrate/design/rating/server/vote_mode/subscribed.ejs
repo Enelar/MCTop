@@ -1,0 +1,18 @@
+<% had_voted = 0 %>
+
+Вы сохранили ник <a href="/Servers/subscribe_page_change&id=<%= this.id %>">test</a> на сервере
+<hr>
+<%
+if(had_voted)
+{
+%>
+    Вы уже голосовали сегодня за сервера этого проекта
+<%
+} 
+else
+{
+%>
+    <a class="btn btn-primary" href="/Servers/vote_page&id=<%= this.id %>">Голосовать за сервер</a>
+<%
+}
+%>
