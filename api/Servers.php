@@ -44,6 +44,7 @@ class Servers extends API
 
   protected function subscribe($nickname, $server_id)
   {
+    $this->addons['design'] = 'main/utils/goback';
     if (!strlen($nickname))
       return $this->unsubscribe(); // не знаю зачем здесь но ок
 
@@ -53,7 +54,7 @@ class Servers extends API
     if ($subscr = $this->is_server_subscriber($server_id))
     {
       // Хотя здесь напрашивается конечно блин
-      if ($subscr['nickname'] == $nickname)
+      if ($subscr == $nickname)
         return $trans->Rollback() || true; // подписка успешна ранее
       $query = "UPDATE main.servers_subscribers SET nickname=$3 WHERE server_id = $1 AND user_id=$2";
     }

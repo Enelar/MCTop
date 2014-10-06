@@ -21,7 +21,7 @@ this.Defer(function()
         $(this).prop('disabled', true);
         phoxy.ApiRequest("/Votes/vote", [__context.id], function(data)
         {
-            __context.first().html(phoxy.DeferRender('/Servers/info?id=' + __context.id));
+            phoxy.ApiRequest('/Servers/info', [__context.id]);
         });
     })
 })
