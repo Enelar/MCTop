@@ -76,9 +76,10 @@ class Servers extends API
           from main.servers_subscribers
           where user_id = $1
             and server_id = $2",
-      [$uid, $server]);
+      [$uid, $server], true);
     if ($check())
-      return $check;
+      return $check->nickname;
+    return false;
   }
 
   protected function unsubscribe($server_id)

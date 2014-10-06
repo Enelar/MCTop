@@ -55,7 +55,7 @@ Class Votes extends API
             'design' => 'rating/server/vote_info',
             'data' => [
                 'id' => (int)$id,
-                'is_server_subscriber' => LoadModule('api', 'Servers')->is_server_subscriber($id)['is_server_subscriber'],
+                'is_server_subscriber' => LoadModule('api', 'Servers')->is_server_subscriber($id),
             ]
         ];
     }
