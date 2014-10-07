@@ -17,6 +17,16 @@ class Users extends API
         return false;
     }
 
+    protected function store_uid()
+    {
+        return
+        [
+          "uid" => $this->get_uid(),
+          "script" => "main/uid",
+          "routeline" => "store_uid",
+        ];
+    }
+
     public function is_user_authorized()
     {
         return !!$this->get_uid();

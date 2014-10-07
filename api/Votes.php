@@ -47,4 +47,16 @@ Class Votes extends API
 
         return isset($last_vote['today']) && $last_vote['today'] == 't';
     }
+
+    protected function is_server_subscriber($id)
+    {
+        return 
+        [
+            'design' => 'rating/server/vote_info',
+            'data' => [
+                'id' => (int)$id,
+                'is_server_subscriber' => LoadModule('api', 'Servers')->is_server_subscriber($id)['is_server_subscriber'],
+            ]
+        ];
+    }
 }

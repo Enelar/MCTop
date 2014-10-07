@@ -1,0 +1,18 @@
+<h1>Подписаться на сервер <%= this.XSSEscape(this.info.name) %></h1><hr>
+
+<form role="form" method="post" action="/Servers/subscribe">
+    <div class="form-group">
+        <input name="nickname" class="form-control" placeholder="Ник на сервере"/>
+    </div>
+    <input type="submit" class="btn btn-success" value="Подписаться">
+</form>
+
+<%
+this.Defer(function()
+{
+    $('form').ajaxForm(function(data)
+    {
+        debugger;
+    })
+})
+%>

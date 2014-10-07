@@ -68,7 +68,7 @@
                 Теги: <span><%= str %></span>
             </div>
 
-
+            <%= this.DeferRender('Votes/is_server_subscriber?id='+this.info.id) %>
         </div>
 
         <div class="tab-pane" id="map"><iframe class="dynmap" src="<%= this.info.map_url %>"></iframe></div>

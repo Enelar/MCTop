@@ -14,6 +14,34 @@ class Servers extends API
     ];
   }
 
+  protected function subscribe_page($id)
+  {
+    $server_info = $this->info($id);
+ 
+    return
+    [
+      'design' => 'rating/server/subscribe_page',
+      'data' => 
+      [
+        'info' => $server_info['data']['info']
+      ]
+    ];
+  }
+
+  protected function subscribe_page_change($id)
+  {
+    $server_info = $this->info($id);
+ 
+    return
+    [
+      'design' => 'rating/server/subscribe_page_change',
+      'data' => 
+      [
+        'info' => $server_info['data']['info']
+      ]
+    ];
+  }
+
   protected function subscribe($nickname, $server_id)
   {
     if (!strlen($nickname))
@@ -38,18 +66,19 @@ class Servers extends API
     return $trans->Finish(count($res));
   }
 
-  private function is_server_subscriber($server, $uid = null)
+  protected function is_server_subscriber($server, $uid = null)
   {
     if (!$uid)
       $uid = LoadModule('api', 'Users')->uid();
     $check = 
-      Core::$db->Query("
+      Core::get_db()->Query("
         select *
           from main.servers_subscribers
           where user_id = $1
             and server_id = $2",
       [$uid, $server]);
-    return $check;
+    if ($check())
+      return $check;
   }
 
   protected function unsubscribe($server_id)
@@ -74,7 +103,9 @@ class Servers extends API
     return
     [
         "design" => "rating/server/info",
-        "data" => ["info" => Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true)],
+        "data" => [
+          "info" => Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true),
+        ],
     ];
   }
 
@@ -82,6 +113,18 @@ class Servers extends API
   {
     $votes = LoadModule('api', 'Votes');
     return $votes->Vote($server_id);
+  }
+
+  protected function vote_page($id)
+  {
+    $server_info = LoadModule('api', 'Servers')->info($id);
+    return 
+    [
+        'design' => 'rating/server/vote',
+        'data' => [
+            'info' => $server_info,
+        ]
+    ];    
   }
 
   protected function version($id)
