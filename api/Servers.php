@@ -94,5 +94,48 @@ class Servers extends API
         ];
   }
 
+    protected function update($id)
+    {
+        global $_POST;
+
+        $tags = explode(',', $_POST['tags']);
+        $tags_in_string = '';
+        foreach ($tags as $tag)
+        {
+            $tags_in_string .= ':'.$tag.': ';
+        }
+
+        Core::get_db()->Query("
+            update main.servers set
+            port = $2,
+            address =$3,
+            version_id = $4,
+            name = $5,
+            description = $6,
+            features = $7,
+            map_url = $8,
+            video_trailer_url = $9,
+            whitelist = $10,
+            license_type = $11,
+            client_type = $12,
+            tags = $13
+            where id = $1
+        ", [
+            $id,
+            $_POST['port'],
+            $_POST['address'],
+            $_POST['version_id'],
+            $_POST['name'],
+            $_POST['description'],
+            $_POST['features'],
+            $_POST['map_url'],
+            $_POST['video_trailer_url'],
+            $_POST['whitelist'],
+            $_POST['license'],
+            $_POST['client_type'],
+            $tags_in_string
+        ]);
+    }
+
 
 }

@@ -14,6 +14,7 @@ class Main extends api
           "main/segment.io",
           "main/url-hook",
           "main/jquery.form.patch",
+          "libs/bootstrap",
         ],
       ];
     }

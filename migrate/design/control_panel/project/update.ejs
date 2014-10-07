@@ -10,9 +10,8 @@
     </li>
 </ol>
 
-<form>
+<form method='post' action='/ControlPanel/project_update_query?id=<%= this.id %>'>
 
-    <!-- todo JS, если значение поля == null, при Escape -->
     <div class="form-group">
         <label>Название проекта</label>
         <input name="name" type="text" class="form-control" placeholder="Название" value="<%= this.XSSEscape(this.name) %>"/>
@@ -61,3 +60,13 @@
 </form>
 
 <div class="message"></div>
+
+<%
+this.Defer(function()
+{
+    $('form').ajaxForm(function(data)
+    {
+        debugger;
+    })
+})
+%>

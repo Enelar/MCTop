@@ -1,3 +1,6 @@
+<link type="text/css" rel="stylesheet" href="/css/chosen.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
+
 <ol class="breadcrumb">
     <li>
         <a href="/ControlPanel">Панель управления</a>
@@ -13,7 +16,7 @@
 <link type="text/css" rel="stylesheet" href="/css/chosen.css"/>
 <link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
 
-<form>
+<form method="post" action="/ControlPanel/server_update_query&id=<%=this.info.id%>">
 
     <div class="form-group">
         <label>Адрес сервера (ip или домен сайта [пример: s1.mctop.su])</label>
@@ -29,49 +32,14 @@
     <div class="form-group">
         <p><label>Версия игры</label></p>
         <select id="version_id" name="version_id" data-placeholder="Версия игры..." class="chosen-select" style="width:350px;" tabindex="2">
-            <option value=""></option>
-        </select>
-    </div>
-
-    <%
-        this.Defer(function()
-        {
-            $.each(this.server_versions, function(key, value) {
-                $('#version_id')
-                        .append($("<option></option>")
-                                .attr("value",value.id)
-                                .text(value.name));
-            });
-        });
-        //todo selected version = info.version_id
-    %>
-
-    <!--
-    <div class="form-group">
-        <p><label>Whitelist</label></p>
-        <select id="whitelist" name="whitelist" data-placeholder="Наличие Whitelist" class="chosen-select" style="width:350px;" tabindex="2">
-            <option value=""></option>
-            <option <?php if ($server->whitelist == 1) echo 'selected'?> value="1">Включен</option>
-            <option <?php if ($server->whitelist == 0) echo 'selected'?> value="0">Выключен</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <p><label>Тип доступа</label></p>
-        <select id="license" name="license" data-placeholder="Тип доступа..." class="chosen-select" style="width:350px;" tabindex="2">
-            <option value=""></option>
-            <option <?php if ($server->license_type == 1) echo 'selected'?> value="1">Только с лицензионным клиентом</option>
-            <option <?php if ($server->license_type == 0) echo 'selected'?> value="0">Лицензия + не лицензия</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <p><label>Вход на сервер</label></p>
-        <select id="client_type" name="client_type" data-placeholder="Тип доступа..." class="chosen-select" style="width:350px;" tabindex="2">
-            <option value=""></option>
-            <option <?php if ($server->client_type == 1) echo 'selected'?> value="1">Только с лицензионным клиентом</option>
-            <option <?php if ($server->client_type == 2) echo 'selected'?> value="2">У моего проекта свой лаунчер</option>
-            <option <?php if ($server->client_type == 3) echo 'selected'?> value="3">Любой лаунчер</option>
+<% for (k in this.server_versions)
+{
+    v = this.server_versions[k];
+%>
+            <option value="<%= v.id %>" <%= v.id == this.info.version_id ? 'selected' : '' %>><%= this.XSSEscape(v.name) %></option>
+<%
+}
+%>
         </select>
     </div>
 
@@ -107,24 +75,82 @@
     </div>
 
 
+    <div class="form-group">
+        <p><label>Whitelist</label></p>
+        <select id="whitelist" name="whitelist" data-placeholder="Наличие Whitelist" class="chosen-select" style="width:350px;" tabindex="2">
+            <option <%= 't' == this.info.whitelist ? 'selected' : '' %> value="1">Включен</option>
+            <option <%= 'f' == this.info.whitelist ? 'selected' : '' %> value="0">Выключен</option>
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <p><label>Тип доступа</label></p>
+        <select id="license" name="license" data-placeholder="Тип доступа..." class="chosen-select" style="width:350px;" tabindex="2">
+            <option <%= 1 == this.info.license_type ? 'selected' : '' %> value="1">Только с лицензионным клиентом</option>
+            <option <%= 0 == this.info.license_type ? 'selected' : '' %> value="0">Лицензия + не лицензия</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <p><label>Вход на сервер</label></p>
+        <select id="client_type" name="client_type" data-placeholder="Тип доступа..." class="chosen-select" style="width:350px;" tabindex="2">
+            <option <%= 1 == this.info.client_type ? 'selected' : '' %> value="1">Только с лицензионным клиентом</option>
+            <option <%= 2 == this.info.client_type ? 'selected' : '' %> value="2">У моего проекта свой лаунчер</option>
+            <option <%= 3== this.info.client_type ? 'selected' : '' %> value="3">Любой лаунчер</option>
+        </select>
+    </div>
+
     <hr>
-
-    <?php
-        $string = '';
-
-        $tags = explode(':',$server->tags);
-    foreach($tags as $tag)
-    if(strlen($tag)>0)
-    $string .= $tag.',';
-
-    ?>
 
     <label>Теги сервера (после ввода каждого - Enter)</label>
-    <input name="tags" id="tags" value="<?php echo $string;?>" />
+    <input name="tags" id="tags" value="" />
 
     <hr>
--->
+
     <button type="submit" class="btn btn-primary">Сохранить</button>
 </form>
+
+<%
+this.Defer(function()
+{
+
+    var config = {
+        '.chosen-select'           : {},
+        '.chosen-select-deselect'  : {allow_single_deselect:true},
+        '.chosen-select-no-single' : {disable_search_threshold:10},
+        '.chosen-select-no-results': {no_results_text:'Упс, ничего не найдено'},
+        '.chosen-select-width'     : {width:"95%"}
+    }
+
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+    var tags = this.info.tags.split(':');
+    console.log(tags);
+    for (k in tags)
+    {
+        v = tags[k];
+
+        if(v.length > 0)
+            $( "input[name='tags']" ).val($( "input[name='tags']" ).val() + ',' + v);
+
+    }
+
+    $('#tags').tagsInput(
+            {
+                'defaultText':'+',
+                'width':'40%'
+            }
+    );
+
+    $('form').ajaxForm(function(data)
+    {
+        debugger;
+    })
+})
+%>
+
 
 <div class="message"></div>

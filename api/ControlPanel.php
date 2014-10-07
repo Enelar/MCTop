@@ -36,7 +36,7 @@ class ControlPanel extends api
         return
         [
             "design" => "control_panel/server/update",
-            "scripts" => ["chosen.jquery", "jquery.tagsinput"],
+            "script" => ["libs/chosen.jquery", "libs/jquery.tagsinput"],
             "data"   =>
             [
                 "info" => $server,
@@ -46,12 +46,29 @@ class ControlPanel extends api
         ];
     }
 
-    protected function server_create($project)
+    protected function server_update_query($id)
     {
+        $server = LoadModule('api','Servers')->info($id);
+        LoadModule('api', 'Projects')->require_owner($server->project);
+        LoadModule('api', 'Servers')->update($id);
         return
-        [
-            "design" => "control_panel/server/create"
-        ];
+            [
+                "reset" => "/ControlPanel/project_info&id=$server->project",
+            ];
+    }
+
+    protected function server_create($project, $mode)
+    {
+        LoadModule('api', 'Projects')->require_owner($project);
+        phoxy_protected_assert($mode, [
+            'error' => 'Ты че хочешь?'
+        ]);
+
+        Core::get_db()->Query("insert into main.servers (project) values ($1)", [$project]);
+        return
+            [
+                "reset" => "/ControlPanel/project_info&id=$project",
+            ];
     }
 
     protected function server_delete($id)
@@ -69,11 +86,26 @@ class ControlPanel extends api
         ];
     }
 
-    protected function project_create()
+    protected function project_update_query($id)
     {
+        LoadModule('api', 'Projects')->require_owner($id);
+        LoadModule('api', 'Projects')->update($id);
+        return
+            [
+                "reset" => "/ControlPanel/project_info&id=$id",
+            ];
+    }
+
+    protected function project_create($mode = null)
+    {
+        phoxy_protected_assert($mode, [
+            'error' => 'Ты че хочешь?'
+        ]);
+
+        Core::get_db()->Query("insert into main.projects (owner) values ($1)", [LoadModule('api', 'Users')->uid()]);
         return
         [
-            "design" => "control_panel/project/create"
+            "reset" => '/ControlPanel',
         ];
     }
 

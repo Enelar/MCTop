@@ -4,7 +4,6 @@
         //todo курит
     </div>-->
 </h1>
-<hr>
 
 <p>
     <%= this.XSSEscape(this.info.description) %>
@@ -13,8 +12,72 @@
 
 <div class="full_server">
 
-    <%= this.DeferRender('server/info_page_navbar', {})%>
+    <%= this.DeferRender('rating/server/info_page_navbar', this)%>
+    <br>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">
 
+            <a target="_blank" href="" class="btn btn-primary">Сайт проекта</a>
+
+            <p>Адрес сервера: <kbd><%= this.info.address %>:<%= this.info.port %></kbd></p>
+            <p>Версия игры: <kbd> <%= this.DeferRender('Servers/version?id='+this.info.version_id) %> </kbd></p>
+
+            <p>Whitelist:
+                <kbd>
+                    <%= (this.info.whitelist == 't')? 'Включен': 'Выключен' %>
+                </kbd>
+            </p>
+            <p>Доступ на сервер:
+                <kbd>
+                    <%= (this.info.license_type == 1)? 'Только с лицензионным клиентом': 'Лицензия + не лицензия' %>
+                </kbd>
+            </p>
+
+            <p>
+                Вход на сервер:
+                <kbd>
+                    <% if(this.info.client_type == 1){%>
+                        <%='Только с лицензионным клиентом'%>
+                   <%}%>
+
+                    <% if(this.info.client_type == 2){%>
+                        <%='У моего проекта свой лаунчер'%>
+                    <%}%>
+
+                    <% if(this.info.client_type == 3){%>
+                        <%='Любой лаунчер'%>
+                    <%}%>
+                </kbd>
+            </p>
+            <hr>
+
+            <%
+            var tags = this.info.tags.split(':');
+            var str = '';
+            for (k in tags)
+            {
+                v = tags[k];
+
+                if(v.length > 0 && v != ' ')
+                    str = str + '<kbd>'+v+'</kbd>   ';
+            }
+            %>
+
+            <div class="tags">
+                Теги: <span><%= str %></span>
+            </div>
+
+
+        </div>
+
+        <div class="tab-pane" id="map"><iframe class="dynmap" src="<%= this.info.map_url %>"></iframe></div>
+        <div class="tab-pane" id="features"><%= this.info.features %></div>
+        <div class="tab-pane" id="trailer">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/<%= this.info.video_trailer_url%>"></iframe>
+            </div>
+        </div>
+    </div>
 </div>
 
-<%= this.DeferRender('Servers/version?id='+this.info.version_id) %>

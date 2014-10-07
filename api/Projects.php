@@ -26,7 +26,7 @@ class Projects extends api
 
     protected function get_servers($id)
     {
-        $res = Core::get_db()->Query('select * from main.servers where project = $1', [$id]);
+        $res = Core::get_db()->Query('select * from main.servers where project = $1 order by id', [$id]);
 
         return [
             'design' => 'rating/project_servers',
@@ -56,6 +56,33 @@ class Projects extends api
 
         $res = db::Query("UPDATE main.projects SET banner=$2 WHERE id=$1 RETURNING id", [$id, $name]);
         return !!$res;
+    }
+
+    protected function update($id)
+    {
+        global $_POST;
+        Core::get_db()->Query("
+            update main.projects set
+            name = $2,
+            description =$3,
+            secret_key = $4,
+            secret_url = $5,
+            site_url = $6,
+            vk_group = $7,
+            fb_public = $8,
+            twitter_account = $9
+            where id = $1
+        ", [
+            $id,
+            $_POST['name'],
+            $_POST['description'],
+            $_POST['secret_key'],
+            $_POST['secret_url'],
+            $_POST['site_url'],
+            $_POST['vk_group'],
+            $_POST['fb_public'],
+            $_POST['twitter_account']
+        ]);
     }
 }
 

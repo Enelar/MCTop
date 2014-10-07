@@ -6,8 +6,11 @@
         <a href="#features" role="tab" data-toggle="tab">Преимущества</a>
     </li>
 
+    <% if(this.info.map_url) {%>
     <li><a href="#map" role="tab" data-toggle="tab">Карта сервера</a></li>
+    <%}%>
 
-
-    <li><a href="#trailer" role="tab" data-toggle="tab">Трейлер сервера</a></li>
+    <% if(this.info.video_trailer_url != 'MmB9b5njVbA') {%>
+    <li><a href="#trailer" role="tab" data-toggle="tab" style="background-color: #CEFAFA">Трейлер сервера</a></li>
+    <%}%>
 </ul>
