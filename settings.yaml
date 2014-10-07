@@ -9,3 +9,10 @@ breadcrumbs:
         0: Пользователи
         login_page: Войти
         register_page: Регистрация
+application:
+    mcping:
+        delay: 4 hours
+    robot:
+        tasks:
+            - owl_nuts/sentinel/QueryNext: 600
+            - owl_nuts/sentinel/FillTheBoard: 1800
