@@ -15,6 +15,7 @@ class Main extends api
           "main/url-hook",
           "main/jquery.form.patch",
           "libs/bootstrap",
+          "main/breadcrumbs",
         ],
       ];
     }
@@ -55,5 +56,4 @@ class Main extends api
                 "design" => "main/pages/why"
             ];
     }
-
 }

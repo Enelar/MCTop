@@ -14,7 +14,10 @@
     <a class="btn btn-primary" href="/Main/faq">FAQ</a>
 </div>
 
-<div class="content" id="phoxy_canvas">
+<div class="content">
+    <%= this.DeferRender('main/utils/breadcrumbs/canvas', {}) %>
+    <div id="phoxy_canvas">
+    </div>
 </div>
 
 <%= this.DeferRender('main/foot', {}) %>

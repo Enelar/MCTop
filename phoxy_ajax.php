@@ -20,9 +20,60 @@ function default_addons( $name )
   [
     "cache" => ["no"],
     "result" => "phoxy_canvas",
+    "breadcrumbs" => breadcrumbs(),
   ];
 
   return $ret;
+}
+
+function breadcrumbs()
+{
+    global $_GET;
+    $url = $_GET[phoxy_conf()["get_api_param"]];
+
+    $array = explode("/", $url);
+    $runner = Core::get_settings()->breadcrumbs;
+
+    $ret = ["/" => "/"];
+
+    $moan = "";
+    foreach ($array as $stone)
+    {
+      $moan .= "/".$stone;
+      if (!isset($runner[$stone]))
+      {
+        $ret[$moan] = $stone;
+        $runner = [];
+        continue;
+      }
+      
+      $runner = $runner[$stone];
+
+      if (is_array($runner))
+        $sign = $runner[0];
+      else
+      {
+        $sign = $runner;
+        $runner = [];
+      }
+
+
+      if ($sign === false)
+        continue;
+      //if ($sign === true)
+      // append to previous one
+      //if ($sign === null)
+      // wait for next and append
+      $ret[$moan] = $sign;
+    }
+
+    if (isset($ret['/Main']))
+    {
+      $ret['/'] = $ret['/Main'];
+      unset($ret['/Main']);
+    }
+
+    return $ret; 
 }
 
 include('core/libs/phoxy/index.php');
