@@ -11,12 +11,13 @@ class Core
     public $router;
     public $user;
     public $user_session;
+    private static $that;
 
     function __construct()
     {
+        self::$that = $this;
         $this->init_session();
         $this->load_settings();
-        $this->init_dbs();
     }
 
     private function init_session()
@@ -28,7 +29,7 @@ class Core
     private function load_settings()
     {
         require_once('core/settings.php');
-        self::$settings = $settings;
+        self::$settings = new Settings();
     }
 
     private function init_redis_db()
@@ -36,8 +37,11 @@ class Core
         try
         {
           self::$redis_db = new Redis();
-          self::$redis_db->connect(self::$settings->db['redis']['server_address'], self::$settings->db['redis']['redis_server_port']);
-          self::$redis_db->select(self::$settings->db['redis']['db_number']);
+          self::$redis_db->connect(
+            self::get_settings()->db->redis->server_address,
+            self::get_settings()->db->redis->redis_server_port);
+          self::$redis_db->select(
+            self::get_settings()->db->redis->db_number);
           return;
         }
         catch (RedisException $e) {}
@@ -54,7 +58,7 @@ class Core
           include_once('core/libs/phpsql/phpsql.php');
           include_once('core/libs/phpsql/pgsql.php');
           $sql = new phpsql();
-          $pg = $sql->Connect("pgsql://postgres@127.0.0.1/mctop");
+          $pg = $sql->Connect(self::get_settings()->db->connect_url);
           include_once('pg_wrap.php');
           self::$db = new pg_wrap($pg);
           return;
@@ -126,17 +130,22 @@ class Core
 
     static function get_db()
     {
+        if (!self::$db)
+            self::$that->init_postgres_db();
         return self::$db;
     }
 
     static function get_redis()
     {
+        if (!self::$redis_db)
+            self::$that->init_redis_db();
         return self::$redis_db;
     }
 
     static function get_settings()
     {
-        return self::$settings;
+        $t = self::$settings;
+        return $t();
     }
 
     static function is_ajax_request()
