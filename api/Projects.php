@@ -2,11 +2,13 @@
 
 class Projects extends api
 {
-    protected function reserve($page = 1)
+    protected function reserve($page = 0)
     {
-        if($page <= 0)
+        $page = (int)$page;
+        if($page < 0)
             return ['error' => 'Хакер, уровень: mctop v.1'];
-        $res = Core::get_db()->Query('select * from main.projects where active = 1 order by score limit 10 offset $1', [$page*10]);
+
+        $res = Core::get_db()->Query('select * from main.projects where active = 1 order by score desc limit 10 offset $1', [$page*10]);
         $projects_count = Core::get_db()->Query('select count (*) from main.projects where active = 1', [], true);
         return [
             'design' => 'rating/projects_list',

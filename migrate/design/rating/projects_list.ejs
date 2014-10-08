@@ -7,10 +7,10 @@
 
 <ul class="pagination pagination-lg">
 
-  <% if(current_page != 1) {%>
+  <% if(current_page != 0) {%>
   	<li><a href="/Projects?page=<%= current_page-1 %>">&laquo;</a></li>
   <%} else {%> 
-    	<li><a>|</a></li>
+    	<li class="active"><a>TOP 10</a></li>
   <%}%>
   <% if (current_page < 6) {
   	page_start_counter = 6;

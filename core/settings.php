@@ -53,7 +53,7 @@ class Settings
                     'show_to_guest' => false,
                     'name' => 'Серверы',
                     'icon' => 'glyphicon glyphicon-home',
-                    'link' => '/Servers/list',
+                    'link' => '/Servers',
                     ],
                 'search' =>
                 [

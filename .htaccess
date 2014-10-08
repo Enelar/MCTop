@@ -4,7 +4,7 @@ Options +FollowSymlinks
 RewriteEngine On
 
 RewriteRule ^api/(.+)$ phoxy_ajax.php?api=$1 [QSA]
-RewriteRule ^api(.*)$ phoxy_ajax.php?api=Projects&page=1 [QSA]
+RewriteRule ^api(.*)$ phoxy_ajax.php?api=Projects&page=0 [QSA]
 
 RewriteRule ^.*yaml$ phoxy_start.html
 

@@ -1,6 +1,6 @@
 <link type="text/css" rel="stylesheet" href="/css/chosen.css"/>
 <link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
-
+<% console.log(this.info)%>
 <ol class="breadcrumb">
     <li>
         <a href="/ControlPanel">Панель управления</a>
@@ -127,8 +127,9 @@ this.Defer(function()
         $(selector).chosen(config[selector]);
     }
 
+    if(this.info.tags === undefined)
+        this.info.tags = ':example:';
     var tags = this.info.tags.split(':');
-    console.log(tags);
     for (k in tags)
     {
         v = tags[k];

@@ -37,22 +37,32 @@ class Search extends api
         return [
             "design" => "rating/search/index",
             "script" => ["libs/chosen.jquery", "libs/jquery.tagsinput"],
+            "data" => [
+                "server_versions" => Core::get_db()->Query('select * from main.servers_versions')
+            ],
         ];
     }
 
     protected function get_results($tags_string, $version = 0)
     {
-        phoxy_protected_assert(!$version, []);
+
         $tags = explode(',', $tags_string);
         foreach ($tags as &$tag)
             if (strlen($tag))
                 $tag = "%$tag%";
 
-        $query = 'select * from main.servers where tags like all ($1::varchar[]) order by votes desc';
-
         $pg = array_php2pg($tags, null);
 
-        $servers = Core::get_db()->Query($query,[$pg]);
+        if($version == 0)
+        {
+            $query = 'select * from main.servers where tags like all ($1::varchar[]) order by votes desc';
+            $servers = Core::get_db()->Query($query,[$pg]);
+        }
+        else
+        {
+            $query = 'select * from main.servers where version_id = $2 and tags like all ($1::varchar[]) order by votes desc';
+            $servers = Core::get_db()->Query($query,[$pg, $version]);
+        }
 
         return
         [

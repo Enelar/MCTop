@@ -5,11 +5,19 @@ class Servers extends API
 
   protected function reserve($page = 0)
   {
-    $res = Core::get_db()->Query('select * from main.servers where active = 1 order by votes limit 10 offset $1', [$page*10]);
+    $page = (int)$page;
+    if($page < 0)
+      return ['error' => 'Хакер, уровень: mctop v.1'];
+
+    $res = Core::get_db()->Query('select * from main.servers where active = 1 order by votes desc limit 10 offset $1', [$page*10]);
+    $servers_count = Core::get_db()->Query('select count (*) from main.servers where active = 1', [], true);
+ 
     return [
         "design" => "rating/servers_list",
         "data"   => [
-            "servers" => $res
+            "servers" => $res,
+            'projects_count' => $servers_count['count'],
+            'current_page' => $page
         ],
     ];
   }
