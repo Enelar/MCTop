@@ -78,7 +78,7 @@ class Servers extends API
   protected function is_server_subscriber($server, $uid = null)
   {
     if (!$uid)
-      $uid = LoadModule('api', 'Users')->uid();
+      $uid = LoadModule('api', 'Users')->get_uid();
     $check = 
       Core::get_db()->Query("
         select *
@@ -111,7 +111,9 @@ class Servers extends API
   protected function info($server_id)
   {
     $server_info = Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true);
- 
+    if(!$server_info['id'])
+      return ['error' => 'Сервер не найден'];
+
     return
     [
         "design" => "rating/server/info",
@@ -191,6 +193,36 @@ class Servers extends API
             $_POST['client_type'],
             $tags_in_string
         ]);
+    }
+
+    protected function favorite_server($id)
+    {
+        $check = Core::get_db()->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
+        return [
+          'design' => 'rating/server/favorite_server',
+          'data' => [
+            'is_server_favorite' => ($check['user_id']!=0),
+          ],
+        ];
+    }
+
+    protected function favorite_server_add($id)
+    {
+      $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $server_id], true);
+        if(sizeof($check)>0 and is_array($check))
+        {
+            Core::$db->Query('insert into users.servers_favorite (user_id, server_id) values ($1, $2)', [LoadModule('api', 'Users')->get_uid(), $server_id]);
+        }
+        
+    }
+
+    protected function favorite_server_remove($id)
+    {
+        $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $server_id], true);
+        if(sizeof($check)>0 and is_array($check))
+        {
+            Core::$db->Query('delete from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $server_id]);
+        }
     }
 
 

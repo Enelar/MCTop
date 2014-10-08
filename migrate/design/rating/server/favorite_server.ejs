@@ -1,0 +1,15 @@
+<% if (uid() !== 0) {%>
+
+	<% if(this.is_server_favorite){ %>
+	    <div class="btn_favorite">
+	        <a class="btn btn-warning" id="btn_favorite_add">Удалить из избранного</a>
+	    </div>
+	<%}%>
+
+	<% if(!this.is_server_favorite){ %>
+	    <div class="btn_favorite">
+	        <a class="btn btn-success" id="btn_favorite_remove">Добавить в избранное</a>
+	    </div>
+	<%}%>
+
+<%}%>

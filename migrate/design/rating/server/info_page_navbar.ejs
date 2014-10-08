@@ -2,9 +2,12 @@
     <li class="active">
         <a href="#home" role="tab" data-toggle="tab">Основные сведения</a>
     </li>
+
+    <% if (this.info.features !== null){%>
     <li>
         <a href="#features" role="tab" data-toggle="tab">Преимущества</a>
     </li>
+    <%}%>
 
     <% if(this.info.map_url) {%>
     <li><a href="#map" role="tab" data-toggle="tab">Карта сервера</a></li>
