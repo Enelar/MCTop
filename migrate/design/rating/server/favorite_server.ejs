@@ -2,14 +2,34 @@
 
 	<% if(this.is_server_favorite){ %>
 	    <div class="btn_favorite">
-	        <a class="btn btn-warning" id="btn_favorite_add">Удалить из избранного</a>
+        	<a class="btn btn-warning" id="btn_favorite_remove">Удалить из избранного</a>
 	    </div>
 	<%}%>
 
 	<% if(!this.is_server_favorite){ %>
-	    <div class="btn_favorite">
-	        <a class="btn btn-success" id="btn_favorite_remove">Добавить в избранное</a>
+	    <div class="btn_favorite" >
+	        <a class="btn btn-success" id="btn_favorite_add">Добавить в избранное</a>
 	    </div>
 	<%}%>
+
+	<% 
+    this.Defer(function()
+    {
+    	server_id = this.server_id;
+
+		$( "#btn_favorite_add" ).click(function() {
+		  phoxy.AJAX('Servers/favorite_server_add&id='+server_id, function(data){
+		  	location.reload();
+		  });
+		});
+
+		$( "#btn_favorite_remove" ).click(function() {
+		  phoxy.AJAX('Servers/favorite_server_remove&id='+server_id, function(data){
+		  	location.reload();
+		  });
+		});
+    })
+
+	%>
 
 <%}%>

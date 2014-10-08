@@ -1,0 +1,13 @@
+Категории: <br>
+
+<%
+
+for (k in this.categories)
+{
+	v = this.categories[k];%>
+
+<a class="btn btn-success" href="/Faq/category_pages?id=<%= v.id %>"><%= v.name %></a><br>
+
+<%}
+
+%>

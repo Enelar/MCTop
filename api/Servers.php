@@ -202,27 +202,53 @@ class Servers extends API
           'design' => 'rating/server/favorite_server',
           'data' => [
             'is_server_favorite' => ($check['user_id']!=0),
+            'server_id' => (int)$id
           ],
         ];
     }
 
     protected function favorite_server_add($id)
     {
-      $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $server_id], true);
-        if(sizeof($check)>0 and is_array($check))
-        {
-            Core::$db->Query('insert into users.servers_favorite (user_id, server_id) values ($1, $2)', [LoadModule('api', 'Users')->get_uid(), $server_id]);
-        }
+      $check = Core::get_db()->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
+      
+      if($check['user_id'] != LoadModule('api', 'Users')->get_uid())
+      {
+          Core::get_db()->Query('insert into users.servers_favorite (user_id, server_id) values ($1, $2)', [LoadModule('api', 'Users')->get_uid(), $id]);
+      }
         
     }
 
     protected function favorite_server_remove($id)
     {
-        $check = Core::$db->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $server_id], true);
-        if(sizeof($check)>0 and is_array($check))
-        {
-            Core::$db->Query('delete from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $server_id]);
+      $check = Core::get_db()->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
+      if($check['user_id'] == LoadModule('api', 'Users')->get_uid())
+      {
+          Core::get_db()->Query('delete from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id]);
+      }
+    }
+
+    protected function favorite()
+    {
+      $user_id = LoadModule('api', 'Users')->uid();
+      $servers = Core::get_db()->Query('select server_id from users.servers_favorite where user_id = $1', [$user_id]);
+      
+      if($servers())
+      {
+        foreach ($servers as $key => $server_id)
+        { 
+          $servers[$key] = Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id['server_id']], true);;
         }
+
+      }
+
+      return 
+      [
+        'design' => 'social/favorite/index',
+        'data' => 
+        [
+          'servers' => $servers
+        ]
+      ];
     }
 
 
