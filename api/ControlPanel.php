@@ -31,15 +31,15 @@ class ControlPanel extends api
     protected function server_update($id)
     {
         $server = LoadModule('api','Servers')->info($id);
-        $project = LoadModule('api', 'Projects')->info($server['info']['project']);
-        LoadModule('api', 'Projects')->require_owner($server['info']['project']);
+        $project = LoadModule('api', 'Projects')->info($server->project);
+        LoadModule('api', 'Projects')->require_owner($server->project);
         return
         [
             "design" => "control_panel/server/update",
             "script" => ["libs/chosen.jquery", "libs/jquery.tagsinput"],
             "data"   =>
             [
-                "info" => $server['info'],
+                "info" => $server,
                 "project" => $project,
                 "server_versions" => Core::get_db()->Query('select * from main.servers_versions')
             ]

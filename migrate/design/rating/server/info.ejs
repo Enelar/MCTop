@@ -16,8 +16,6 @@
     <div class="tab-content">
         <div class="tab-pane active" id="home">
 
-            <a target="_blank" href="<%= this.XSSEscape(this.project.site_url) %>" class="btn btn-primary">Сайт проекта</a>
-
             <p>Адрес сервера: <kbd><%= this.XSSEscape(this.info.address) %>:<%= this.XSSEscape(this.info.port) %></kbd></p>
             <p>Версия игры: <kbd> <%= this.DeferRender('Servers/version?id='+this.info.version_id) %> </kbd></p>
 

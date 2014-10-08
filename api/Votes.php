@@ -35,19 +35,22 @@ Class Votes extends API
         $trans->Commit();
     }
 
-    public function is_user_have_voted_today($server_id, $user_id = null)
+    protected function is_user_have_voted_today($server_id, $user_id = null)
     {
         if (!$user_id)
             $user_id = LoadModule('api', 'Users')->uid();
+
+        $server = LoadModule('api', 'Servers')->info($server_id);
+        $project = LoadModule('api', 'Projects')->info($server->project);
 
         $last_vote = 
             Core::get_db()->Query("
                 select (now() - time < '1 day'::interval) as today
                     from votes.main
-                    where server_id = $1
+                    where project_id = $1
                       and user_id = $2
                     order by time desc
-                    limit 1", [$server_id, $user_id], true);
+                    limit 1", [$project->id, $user_id], true);
 
         return isset($last_vote['today']) && $last_vote['today'] == 't';
     }

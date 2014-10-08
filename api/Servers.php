@@ -31,7 +31,7 @@ class Servers extends API
       'design' => 'rating/server/subscribe_page',
       'data' => 
       [
-        'info' => $server_info['data']['info']
+        'info' => $server_info
       ]
     ];
   }
@@ -45,7 +45,7 @@ class Servers extends API
       'design' => 'rating/server/subscribe_page_change',
       'data' => 
       [
-        'info' => $server_info['data']['info']
+        'info' => $server_info
       ]
     ];
   }
@@ -119,7 +119,7 @@ class Servers extends API
         "design" => "rating/server/info",
         "data" => [
           "info" => $server_info,
-          "project" => LoadModule('api', 'Projects')->info($server_info->project),
+          //"project" => LoadModule('api', 'Projects')->info($server_info->project),
         ],
     ];
   }
