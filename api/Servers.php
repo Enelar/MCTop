@@ -102,11 +102,14 @@ class Servers extends API
 
   protected function info($server_id)
   {
+    $server_info = Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true);
+ 
     return
     [
         "design" => "rating/server/info",
         "data" => [
-          "info" => Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true),
+          "info" => $server_info,
+          "project" => LoadModule('api', 'Projects')->info($server_info->project),
         ],
     ];
   }
