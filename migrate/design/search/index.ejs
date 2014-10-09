@@ -1,7 +1,7 @@
 <link type="text/css" rel="stylesheet" href="/css/chosen.css"/>
 <link rel="stylesheet" type="text/css" href="/css/jquery.tagsinput.css" />
 
-<h1><span class="icon_container"></span> Поиск</h1><hr>
+<h1><span class="icon_container"></span> Поиск серверов Minecraft</h1><hr>
 
 <%
 
@@ -49,7 +49,9 @@ phoxy.Appeared('#tags_tagsinput', function()
 
     <div class="form-group">
         <p><label>Версия игры</label></p>
-
+       <select id="version_id" name="version_id" data-placeholder="Версия игры..." class="chosen-select" style="width:350px;" tabindex="2">
+        <option>tet</option>
+        </select>
     </div>
 
     <button class="btn btn-default">Поиск</button>

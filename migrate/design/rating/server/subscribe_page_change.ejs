@@ -1,6 +1,6 @@
 <h1>Смена нике на сервере <%= this.XSSEscape(this.info.name) %></h1><hr>
 
-<form role="form" method="post" action = "">
+<form role="form" method="post" action = "/Servers/subscribe_page_change&id=<%= this.info.id%>">
     <div class="form-group">
         <input name="nickname" class="form-control" placeholder="Новый ник на сервере"/>
     </div>

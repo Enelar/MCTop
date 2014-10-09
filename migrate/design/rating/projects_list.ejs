@@ -1,6 +1,40 @@
+<% var current_page = parseInt(this.current_page) %>
+<% var page_start_counter = current_page %>
+
 <h1><span class="glyphicon glyphicon-star"></span> Рейтинг проектов Minecraft</h1><hr>
 
 <div class="projects_rating">
+
+<ul class="pagination pagination-lg">
+
+  <% if(current_page != 0) {%>
+  	<li><a href="/Projects?page=<%= current_page-1 %>">&laquo;</a></li>
+  <%} else {%> 
+    	<li class="active"><a>TOP 10</a></li>
+  <%}%>
+  <% if (current_page < 6) {
+  	page_start_counter = 6;
+  }%>
+
+  <% for (i=page_start_counter-5; i < (current_page + 5); i++) {%>
+
+  	<% 
+  		if(i >= Math.round(this.projects_count/10) ) 
+  			continue;
+  	%>
+  	<% if(i != current_page) {%>
+		<li><a href="/Projects?page=<%= i %>"><%= i %></a></li>
+	<% } 
+
+	else {%>
+		<li class = "active"><a href="/Projects?page=<%= i %>"><%= i %></a></li>
+	<% } %>
+  <% } %>
+
+  <% if(current_page < Math.round((this.projects_count/10)-0.5) ) {%>
+  	<li><a href="/Projects?page=<%= current_page+1 %>">&raquo;</a></li>
+  <% } %>
+</ul>
 
 <%
     for (k in this.projects)

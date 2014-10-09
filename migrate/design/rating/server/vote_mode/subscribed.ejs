@@ -1,0 +1,29 @@
+<div>
+Вы сохранили ник <%= this.is_server_subscriber %> на сервере
+<hr>
+<%
+if(this.have_vote)
+{
+%>
+    Вы уже голосовали сегодня за сервера этого проекта
+<%
+} 
+else
+{
+%>
+    <a role="vote" class="btn btn-primary">Голосовать за сервер</a>
+<%
+}
+this.Defer(function()
+{
+    this.first().find('a[role="vote"]').click(function()
+    {
+        $(this).prop('disabled', true);
+        phoxy.ApiRequest("/Votes/vote", [__context.id], function(data)
+        {
+            phoxy.ApiRequest('/Servers/info', [__context.id]);
+        });
+    })
+})
+%>
+</div>

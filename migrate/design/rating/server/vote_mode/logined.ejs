@@ -1,0 +1,43 @@
+<%
+function SubscribeForm()
+{
+    var canvas = this.escape().DrawTo([]);
+%>
+<form role="form" method="get" action="/Servers/subscribe">
+    <div class="form-group">
+        <input name="nickname" class="form-control" placeholder="Ник на сервере"/>
+    </div>
+    <input name='id' type='hidden' value='<%= this.id %>' />
+    <input type="submit" class="btn btn-success" value="Подписаться">
+</form>
+<%
+    var ret = this.escape().Render();
+    this.escape().DrawTo(canvas);
+    return ret;
+}
+
+
+if(this.is_server_subscriber === false)
+{
+%>
+    <a class="btn btn-primary">Для голосования за сервере тебе нужно @Подписаться_на_сервер</a>
+<%
+    var form = SubscribeForm.apply(this);
+    this.Defer(function()
+    {
+        // href="/Servers/subscribe_page&id=< %= this.id % >"
+        this.first().popover(
+        {
+            content: form,
+            html: true,
+        })
+    })
+
+}
+else
+{
+%>
+    <%= this.DeferRender('rating/server/vote_mode/subscribed', this) %>
+<%
+}
+%>

@@ -1,0 +1,8 @@
+<%
+if (uid() != 0)
+{
+%>
+    <%= this.DeferRender('rating/server/vote_mode/logined', this) %>
+<%
+}
+%>

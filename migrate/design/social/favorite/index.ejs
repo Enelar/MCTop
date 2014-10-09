@@ -1,4 +1,10 @@
-<%
-if (logged)
-    DeferRender('Social/InFavorite')
+<h1> избранные сервера </h1><hr>
+
+<% 
+for (k in this.servers){
+	v = this.servers[k];
 %>
+
+<a class="btn btn-success" href="/Servers/info&id=<%= v.id%>"><%= v.name %></a> <br><br>
+
+<%}%>

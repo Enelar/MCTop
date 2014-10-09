@@ -16,3 +16,6 @@ application:
         tasks:
             - owl_nuts/sentinel/QueryNext: 600
             - owl_nuts/sentinel/FillTheBoard: 1800
+    vk:
+        client_id: 111
+        redirect_url: http://192.168.29.122/auth/vk/do

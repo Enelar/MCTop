@@ -1,8 +1,6 @@
 <h1>
     <span class="glyphicon glyphicon-align-justify"></span> Сервер <%= this.XSSEscape(this.info.name) %>
-    <!--<div class="btn_favorite">
-        //todo курит
-    </div>-->
+    <%= this.DeferRender('Servers/favorite_server?id='+this.info.id) %>
 </h1>
 
 <p>
@@ -18,9 +16,7 @@
     <div class="tab-content">
         <div class="tab-pane active" id="home">
 
-            <a target="_blank" href="" class="btn btn-primary">Сайт проекта</a>
-
-            <p>Адрес сервера: <kbd><%= this.info.address %>:<%= this.info.port %></kbd></p>
+            <p>Адрес сервера: <kbd><%= this.XSSEscape(this.info.address) %>:<%= this.XSSEscape(this.info.port) %></kbd></p>
             <p>Версия игры: <kbd> <%= this.DeferRender('Servers/version?id='+this.info.version_id) %> </kbd></p>
 
             <p>Whitelist:
@@ -53,29 +49,38 @@
             <hr>
 
             <%
-            var tags = this.info.tags.split(':');
-            var str = '';
-            for (k in tags)
+            if(this.info.tags !== null && this.info.tags !== undefined)
             {
-                v = tags[k];
+                var tags = this.info.tags.split(':');
+                var str = '';
+                for (k in tags)
+                {
+                    v = tags[k];
 
-                if(v.length > 0 && v != ' ')
-                    str = str + '<kbd>'+v+'</kbd>   ';
-            }
+                    if(v.length > 0 && v != ' ')
+                        str = str + '<kbd>'+this.XSSEscape(v)+'</kbd>   ';
+                }
+            }   
             %>
+
+
 
             <div class="tags">
                 Теги: <span><%= str %></span>
             </div>
 
-            <%= this.DeferRender('Votes/is_server_subscriber?id='+this.info.id) %>
+            <% if (uid() !== 0){%>
+                <%= this.DeferRender('Votes/is_server_subscriber?id='+this.info.id) %>
+            <%}%>
         </div>
 
-        <div class="tab-pane" id="map"><iframe class="dynmap" src="<%= this.info.map_url %>"></iframe></div>
-        <div class="tab-pane" id="features"><%= this.info.features %></div>
+        <% if(this.info.map_url !== null){%>
+        <div class="tab-pane" id="map"><iframe class="dynmap" src="<%= this.XSSEscape(this.info.map_url) %>"></iframe></div>
+        <%}%>
+        <div class="tab-pane" id="features"><%= this.XSSEscape(this.info.features) %></div>
         <div class="tab-pane" id="trailer">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/<%= this.info.video_trailer_url%>"></iframe>
+                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/<%= this.XSSEscape(this.info.video_trailer_url)%>"></iframe>
             </div>
         </div>
     </div>

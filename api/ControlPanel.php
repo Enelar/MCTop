@@ -48,7 +48,7 @@ class ControlPanel extends api
 
     protected function server_update_query($id)
     {
-        $server = LoadModule('api','Servers')->info($id);
+        $server = Core::get_db()->Query("select * from main.servers WHERE id=$1", [$id], true);;
         LoadModule('api', 'Projects')->require_owner($server->project);
         LoadModule('api', 'Servers')->update($id);
         return

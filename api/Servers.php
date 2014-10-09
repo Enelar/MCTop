@@ -5,11 +5,19 @@ class Servers extends API
 
   protected function reserve($page = 0)
   {
-    $res = Core::get_db()->Query('select * from main.servers where active = 1 order by votes limit 10 offset $1', [$page*10]);
+    $page = (int)$page;
+    if($page < 0)
+      return ['error' => 'Хакер, уровень: mctop v.1'];
+
+    $res = Core::get_db()->Query('select * from main.servers where active = 1 order by votes desc limit 10 offset $1', [$page*10]);
+    $servers_count = Core::get_db()->Query('select count (*) from main.servers where active = 1', [], true);
+ 
     return [
         "design" => "rating/servers_list",
         "data"   => [
-            "servers" => $res
+            "servers" => $res,
+            'projects_count' => $servers_count['count'],
+            'current_page' => $page
         ],
     ];
   }
@@ -23,7 +31,7 @@ class Servers extends API
       'design' => 'rating/server/subscribe_page',
       'data' => 
       [
-        'info' => $server_info['data']['info']
+        'info' => $server_info
       ]
     ];
   }
@@ -37,30 +45,31 @@ class Servers extends API
       'design' => 'rating/server/subscribe_page_change',
       'data' => 
       [
-        'info' => $server_info['data']['info']
+        'info' => $server_info
       ]
     ];
   }
 
   protected function subscribe($nickname, $server_id)
   {
+    $this->addons['design'] = 'main/utils/goback';
     if (!strlen($nickname))
       return $this->unsubscribe(); // не знаю зачем здесь но ок
 
     $uid = LoadModule('api', 'Users')->uid();
-    $trans = db::Begin();
+    $trans = Core::get_db()->Begin();
     // Дерьмово, но я не хочу морочить тебе голову с условной блокировкой
     if ($subscr = $this->is_server_subscriber($server_id))
     {
       // Хотя здесь напрашивается конечно блин
-      if ($subscr['nickname'] == $nickname)
+      if ($subscr == $nickname)
         return $trans->Rollback() || true; // подписка успешна ранее
       $query = "UPDATE main.servers_subscribers SET nickname=$3 WHERE server_id = $1 AND user_id=$2";
     }
     else
       $query = "INSERT INTO main.servers_subscribers(server_id, user_id, nickname) VALUES ($1, $2, $3)";
 
-    $res = Core::$db->Query("{$query} RETURNING *",
+    $res = Core::get_db()->Query("{$query} RETURNING *",
           [ $server_id, $uid, $nickname], true);
 
     return $trans->Finish(count($res));
@@ -69,16 +78,17 @@ class Servers extends API
   protected function is_server_subscriber($server, $uid = null)
   {
     if (!$uid)
-      $uid = LoadModule('api', 'Users')->uid();
+      $uid = LoadModule('api', 'Users')->get_uid();
     $check = 
       Core::get_db()->Query("
         select *
           from main.servers_subscribers
           where user_id = $1
             and server_id = $2",
-      [$uid, $server]);
+      [$uid, $server], true);
     if ($check())
-      return $check;
+      return $check->nickname;
+    return false;
   }
 
   protected function unsubscribe($server_id)
@@ -100,11 +110,16 @@ class Servers extends API
 
   protected function info($server_id)
   {
+    $server_info = Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true);
+    if(!$server_info['id'])
+      return ['error' => 'Сервер не найден'];
+
     return
     [
         "design" => "rating/server/info",
         "data" => [
-          "info" => Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id], true),
+          "info" => $server_info,
+          //"project" => LoadModule('api', 'Projects')->info($server_info->project),
         ],
     ];
   }
@@ -178,6 +193,62 @@ class Servers extends API
             $_POST['client_type'],
             $tags_in_string
         ]);
+    }
+
+    protected function favorite_server($id)
+    {
+        $check = Core::get_db()->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
+        return [
+          'design' => 'rating/server/favorite_server',
+          'data' => [
+            'is_server_favorite' => ($check['user_id']!=0),
+            'server_id' => (int)$id
+          ],
+        ];
+    }
+
+    protected function favorite_server_add($id)
+    {
+      $check = Core::get_db()->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
+      
+      if($check['user_id'] != LoadModule('api', 'Users')->get_uid())
+      {
+          Core::get_db()->Query('insert into users.servers_favorite (user_id, server_id) values ($1, $2)', [LoadModule('api', 'Users')->get_uid(), $id]);
+      }
+        
+    }
+
+    protected function favorite_server_remove($id)
+    {
+      $check = Core::get_db()->Query('select * from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true);
+      if($check['user_id'] == LoadModule('api', 'Users')->get_uid())
+      {
+          Core::get_db()->Query('delete from users.servers_favorite where user_id = $1 and server_id = $2', [LoadModule('api', 'Users')->get_uid(), $id]);
+      }
+    }
+
+    protected function favorite()
+    {
+      $user_id = LoadModule('api', 'Users')->uid();
+      $servers = Core::get_db()->Query('select server_id from users.servers_favorite where user_id = $1', [$user_id]);
+      
+      if($servers())
+      {
+        foreach ($servers as $key => $server_id)
+        { 
+          $servers[$key] = Core::get_db()->Query("select * from main.servers WHERE id=$1", [$server_id['server_id']], true);;
+        }
+
+      }
+
+      return 
+      [
+        'design' => 'social/favorite/index',
+        'data' => 
+        [
+          'servers' => $servers
+        ]
+      ];
     }
 
 

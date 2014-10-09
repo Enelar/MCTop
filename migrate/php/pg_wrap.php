@@ -27,7 +27,7 @@ class pg_wrap
   }
 }
 
-class row_wraper implements arrayaccess, JsonSerializable
+class row_wraper implements arrayaccess, JsonSerializable, iterator
 {
   private $original_row_array;
   
@@ -87,5 +87,30 @@ class row_wraper implements arrayaccess, JsonSerializable
   public function jsonSerialize()
   {
       return $this->original_row_array;
+  }
+
+  public function rewind()
+  {
+      reset($this->original_row_array);
+  }
+
+  public function current()
+  {
+      return current($this->original_row_array);
+  }
+
+  public function key()
+  {
+      return key($this->original_row_array);
+  }
+
+  public function next()
+  {
+      return next($this->original_row_array);
+  }
+
+  public function valid()
+  {
+      return false !== $this->current();
   }
 }

@@ -2,14 +2,23 @@
 
 class Projects extends api
 {
-    protected function reserve($page = 1)
+    protected function reserve($page = 0)
     {
-        $res = Core::get_db()->Query('select * from main.projects where active = 1 order by score limit 10 offset $1', [$page*10]);
+        $page = (int)$page;
+        if($page < 0)
+            return ['error' => 'Хакер, уровень: mctop v.1'];
 
+        //$res = Core::get_db()->Query('select * from main.projects where active = 1 and ((select count(id) from main.servers where owner = id and active = 1)>0) order by score desc limit 10 offset $1', [$page*10]);
+        //todo Почему-то не работает
+
+        $res = Core::get_db()->Query('select * from main.projects where active = 1 order by score desc limit 10 offset $1', [$page*10]);
+        $projects_count = Core::get_db()->Query('select count (*) from main.projects where active = 1', [], true);
         return [
             'design' => 'rating/projects_list',
             'data' => [
               'projects' => $res,
+              'projects_count' => $projects_count['count'],
+              'current_page' => $page
             ],
         ];
     }
@@ -19,7 +28,7 @@ class Projects extends api
         return
         [
             "data" => [
-                "info" => Core::get_db()->Query('select * from main.projects where owner = $1 and id = $2', [LoadModule('api', 'Users')->get_uid(), $id], true)
+                "info" => Core::get_db()->Query('select * from main.projects where id = $1', [$id], true),
             ]
         ];
     }

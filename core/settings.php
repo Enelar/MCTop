@@ -53,7 +53,7 @@ class Settings
                     'show_to_guest' => false,
                     'name' => 'Серверы',
                     'icon' => 'glyphicon glyphicon-home',
-                    'link' => '/Servers/list',
+                    'link' => '/Servers',
                     ],
                 'search' =>
                 [
@@ -91,7 +91,7 @@ class Settings
                     'show_in_navbar' => true,
                     'show_to_authorized' => true,
                     'show_to_guest' => false,
-                    'name' => 'Панель управления',
+                    'name' => 'ПУ',
                     'icon' => 'glyphicon glyphicon-plus',
                     'link' => '/ControlPanel',
                 ],
@@ -109,6 +109,15 @@ class Settings
                     'show_in_navbar' => false,
                     'icon' => 'glyphicon glyphicon-picture',
                 ],
+                'favorite_serers' => 
+                [
+                    'show_in_navbar' => true,
+                    'show_to_authorized' => true,
+                    'show_to_guest' => false,
+                    'icon' => 'glyphicon glyphicon-heart',
+                    'name' => 'Favorite',
+                    'link' => '/Servers/favorite',
+                ]
             ],
 
             'application' =>
