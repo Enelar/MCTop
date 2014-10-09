@@ -66,9 +66,11 @@ class Users extends API
         ];
     }
 
-    private function info($id)
+    public function info($id)
     {
-        return Core::get_db()->Query("SELECT * FROM main.users WHERE id=$1", [$id], true);
+        $res = Core::get_db()->Query("SELECT * FROM main.users WHERE id=$1", [$id], true);
+        unset($res['password']);
+        return $res;
     }
 
     protected function login_page()
@@ -83,12 +85,30 @@ class Users extends API
     {
         return
         [
-            "design" => "social/user/register_page",
+            "design" => "auth/register_page",
         ];
     }
 
-    protected function test()
+    private function get_forced_uid()
     {
-        var_dump($_SESSION);
+        if ($this->get_uid())
+            return $this->get_uid();
+        $res = Core::get_db()->Query("INSERT INTO main.users DEFAULT VALUES RETURNING id", [], true);
+        return $this->login($res->id);
+    }
+
+    protected function do_oneclick_reg()
+    {
+        if ($this->get_uid())
+            return
+            [
+                "reset" => '/'
+            ];
+
+        return
+        [
+            "design" => "auth/store_account",
+            "data" => $this->get_forced_uid(),
+        ];
     }
 }

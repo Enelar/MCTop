@@ -1,0 +1,49 @@
+.vk_example {
+  width: 656px;
+  height: 344;
+  display: inline-block;
+}
+
+.vk_example .head {
+  background: #597BA5;
+  height: 60px;
+  font-size: 1.2em;
+  padding-top: 17px;
+  padding-left: 20px;
+}
+
+.vk_example .body {
+  height: 225px;
+  padding: 20px 100px;
+  font-size: 0.9em;
+  background-color: white;
+}
+
+.vk_example .tail {
+  height: 60px;
+  background-color: #EEF0F2;
+}
+
+.vk_example .tail a.btn {
+  float: right;
+  margin-top: 13px;
+  margin-right: 20px;
+}
+
+.vk_example .body span {
+  display: block;
+}
+
+.vk_example .permissions {
+  padding-top: 10px;
+  padding-left: 50px;
+  line-height: 2em;
+}
+
+.vk_example .permissions b {
+  display: block;
+}
+
+.vk_example .permissions i {
+  padding-left: 20px;
+}

@@ -9,6 +9,19 @@ breadcrumbs:
         0: Пользователи
         login_page: Войти
         register_page: Регистрация
+    auth:
+        0: Система авторизации
+        email:
+            0: Через email
+            reg: Регистрация
+        vk: Вконтакте
+    ControlPanel:
+        0: Панель управления
+        help_index: Помощь
+        project_info: Страница проекта
+        project_update: Редактирование проекта
+        project_buttons: Кнопки для проекта
+        server_create: Добавить сервер
 application:
     mcping:
         delay: 4 hours
@@ -17,5 +30,4 @@ application:
             - owl_nuts/sentinel/QueryNext: 600
             - owl_nuts/sentinel/FillTheBoard: 1800
     vk:
-        client_id: 111
-        redirect_url: http://192.168.29.122/auth/vk/do
+        redirect_uri: http://mctop.im/auth/vk/Auth

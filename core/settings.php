@@ -71,7 +71,7 @@ class Settings
                     'show_to_guest' => true,
                     'name' => 'Авторизация',
                     'icon' => 'glyphicon glyphicon-lock',
-                    'link' => '/Users/login_page',
+                    'link' => '/auth',
                 ],
                 'registration' =>
                 [

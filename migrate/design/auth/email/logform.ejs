@@ -1,15 +1,33 @@
+<%
+if (!uid())
+{
+%>
 <form method='post' action='/auth/email/authorize'>
-    <input type='text' name='email'>
-    <input type='password' name='password'>
-    <button role='submit'>Login</button>
+    <div class="form-group">
+        <label>Email</label>
+        <input id="login" name="email" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Пароль</label>
+        <input name="password" type="password" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-default">Войти</button>
 </form>
 
 <%
-this.Defer(function()
-{
-    this.first().ajaxForm(function(data)
+    this.Defer(function()
     {
-        debugger;
+        this.first().ajaxForm(function(data)
+        {
+            debugger;
+        })
     })
-})
+
+}
+else
+{
+%>
+    <h3>Вы уже в системе, нет нужды входить</h3>
+<%    
+}
 %>

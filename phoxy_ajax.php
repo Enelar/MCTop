@@ -11,6 +11,8 @@ function phoxy_conf()
   $ret = phoxy_default_conf();
   $ret["ejs_dir"] = "/migrate/design";
   $ret["js_dir"] = "/migrate/js";
+  global $_SERVER;
+  $ret["ip"] = $_SERVER["HTTP_X_REAL_IP"];
   return $ret;
 }
 
